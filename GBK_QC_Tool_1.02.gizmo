@@ -1,5 +1,4 @@
 Group {
-inputs 2
 name GBK_QC_Tool
 addUserKnob {20 QC l "QC Tool" -STARTLINE}
 addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
@@ -12,16 +11,15 @@ addUserKnob {26 ""}
 addUserKnob {6 Flip l "Flip Quadrants" +STARTLINE}
 addUserKnob {26 ""}
 addUserKnob {3 new_gain l "Gain Up / Down"}
-new_gain {3}
+new_gain 3
 addUserKnob {26 text l "" -STARTLINE T "For Gain +/- views"}
 addUserKnob {3 saturation1 l Saturation}
-saturation1 {4}
+saturation1 4
 addUserKnob {26 text_1 l "" -STARTLINE T "For Saturation view"}
 addUserKnob {26 _1 l "For Illegal Values"}
 addUserKnob {7 maxVal l "Maximum Value" R -10 100}
-maxVal {1}
+maxVal 1
 addUserKnob {7 minVal l "Minimum Value " R -10 100}
-minVal {0}
 addUserKnob {26 ""}
 addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.02 version</font>"}
 addUserKnob {26 HeadlineB l "" +STARTLINE T "<font color=#808080 size=\"2\">GBK QC Tool - 2019</font>"}
@@ -34,9 +32,10 @@ addUserKnob {6 frameRanges l "Frame Ranges (in Comp view)" +STARTLINE}
 frameRanges true
 addUserKnob {26 ""}
 addUserKnob {3 textSize l "Text Size"}
-textSize {70}
+textSize 70
 addUserKnob {20 tips l "QC Checking Tips"}
 addUserKnob {20 colourchecks l "Colour Checks" n 1}
+colourchecks 0
 addUserKnob {26 ""}
 addUserKnob {26 tip_colour l "" +STARTLINE T "\nNegative blacks - Check for black values that are below zero,\n even black values close to zero are likely too low for approval.\n\nCheck that these values aren't caused by the viewer LUT by\n testing the plate input to both QC Tool inputs. \n\nCheck despilled elements against their original scans to make sure\ndespilling hasn't effected the element too much (particularly skin tones)\nMake sure neutral grades aren't broken by any grading done in the\ncomp compare the final comp colour space to the original scan. \n\nMake sure that the comp 'Write node' has the same settings as your 'Read node'. \nSwitch colour spaces while watching the shot, Log, sRGB, rec709,\nthis will ensure the added elements will react the same as the original scan.\n"}
 addUserKnob {26 ""}
@@ -95,8 +94,8 @@ illegal_values true
 addUserKnob {6 comp l "<font color=#888888><b>_Comp" +STARTLINE}
 comp true
 addUserKnob {26 ""}
-addUserKnob {22 selectnone l "Select None" T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n" +STARTLINE}
-addUserKnob {22 selectall l "Select All" -STARTLINE T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
+addUserKnob {22 selectnone l "Select None" T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n" +STARTLINE}
+addUserKnob {22 selectall l "Select All" -STARTLINE T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
 addUserKnob {26 ""}
 addUserKnob {4 res l Res M {Full 0.75 0.5 0.25}}
 addUserKnob {41 width l INVISIBLE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.width}
@@ -111,7 +110,7 @@ inputs 0
 name BackdropNode12
 tile_color 0x2c2c2cff
 label "<center><font color=#FFFFFF>Custom View"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 4634
 ypos -956
@@ -124,7 +123,7 @@ inputs 0
 name BackdropNode1
 tile_color 0x212121ff
 label "I\nL\nL\nE\nG\nA\nL\n \nV\nA\nL\nU\nE\nS"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 394
 ypos -944
@@ -147,7 +146,7 @@ inputs 0
 name BackdropNode11
 tile_color 0x212121ff
 label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 4024
 ypos -944
@@ -159,7 +158,7 @@ inputs 0
 name BackdropNode2
 tile_color 0x212121ff
 label "C\nO\nM\nP"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos -46
 ypos -944
@@ -171,7 +170,7 @@ inputs 0
 name BackdropNode3
 tile_color 0x212121ff
 label "S\nA\nT\nU\nR\nA\nT\nI\nO\nN"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 834
 ypos -944
@@ -183,7 +182,7 @@ inputs 0
 name BackdropNode4
 tile_color 0x212121ff
 label "N\nO\nI\nS\nE"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 1274
 ypos -944
@@ -195,7 +194,7 @@ inputs 0
 name BackdropNode5
 tile_color 0x212121ff
 label "G\nA\nI\nN\n \n-"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 1714
 ypos -944
@@ -207,7 +206,7 @@ inputs 0
 name BackdropNode6
 tile_color 0x212121ff
 label "G\nA\nI\nN\n \n+"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 2154
 ypos -944
@@ -219,7 +218,7 @@ inputs 0
 name BackdropNode7
 tile_color 0x212121ff
 label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nA"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 2594
 ypos -944
@@ -231,7 +230,7 @@ inputs 0
 name BackdropNode8
 tile_color 0x212121ff
 label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nB"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 3034
 ypos -944
@@ -243,7 +242,7 @@ inputs 0
 name BackdropNode9
 tile_color 0x212121ff
 label "P\nL\nA\nT\nE"
-note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
 note_font_size 42
 xpos 3584
 ypos -944
@@ -312,13 +311,13 @@ name Dot29
 xpos 2084
 ypos -1446
 }
-set N965ec610 [stack 0]
+set N9c2fc600 [stack 0]
 Dot {
 name Dot31
 xpos 1754
 ypos -1446
 }
-set N9c009ea0 [stack 0]
+set Na52daa70 [stack 0]
 Crop {
 box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
 reformat true
@@ -327,7 +326,7 @@ name top_right
 xpos 1830
 ypos -1329
 }
-push $N9c009ea0
+push $Na52daa70
 Crop {
 box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
 reformat true
@@ -336,7 +335,7 @@ name top_left
 xpos 1940
 ypos -1329
 }
-push $N9c009ea0
+push $Na52daa70
 Crop {
 box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
 reformat true
@@ -345,7 +344,7 @@ name bottom_right
 xpos 1610
 ypos -1329
 }
-push $N9c009ea0
+push $Na52daa70
 Crop {
 box {0 0 {width/2 x1026 2048} {height/2}}
 reformat true
@@ -354,7 +353,7 @@ name bottom_left
 xpos 1500
 ypos -1329
 }
-push $N965ec610
+push $N9c2fc600
 Switch {
 inputs 5
 which {{Quarter_View.QuarterView}}
@@ -363,37 +362,37 @@ label "\[value which]"
 xpos 2050
 ypos -1167
 }
-set N96714cf0 [stack 0]
+set N95a0fde0 [stack 0]
 Dot {
 name Dot2
 xpos 2084
 ypos -846
 }
-set N149238c0 [stack 0]
+set N9c3209a0 [stack 0]
 Dot {
 name Dot19
 xpos 1974
 ypos -846
 }
-set N94f26440 [stack 0]
+set N9c2eabb0 [stack 0]
 Dot {
 name Dot16
 xpos 1534
 ypos -846
 }
-set N94eef040 [stack 0]
+set N9c2d18f0 [stack 0]
 Dot {
 name Dot18
 xpos 1094
 ypos -846
 }
-set N945f7960 [stack 0]
+set Na23d96e0 [stack 0]
 Dot {
 name Dot3
 xpos 654
 ypos -846
 }
-set N73bc36a0 [stack 0]
+set Na1bc7c00 [stack 0]
 Dot {
 name Dot7
 xpos 214
@@ -451,8 +450,8 @@ xpos 180
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0" x1 1}}
 }
-set N97d22a20 [stack 0]
-push $N97d22a20
+set N9c8d6c60 [stack 0]
+push $N9c8d6c60
 Dilate {
 channels mask
 size 8
@@ -469,7 +468,7 @@ name Multiply3
 xpos 70
 ypos -207
 }
-push $N97d22a20
+push $N9c8d6c60
 Multiply {
 inputs 1+1
 value 0
@@ -494,8 +493,8 @@ xpos 180
 ypos -135
 disable {{"frameRanges == 0 ? 1 : 0"}}
 }
-set N9be21970 [stack 0]
-push $N9be21970
+set Na27b4130 [stack 0]
+push $Na27b4130
 Dilate {
 channels mask
 size 8
@@ -512,7 +511,7 @@ name Multiply13
 xpos 70
 ypos -39
 }
-push $N9be21970
+push $Na27b4130
 Multiply {
 inputs 1+1
 value 0
@@ -527,8 +526,8 @@ name Dot44
 xpos 214
 ypos 522
 }
-set N946f74a0 [stack 0]
-push $N73bc36a0
+set Nadabbb00 [stack 0]
+push $Na1bc7c00
 Expression {
 expr0 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:r"
 expr1 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 1:g"
@@ -577,8 +576,8 @@ xpos 620
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N95817110 [stack 0]
-push $N95817110
+set N94cd9e10 [stack 0]
+push $N94cd9e10
 Dilate {
 channels mask
 size 8
@@ -595,7 +594,7 @@ name Multiply19
 xpos 510
 ypos -207
 }
-push $N95817110
+push $N94cd9e10
 Multiply {
 inputs 1+1
 value 0
@@ -610,8 +609,8 @@ name Dot43
 xpos 654
 ypos 474
 }
-set N94618670 [stack 0]
-push $N945f7960
+set N404bd260 [stack 0]
+push $Na23d96e0
 Saturation {
 channels all
 saturation {{saturation1}}
@@ -634,8 +633,8 @@ xpos 1060
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9c70ac50 [stack 0]
-push $N9c70ac50
+set Na91be040 [stack 0]
+push $Na91be040
 Dilate {
 channels mask
 size 8
@@ -652,7 +651,7 @@ name Multiply1
 xpos 950
 ypos -207
 }
-push $N9c70ac50
+push $Na91be040
 Multiply {
 inputs 1+1
 value 0
@@ -667,14 +666,14 @@ name Dot42
 xpos 1094
 ypos 426
 }
-set N956d4440 [stack 0]
-push $N94eef040
+set Na84e19c0 [stack 0]
+push $N9c2d18f0
 Dot {
 name Dot17
 xpos 1534
 ypos -798
 }
-set N956d8be0 [stack 0]
+set Na21b83c0 [stack 0]
 Dot {
 name Dot1
 xpos 1424
@@ -685,7 +684,7 @@ name Dot15
 xpos 1424
 ypos -678
 }
-push $N956d8be0
+push $Na21b83c0
 Blur {
 size 3
 name Blur1
@@ -723,8 +722,8 @@ xpos 1500
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9c6f5560 [stack 0]
-push $N9c6f5560
+set Na92d1820 [stack 0]
+push $Na92d1820
 Dilate {
 channels mask
 size 8
@@ -741,7 +740,7 @@ name Multiply5
 xpos 1390
 ypos -207
 }
-push $N9c6f5560
+push $Na92d1820
 Multiply {
 inputs 1+1
 value 0
@@ -787,8 +786,8 @@ name Dot41
 xpos 1534
 ypos 378
 }
-set N9b6006d0 [stack 0]
-push $N94f26440
+set Nad9be450 [stack 0]
+push $N9c2eabb0
 Grade {
 channels all
 white {{"1 / Grade5.white"}}
@@ -817,8 +816,8 @@ xpos 1940
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9c6bec20 [stack 0]
-push $N9c6bec20
+set N9cb229a0 [stack 0]
+push $N9cb229a0
 Dilate {
 channels mask
 size 8
@@ -835,7 +834,7 @@ name Multiply7
 xpos 1830
 ypos -207
 }
-push $N9c6bec20
+push $N9cb229a0
 Multiply {
 inputs 1+1
 value 0
@@ -858,14 +857,14 @@ name Dot40
 xpos 1974
 ypos 330
 }
-set N9562af50 [stack 0]
-push $N149238c0
+set Nb47df180 [stack 0]
+push $N9c3209a0
 Dot {
 name Dot20
 xpos 2414
 ypos -846
 }
-set N9cfb3150 [stack 0]
+set Nb47e3980 [stack 0]
 Grade {
 channels all
 white {{new_gain}}
@@ -889,8 +888,8 @@ xpos 2380
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9cfc81a0 [stack 0]
-push $N9cfc81a0
+set Nb47dec90 [stack 0]
+push $Nb47dec90
 Dilate {
 channels mask
 size 8
@@ -907,7 +906,7 @@ name Multiply9
 xpos 2270
 ypos -207
 }
-push $N9cfc81a0
+push $Nb47dec90
 Multiply {
 inputs 1+1
 value 0
@@ -922,20 +921,20 @@ name Dot39
 xpos 2414
 ypos 282
 }
-set N958e42d0 [stack 0]
-push $N9cfb3150
+set Nb4acd1c0 [stack 0]
+push $Nb47e3980
 Dot {
 name Dot21
 xpos 2854
 ypos -846
 }
-set N958e88c0 [stack 0]
+set Nb4ac16c0 [stack 0]
 Dot {
 name Dot24
 xpos 2854
 ypos -726
 }
-set N958ed170 [stack 0]
+set Nb4ad6040 [stack 0]
 Expression {
 expr0 (x/width)*size*pixel_aspect
 expr1 (y/height)*size
@@ -966,7 +965,7 @@ addUserKnob {20 User}
 addUserKnob {7 size}
 size 1
 }
-push $N958ed170
+push $Nb4ad6040
 Dot {
 name Dot25
 xpos 2744
@@ -989,13 +988,13 @@ name Dot54
 xpos 3844
 ypos -1446
 }
-set Nbffcc520 [stack 0]
+set Nb47f9940 [stack 0]
 Dot {
 name Dot55
 xpos 3514
 ypos -1446
 }
-set N952f5c70 [stack 0]
+set Nb48026c0 [stack 0]
 Crop {
 box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
 reformat true
@@ -1004,7 +1003,7 @@ name top_right1
 xpos 3590
 ypos -1329
 }
-push $N952f5c70
+push $Nb48026c0
 Crop {
 box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
 reformat true
@@ -1013,7 +1012,7 @@ name top_left1
 xpos 3700
 ypos -1329
 }
-push $N952f5c70
+push $Nb48026c0
 Crop {
 box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
 reformat true
@@ -1022,7 +1021,7 @@ name bottom_right1
 xpos 3370
 ypos -1329
 }
-push $N952f5c70
+push $Nb48026c0
 Crop {
 box {0 0 {width/2 x1026 2048} {height/2}}
 reformat true
@@ -1031,7 +1030,7 @@ name bottom_left1
 xpos 3260
 ypos -1329
 }
-push $Nbffcc520
+push $Nb47f9940
 Switch {
 inputs 5
 which {{Quarter_View.QuarterView}}
@@ -1045,19 +1044,19 @@ name Dot27
 xpos 3844
 ypos -534
 }
-set N951d4340 [stack 0]
+set Nb47cd210 [stack 0]
 Dot {
 name Dot26
 xpos 3624
 ypos -534
 }
-set N951d3d00 [stack 0]
+set Nb47c5050 [stack 0]
 Dot {
 name Dot6
 xpos 3404
 ypos -534
 }
-set N951dd1f0 [stack 0]
+set Nb47d1ba0 [stack 0]
 Keymix {
 inputs 3
 bbox A
@@ -1080,8 +1079,8 @@ xpos 2820
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N951ea7d0 [stack 0]
-push $N951ea7d0
+set Nb4f12f60 [stack 0]
+push $Nb4f12f60
 Dilate {
 channels mask
 size 8
@@ -1098,7 +1097,7 @@ name Multiply11
 xpos 2710
 ypos -207
 }
-push $N951ea7d0
+push $Nb4f12f60
 Multiply {
 inputs 1+1
 value 0
@@ -1113,21 +1112,21 @@ name Dot38
 xpos 2854
 ypos 234
 }
-set N957ce420 [stack 0]
-push $N951d3d00
-push $N958e88c0
+set Nb47d6650 [stack 0]
+push $Nb47c5050
+push $Nb4ac16c0
 Dot {
 name Dot22
 xpos 3294
 ypos -846
 }
-set N957d2ab0 [stack 0]
+set Nb471f4e0 [stack 0]
 Dot {
 name Dot4
 xpos 3514
 ypos -846
 }
-set N957d7360 [stack 0]
+set Nb4723d90 [stack 0]
 Difference {
 inputs 2
 gain 50
@@ -1135,7 +1134,7 @@ name Difference1
 xpos 3480
 ypos -423
 }
-push $N957d2ab0
+push $Nb471f4e0
 Expression {
 expr0 (x/width)*size*pixel_aspect
 expr1 (y/height)*size
@@ -1166,7 +1165,7 @@ addUserKnob {20 User}
 addUserKnob {7 size}
 size 1
 }
-push $N951dd1f0
+push $Nb47d1ba0
 Keymix {
 inputs 3
 bbox A
@@ -1189,8 +1188,8 @@ xpos 3260
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N94fbbcf0 [stack 0]
-push $N94fbbcf0
+set Nb4d06f60 [stack 0]
+push $Nb4d06f60
 Dilate {
 channels mask
 size 8
@@ -1207,7 +1206,7 @@ name Multiply15
 xpos 3150
 ypos -207
 }
-push $N94fbbcf0
+push $Nb4d06f60
 Multiply {
 inputs 1+1
 value 0
@@ -1222,8 +1221,8 @@ name Dot37
 xpos 3294
 ypos 186
 }
-set N9bb0b5e0 [stack 0]
-push $N951d4340
+set Nb4b158c0 [stack 0]
+push $Nb47cd210
 Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message PLATE
@@ -1239,8 +1238,8 @@ xpos 3810
 ypos -303
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9bb0fc70 [stack 0]
-push $N9bb0fc70
+set N731e4cd0 [stack 0]
+push $N731e4cd0
 Dilate {
 channels mask
 size 8
@@ -1257,7 +1256,7 @@ name Multiply17
 xpos 3700
 ypos -207
 }
-push $N9bb0fc70
+push $N731e4cd0
 Multiply {
 inputs 1+1
 value 0
@@ -1282,8 +1281,8 @@ xpos 3810
 ypos -87
 disable {{"frameRanges == 0 ? 1 : 0"}}
 }
-set N9b804300 [stack 0]
-push $N9b804300
+set N73219ee0 [stack 0]
+push $N73219ee0
 Dilate {
 channels mask
 size 8
@@ -1300,7 +1299,7 @@ name Multiply21
 xpos 3700
 ypos 9
 }
-push $N9b804300
+push $N73219ee0
 Multiply {
 inputs 1+1
 value 0
@@ -1315,15 +1314,15 @@ name Dot36
 xpos 3844
 ypos 138
 }
-set N9cfee610 [stack 0]
-push $N957d7360
+set N7320e5b0 [stack 0]
+push $Nb4723d90
 Dot {
 name Dot34
 xpos 4284
 ypos -846
 }
-set N9cff2ca0 [stack 0]
-push $N951d4340
+set Nb4a16370 [stack 0]
+push $Nb47cd210
 Merge2 {
 inputs 2
 operation difference
@@ -1351,8 +1350,8 @@ xpos 4250
 ypos -279
 disable {{"labelToggle == 0 ? 1 : 0"}}
 }
-set N9d00bf20 [stack 0]
-push $N9d00bf20
+set Nb4bd8230 [stack 0]
+push $Nb4bd8230
 Dilate {
 channels mask
 size 8
@@ -1369,7 +1368,7 @@ name Multiply23
 xpos 4140
 ypos -183
 }
-push $N9d00bf20
+push $Nb4bd8230
 Multiply {
 inputs 1+1
 value 0
@@ -1385,8 +1384,8 @@ name Dot45
 xpos 4284
 ypos 90
 }
-set N9d01f0f0 [stack 0]
-push $N9cff2ca0
+set Nb4c0d430 [stack 0]
+push $Nb4a16370
 Crop {
 box {{input.format.x} {input.format.y} {input.format.r} {input.format.t}}
 name Crop_input1
@@ -1521,8 +1520,6 @@ disable {{"comp == 0"}}
 LayerContactSheet {
 width {{"input.width * \[value this.columns]"}}
 height {{"input.height * \[value this.rows]"}}
-rows {3}
-columns {4}
 autodims false
 name LayerContactSheet_CUSTOM_VIEW
 xpos 5130
@@ -1536,7 +1533,7 @@ note_font_color 0xffffffff
 xpos 5164
 ypos 762
 }
-set N9b70a910 [stack 0]
+set Nb44b28b0 [stack 0]
 Dot {
 name Dot51
 tile_color 0x949494ff
@@ -1545,7 +1542,7 @@ note_font_color 0xffffffff
 xpos 5274
 ypos 762
 }
-set N9b70ede0 [stack 0]
+set Nb44b6c80 [stack 0]
 Dot {
 name Dot52
 tile_color 0x949494ff
@@ -1554,7 +1551,7 @@ note_font_color 0xffffffff
 xpos 5384
 ypos 762
 }
-set N9b713690 [stack 0]
+set Nb44bb4e0 [stack 0]
 Dot {
 name Dot53
 tile_color 0x949494ff
@@ -1571,7 +1568,7 @@ label "\[value scale]"
 xpos 5460
 ypos 873
 }
-push $N9b713690
+push $Nb44bb4e0
 Reformat {
 type scale
 scale 0.5
@@ -1580,7 +1577,7 @@ label "\[value scale]"
 xpos 5350
 ypos 873
 }
-push $N9b70ede0
+push $Nb44b6c80
 Reformat {
 type scale
 scale 0.75
@@ -1589,7 +1586,7 @@ label "\[value scale]"
 xpos 5240
 ypos 873
 }
-push $N9b70a910
+push $Nb44b28b0
 Switch {
 inputs 4
 which {{res}}
@@ -1603,7 +1600,7 @@ name Dot46
 xpos 5164
 ypos 2658
 }
-push $N9d01f0f0
+push $Nb4c0d430
 Dot {
 name Dot49
 tile_color 0x949494ff
@@ -1612,76 +1609,75 @@ note_font_color 0xffffffff
 xpos 4284
 ypos 786
 }
-set N9bed7dc0 [stack 0]
-push $N9b6006d0
+set Nb44f78a0 [stack 0]
+push $Nad9be450
 Dot {
 name Dot10
 xpos 1534
 ypos 786
 }
-set N9bed3290 [stack 0]
-push $N956d4440
+set Nb4500be0 [stack 0]
+push $Na84e19c0
 Dot {
 name Dot9
 xpos 1094
 ypos 786
 }
-set N9bee0fa0 [stack 0]
-push $N94618670
+set Nb44fc2d0 [stack 0]
+push $N404bd260
 Dot {
 name Dot8
 xpos 654
 ypos 786
 }
-set N9bee5850 [stack 0]
-push $N958e42d0
+set Nb4509dc0 [stack 0]
+push $Nb4acd1c0
 Dot {
 name Dot28
 xpos 2414
 ypos 786
 }
-set N9beea100 [stack 0]
-push $N946f74a0
+set Nb450e670 [stack 0]
+push $Nadabbb00
 Dot {
 name Dot5
 xpos 214
 ypos 786
 }
-set N9beee9b0 [stack 0]
-push $N9562af50
+set Nb4512f20 [stack 0]
+push $Nb47df180
 Dot {
 name Dot11
 xpos 1974
 ypos 786
 }
-set N9bef3260 [stack 0]
-push $N9bb0b5e0
+set Nb45177d0 [stack 0]
+push $Nb4b158c0
 Dot {
 name Dot13
 xpos 3294
 ypos 786
 }
-set N9bef7b10 [stack 0]
-push $N9cfee610
+set Nb451c080 [stack 0]
+push $N7320e5b0
 Dot {
 name Dot12
 xpos 3844
 ypos 786
 }
-set N9bedc640 [stack 0]
-push $N957ce420
+set Nb4520930 [stack 0]
+push $Nb47d6650
 Dot {
 name Dot14
 xpos 2854
 ypos 786
 }
-set N9bf00cb0 [stack 0]
+set Nb4505460 [stack 0]
 ContactSheet {
 inputs 10
 width {{"input.width * \[value this.columns]"}}
 height {{"input.height * \[value this.rows]"}}
-rows {3}
-columns {3}
+columns 3
 roworder TopBottom
 startframe 1
 endframe 1
@@ -1689,16 +1685,16 @@ name ContactSheet1
 xpos 4250
 ypos 1431
 }
-push $N9bed7dc0
-push $N9bed3290
-push $N9bee0fa0
-push $N9bee5850
-push $N9bef3260
-push $N9beea100
-push $N9bef7b10
-push $N9bf00cb0
-push $N9bedc640
-push $N9beee9b0
+push $Nb44f78a0
+push $Nb4500be0
+push $Nb44fc2d0
+push $Nb4509dc0
+push $Nb45177d0
+push $Nb450e670
+push $Nb451c080
+push $Nb4505460
+push $Nb4520930
+push $Nb4512f20
 Switch {
 inputs 11
 which {{QCMenu1.QCView}}
@@ -1715,13 +1711,13 @@ note_font_color 0xffffffff
 xpos 1314
 ypos 1554
 }
-set N9bf18c00 [stack 0]
+set Nb45255b0 [stack 0]
 Dot {
 name Dot35
 xpos 544
 ypos 1554
 }
-set N9bf1d4c0 [stack 0]
+set Nb43c1ab0 [stack 0]
 Crop {
 box {{width/2} 0 {width} {height/2}}
 name Crop4
@@ -1742,7 +1738,7 @@ name Transform4
 xpos 730
 ypos 1671
 }
-push $N9bf1d4c0
+push $Nb43c1ab0
 Crop {
 box {0 0 {width/2} {height/2}}
 name Crop3
@@ -1764,7 +1760,7 @@ xpos 620
 ypos 1671
 }
 push 0
-push $N9bf1d4c0
+push $Nb43c1ab0
 Crop {
 box {0 {height/2} {width/2} {height}}
 name Crop1
@@ -1785,7 +1781,7 @@ name Transform2
 xpos 290
 ypos 1671
 }
-push $N9bf1d4c0
+push $Nb43c1ab0
 Crop {
 box {{width/2} {height/2} {width} {height}}
 name Crop2
@@ -1812,7 +1808,7 @@ name Merge8
 xpos 510
 ypos 1815
 }
-push $N9bf18c00
+push $Nb45255b0
 Switch {
 inputs 2
 which {{Flip}}
@@ -1826,13 +1822,13 @@ name Dot32
 xpos 1314
 ypos 2298
 }
-set N9c5c2230 [stack 0]
+set Nb42df6e0 [stack 0]
 Dot {
 name Dot33
 xpos 1094
 ypos 2298
 }
-set N95126810 [stack 0]
+set Nb42e3b50 [stack 0]
 Reformat {
 type scale
 scale 0.25
@@ -1840,7 +1836,7 @@ name Reformat4
 xpos 1170
 ypos 2463
 }
-push $N95126810
+push $Nb42e3b50
 Reformat {
 type scale
 scale 0.5
@@ -1848,7 +1844,7 @@ name Reformat3
 xpos 1060
 ypos 2463
 }
-push $N95126810
+push $Nb42e3b50
 Reformat {
 type scale
 scale 0.75
@@ -1856,7 +1852,7 @@ name Reformat2
 xpos 950
 ypos 2463
 }
-push $N9c5c2230
+push $Nb42df6e0
 Switch {
 inputs 4
 which {{Reso.Resolution}}
@@ -1865,7 +1861,7 @@ label "\[value which]"
 xpos 1280
 ypos 2529
 }
-set N9c5f67f0 [stack 0]
+set Nb42e8420 [stack 0]
 Switch {
 inputs 2
 which {{en_cus_view}}
@@ -1887,7 +1883,7 @@ note_font_size 21
 xpos -372
 ypos -157
 }
-push $N9c5f67f0
+push $Nb42e8420
 NoOp {
 name Reso
 knobChanged validation()
@@ -1896,7 +1892,7 @@ ypos 2535
 addUserKnob {20 User}
 addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
 }
-push $N96714cf0
+push $N95a0fde0
 NoOp {
 name Quarter_View
 xpos 1830
