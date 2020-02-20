@@ -1,8 +1,6 @@
 Group {
 inputs 2
 name GBK_QC_Tool
-xpos 10194
-ypos 29799
 addUserKnob {20 QC l "QC Tool" -STARTLINE}
 addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
 addUserKnob {41 Resolution T Reso.Resolution}
@@ -1377,9 +1375,10 @@ inputs 1+1
 value 0
 maskChannelMask mask.a
 name Multiply24
+selected true
 xpos 4250
 ypos -183
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot45
@@ -1479,7 +1478,6 @@ green green
 blue blue
 out NOISE
 name ShuffleCopy_NOISE
-selected true
 xpos 5130
 ypos 375
 disable {{"noise1 == 0"}}
