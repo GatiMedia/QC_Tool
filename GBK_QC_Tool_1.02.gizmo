@@ -1,7 +1,6 @@
 Group {
 inputs 2
 name GBK_QC_Tool
-selected true
 xpos 10194
 ypos 29799
 addUserKnob {20 QC l "QC Tool" -STARTLINE}
@@ -15,15 +14,16 @@ addUserKnob {26 ""}
 addUserKnob {6 Flip l "Flip Quadrants" +STARTLINE}
 addUserKnob {26 ""}
 addUserKnob {3 new_gain l "Gain Up / Down"}
-new_gain 3
+new_gain {3}
 addUserKnob {26 text l "" -STARTLINE T "For Gain +/- views"}
-addUserKnob {3 saturation l Saturation}
-saturation 4
+addUserKnob {3 saturation1 l Saturation}
+saturation1 {4}
 addUserKnob {26 text_1 l "" -STARTLINE T "For Saturation view"}
 addUserKnob {26 _1 l "For Illegal Values"}
 addUserKnob {7 maxVal l "Maximum Value" R -10 100}
-maxVal 1
+maxVal {1}
 addUserKnob {7 minVal l "Minimum Value " R -10 100}
+minVal {0}
 addUserKnob {26 ""}
 addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.02 version</font>"}
 addUserKnob {26 HeadlineB l "" +STARTLINE T "<font color=#808080 size=\"2\">GBK QC Tool - 2019</font>"}
@@ -36,10 +36,9 @@ addUserKnob {6 frameRanges l "Frame Ranges (in Comp view)" +STARTLINE}
 frameRanges true
 addUserKnob {26 ""}
 addUserKnob {3 textSize l "Text Size"}
-textSize 70
+textSize {70}
 addUserKnob {20 tips l "QC Checking Tips"}
 addUserKnob {20 colourchecks l "Colour Checks" n 1}
-colourchecks 0
 addUserKnob {26 ""}
 addUserKnob {26 tip_colour l "" +STARTLINE T "\nNegative blacks - Check for black values that are below zero,\n even black values close to zero are likely too low for approval.\n\nCheck that these values aren't caused by the viewer LUT by\n testing the plate input to both QC Tool inputs. \n\nCheck despilled elements against their original scans to make sure\ndespilling hasn't effected the element too much (particularly skin tones)\nMake sure neutral grades aren't broken by any grading done in the\ncomp compare the final comp colour space to the original scan. \n\nMake sure that the comp 'Write node' has the same settings as your 'Read node'. \nSwitch colour spaces while watching the shot, Log, sRGB, rec709,\nthis will ensure the added elements will react the same as the original scan.\n"}
 addUserKnob {26 ""}
@@ -89,8 +88,8 @@ addUserKnob {6 gain_plus l "<font color=#888888><b>_Gain +" +STARTLINE}
 gain_plus true
 addUserKnob {6 gain_minus l "<font color=#888888><b>_Gain -" +STARTLINE}
 gain_minus true
-addUserKnob {6 noise l "<font color=#888888><b>_Noise" +STARTLINE}
-noise true
+addUserKnob {6 noise1 l "<font color=#888888><b>_Noise" +STARTLINE}
+noise1 true
 addUserKnob {6 saturation_1 l "<font color=#888888><b>_Saturation" +STARTLINE}
 saturation_1 true
 addUserKnob {6 illegal_values l "<font color=#888888><b>_Illegal Values" +STARTLINE}
@@ -295,17 +294,6 @@ label "Negative blacks - Check for black values that are below zero, even black 
 xpos 5897
 ypos -863
 }
-NoOp {
-inputs 0
-name QCMenu1
-knobChanged validation()
-xpos 950
-ypos 1431
-addUserKnob {20 QC t "\n"}
-addUserKnob {22 script T "print 'test inside'" +STARTLINE}
-addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
-QCView "All Views"
-}
 Input {
 inputs 0
 name comp
@@ -430,7 +418,7 @@ font_size_values {{13 50 14 50 15 50 16 50 17 50 18 50 19 50 20 50 21 50 22 50 2
   }
 cursor_position 70
 font {{ DejaVu Sans Mono : Bold : dejavu/DejaVuSansMono-Bold.ttf : 0 }}
-global_font_scale {{"parent.Text10.size *.015"}}
+global_font_scale {{"Text10.size *.015"}}
 font_size 50
 scale {1 1}
 cursor_initialised true
@@ -454,7 +442,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message COMP
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -463,7 +451,7 @@ center {1078 568}
 name Text10
 xpos 180
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0" x1 1}}
+disable {{"labelToggle == 0 ? 1 : 0" x1 1}}
 }
 set N97d22a20 [stack 0]
 push $N97d22a20
@@ -491,13 +479,13 @@ maskChannelMask mask.a
 name Multiply4
 xpos 180
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -580,7 +568,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "ILLEGAL VALUES"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -589,7 +577,7 @@ center {1078 568}
 name Text9
 xpos 620
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N95817110 [stack 0]
 push $N95817110
@@ -617,7 +605,7 @@ maskChannelMask mask.a
 name Multiply20
 xpos 620
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot43
@@ -628,7 +616,7 @@ set N94618670 [stack 0]
 push $N945f7960
 Saturation {
 channels all
-saturation {{parent.saturation}}
+saturation {{saturation1}}
 name Saturation1
 xpos 1060
 ypos -663
@@ -637,7 +625,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message SATURATION
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -646,7 +634,7 @@ center {1078 568}
 name Text5
 xpos 1060
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9c70ac50 [stack 0]
 push $N9c70ac50
@@ -674,7 +662,7 @@ maskChannelMask mask.a
 name Multiply2
 xpos 1060
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot42
@@ -726,7 +714,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message NOISE
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -735,7 +723,7 @@ center {1078 568}
 name Text1
 xpos 1500
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9c6f5560 [stack 0]
 push $N9c6f5560
@@ -763,7 +751,7 @@ maskChannelMask mask.a
 name Multiply6
 xpos 1500
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Text2 {
 font_size_toolbar 100
@@ -820,7 +808,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "GAIN -"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -829,7 +817,7 @@ center {1078 568}
 name Text2
 xpos 1940
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9c6bec20 [stack 0]
 push $N9c6bec20
@@ -857,7 +845,7 @@ maskChannelMask mask.a
 name Multiply8
 xpos 1940
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 NoOp {
 name NoOp2
@@ -892,7 +880,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "GAIN +"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -901,7 +889,7 @@ center {1078 568}
 name Text3
 xpos 2380
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9cfc81a0 [stack 0]
 push $N9cfc81a0
@@ -929,7 +917,7 @@ maskChannelMask mask.a
 name Multiply10
 xpos 2380
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot39
@@ -1083,7 +1071,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "DIFFERENCE A"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -1092,7 +1080,7 @@ center {1078 568}
 name Text4
 xpos 2820
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N951ea7d0 [stack 0]
 push $N951ea7d0
@@ -1120,7 +1108,7 @@ maskChannelMask mask.a
 name Multiply12
 xpos 2820
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot38
@@ -1192,7 +1180,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "DIFFERENCE B"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -1201,7 +1189,7 @@ center {1078 568}
 name Text7
 xpos 3260
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N94fbbcf0 [stack 0]
 push $N94fbbcf0
@@ -1229,7 +1217,7 @@ maskChannelMask mask.a
 name Multiply16
 xpos 3260
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot37
@@ -1242,7 +1230,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message PLATE
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -1251,7 +1239,7 @@ center {1078 568}
 name Text8
 xpos 3810
 ypos -303
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9bb0fc70 [stack 0]
 push $N9bb0fc70
@@ -1279,13 +1267,13 @@ maskChannelMask mask.a
 name Multiply18
 xpos 3810
 ypos -207
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -1294,7 +1282,7 @@ center {1078 568}
 name Text11
 xpos 3810
 ypos -87
-disable {{"parent.frameRanges == 0 ? 1 : 0"}}
+disable {{"frameRanges == 0 ? 1 : 0"}}
 }
 set N9b804300 [stack 0]
 push $N9b804300
@@ -1322,7 +1310,7 @@ maskChannelMask mask.a
 name Multiply22
 xpos 3810
 ypos 9
-disable {{"parent.frameRanges == 0 ? 1 : 0"}}
+disable {{"frameRanges == 0 ? 1 : 0"}}
 }
 Dot {
 name Dot36
@@ -1354,7 +1342,7 @@ Text {
 output {rgba.red rgba.green rgba.blue mask.a}
 message DIFFERENCE
 font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
-size {{parent.textSize}}
+size {{textSize}}
 xjustify center
 yjustify top
 Transform 1
@@ -1363,7 +1351,7 @@ center {1078 568}
 name Text12
 xpos 4250
 ypos -279
-disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+disable {{"labelToggle == 0 ? 1 : 0"}}
 }
 set N9d00bf20 [stack 0]
 push $N9d00bf20
@@ -1421,7 +1409,7 @@ out DIFFERENCE
 name ShuffleCopy_DIFFERENCE
 xpos 5130
 ypos 87
-disable {{"parent.difference == 0"}}
+disable {{"difference == 0"}}
 }
 add_layer {PLATE PLATE.red PLATE.green PLATE.blue PLATE.alpha}
 ShuffleCopy {
@@ -1433,7 +1421,7 @@ out PLATE
 name ShuffleCopy_PLATE
 xpos 5130
 ypos 135
-disable {{"parent.plate == 0"}}
+disable {{"plate == 0"}}
 }
 add_layer {DIFFERENCE_B DIFFERENCE_B.red DIFFERENCE_B.green DIFFERENCE_B.blue DIFFERENCE_B.alpha}
 ShuffleCopy {
@@ -1445,7 +1433,7 @@ out DIFFERENCE_B
 name ShuffleCopy_DIFFERENCE_B
 xpos 5130
 ypos 183
-disable {{"parent.difference_b == 0"}}
+disable {{"difference_b == 0"}}
 }
 add_layer {DIFFERENCE_A DIFFERENCE_A.red DIFFERENCE_A.green DIFFERENCE_A.blue DIFFERENCE_A.alpha}
 ShuffleCopy {
@@ -1457,7 +1445,7 @@ out DIFFERENCE_A
 name ShuffleCopy_DIFFERENCE_A
 xpos 5130
 ypos 231
-disable {{"parent.difference_a == 0"}}
+disable {{"difference_a == 0"}}
 }
 add_layer {GAIN_PLUS GAIN_PLUS.red GAIN_PLUS.green GAIN_PLUS.blue GAIN_PLUS.alpha}
 ShuffleCopy {
@@ -1469,7 +1457,7 @@ out GAIN_PLUS
 name ShuffleCopy_GAIN_PLUS
 xpos 5130
 ypos 279
-disable {{"parent.gain_plus == 0"}}
+disable {{"gain_plus == 0"}}
 }
 add_layer {GAIN_MINUS GAIN_MINUS.red GAIN_MINUS.green GAIN_MINUS.blue GAIN_MINUS.alpha}
 ShuffleCopy {
@@ -1481,7 +1469,7 @@ out GAIN_MINUS
 name ShuffleCopy_GAIN_MINUS
 xpos 5130
 ypos 327
-disable {{"parent.gain_minus == 0"}}
+disable {{"gain_minus == 0"}}
 }
 add_layer {NOISE NOISE.red NOISE.green NOISE.blue NOISE.alpha}
 ShuffleCopy {
@@ -1491,9 +1479,10 @@ green green
 blue blue
 out NOISE
 name ShuffleCopy_NOISE
+selected true
 xpos 5130
 ypos 375
-disable {{"parent.noise == 0"}}
+disable {{"noise1 == 0"}}
 }
 add_layer {SATURATION SATURATION.red SATURATION.green SATURATION.blue SATURATION.alpha}
 ShuffleCopy {
@@ -1505,7 +1494,7 @@ out SATURATION
 name ShuffleCopy_SATURATION
 xpos 5130
 ypos 423
-disable {{"parent.saturation_1 == 0"}}
+disable {{"saturation_1 == 0"}}
 }
 add_layer {ILLEGAL_VALUES ILLEGAL_VALUES.red ILLEGAL_VALUES.green ILLEGAL_VALUES.blue ILLEGAL_VALUES.alpha}
 ShuffleCopy {
@@ -1517,7 +1506,7 @@ out ILLEGAL_VALUES
 name ShuffleCopy_ILLEGAL_VALUES
 xpos 5130
 ypos 471
-disable {{"parent.illegal_values == 0"}}
+disable {{"illegal_values == 0"}}
 }
 add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
 ShuffleCopy {
@@ -1529,11 +1518,13 @@ out COMP
 name ShuffleCopy_COMP
 xpos 5130
 ypos 519
-disable {{"parent.comp == 0"}}
+disable {{"comp == 0"}}
 }
 LayerContactSheet {
 width {{"input.width * \[value this.columns]"}}
 height {{"input.height * \[value this.rows]"}}
+rows {3}
+columns {4}
 autodims false
 name LayerContactSheet_CUSTOM_VIEW
 xpos 5130
@@ -1691,7 +1682,8 @@ ContactSheet {
 inputs 10
 width {{"input.width * \[value this.columns]"}}
 height {{"input.height * \[value this.rows]"}}
-columns 3
+rows {3}
+columns {3}
 roworder TopBottom
 startframe 1
 endframe 1
@@ -1825,7 +1817,7 @@ ypos 1815
 push $N9bf18c00
 Switch {
 inputs 2
-which {{parent.Flip}}
+which {{Flip}}
 name flipQuad
 label "\[value which]"
 xpos 1280
@@ -1878,7 +1870,7 @@ ypos 2529
 set N9c5f67f0 [stack 0]
 Switch {
 inputs 2
-which {{parent.en_cus_view}}
+which {{en_cus_view}}
 name Switch_CUS_VIEW
 label "\[value which]"
 xpos 1280
@@ -1913,5 +1905,16 @@ xpos 1830
 ypos -1161
 addUserKnob {20 User}
 addUserKnob {4 QuarterView l "Quarter View" M {"Full Screen" "Bottom Left" "Bottom Right" "Top Left" "Top Right" ""}}
+}
+NoOp {
+inputs 0
+name QCMenu1
+knobChanged validation()
+xpos 950
+ypos 1431
+addUserKnob {20 QC t "\n"}
+addUserKnob {22 script T "print 'test inside'" +STARTLINE}
+addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
+QCView "All Views"
 }
 end_group
