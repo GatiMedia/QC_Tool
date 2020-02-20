@@ -1,0 +1,1917 @@
+Group {
+inputs 2
+name GBK_QC_Tool
+selected true
+xpos 10194
+ypos 29799
+addUserKnob {20 QC l "QC Tool" -STARTLINE}
+addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
+addUserKnob {41 Resolution T Reso.Resolution}
+addUserKnob {41 QuarterView l "Quarter View" T Quarter_View.QuarterView}
+addUserKnob {41 rows_1 l rows/columns T ContactSheet1.rows}
+addUserKnob {41 columns_1 l "" -STARTLINE T ContactSheet1.columns}
+addUserKnob {26 tex l "" -STARTLINE T "For 'QC View / All Views'"}
+addUserKnob {26 ""}
+addUserKnob {6 Flip l "Flip Quadrants" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {3 new_gain l "Gain Up / Down"}
+new_gain 3
+addUserKnob {26 text l "" -STARTLINE T "For Gain +/- views"}
+addUserKnob {3 saturation l Saturation}
+saturation 4
+addUserKnob {26 text_1 l "" -STARTLINE T "For Saturation view"}
+addUserKnob {26 _1 l "For Illegal Values"}
+addUserKnob {7 maxVal l "Maximum Value" R -10 100}
+maxVal 1
+addUserKnob {7 minVal l "Minimum Value " R -10 100}
+addUserKnob {26 ""}
+addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.02 version</font>"}
+addUserKnob {26 HeadlineB l "" +STARTLINE T "<font color=#808080 size=\"2\">GBK QC Tool - 2019</font>"}
+addUserKnob {20 Overlays}
+addUserKnob {6 labelToggle l Labels +STARTLINE}
+labelToggle true
+addUserKnob {6 dataWinToggle l "dataWindow (in Comp view)" +STARTLINE}
+dataWinToggle true
+addUserKnob {6 frameRanges l "Frame Ranges (in Comp view)" +STARTLINE}
+frameRanges true
+addUserKnob {26 ""}
+addUserKnob {3 textSize l "Text Size"}
+textSize 70
+addUserKnob {20 tips l "QC Checking Tips"}
+addUserKnob {20 colourchecks l "Colour Checks" n 1}
+colourchecks 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_colour l "" +STARTLINE T "\nNegative blacks - Check for black values that are below zero,\n even black values close to zero are likely too low for approval.\n\nCheck that these values aren't caused by the viewer LUT by\n testing the plate input to both QC Tool inputs. \n\nCheck despilled elements against their original scans to make sure\ndespilling hasn't effected the element too much (particularly skin tones)\nMake sure neutral grades aren't broken by any grading done in the\ncomp compare the final comp colour space to the original scan. \n\nMake sure that the comp 'Write node' has the same settings as your 'Read node'. \nSwitch colour spaces while watching the shot, Log, sRGB, rec709,\nthis will ensure the added elements will react the same as the original scan.\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup n -1}
+addUserKnob {20 group l "Grain Checks" n 1}
+group 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_grain l "" +STARTLINE T "\nIMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to\nfull resolution and with your viewer set to 1:1 ratio!!\n\nAny viewer sampling with alter the results and mask \ndetails the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere.\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup_1 l endGroup n -1}
+addUserKnob {20 group_1 l "Focus Check" n 1}
+group_1 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_focus l "" +STARTLINE T "\nCompare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly,\nscrub through slowly, back and forth, looking for \ndifferences in the animation curve for the focus.\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup_2 l endGroup n -1}
+addUserKnob {20 group_2 l "Matte Checks" n 1}
+group_2 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_matte l "" +STARTLINE T "\nCheck edges of keys -  If they're too smooth they won't look natural,\nif they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair\nand fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, \nespecially on parts of the frame where comp or CG hasn't been done. \nThe Noise view is helpful for this.\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup_3 l endGroup n -1}
+addUserKnob {20 group_3 l "Tracking Checks" n 1}
+group_3 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_tracking l "" +STARTLINE T "\nVerify that tracked in elements do not wiggle or drift from\nnearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup_4 l endGroup n -1}
+addUserKnob {20 group_4 l "Frame Checks" n 1}
+group_4 0
+addUserKnob {26 ""}
+addUserKnob {26 tip_frame l "" +STARTLINE T "\nMake sure the frame range matches the delivery range.  \nTurn on the 'Frame Ranges' in Overlays to verify against \nwhat's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery. \nTurn on 'dataWindow' in Overlays and watch the four values to make\nsure they are correct and do not change throughout the\nsequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels,\nno dropped frames, etc.  This can only be done using\nFull resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp,\nwipe between the two, do you see any shifting of pixels that shouldn't be there,\nand grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the\nedges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up.\n"}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup_5 l endGroup n -1}
+addUserKnob {20 customview l CustomView}
+addUserKnob {6 en_cus_view l "<font size=5><b>___Enable Custom View___" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {6 difference l "<font color=#888888><b>_Difference" +STARTLINE}
+difference true
+addUserKnob {6 plate l "<font color=#888888><b>_Plate" +STARTLINE}
+plate true
+addUserKnob {6 difference_b l "<font color=#888888><b>_Difference B" +STARTLINE}
+difference_b true
+addUserKnob {6 difference_a l "<font color=#888888><b>_Difference A" +STARTLINE}
+difference_a true
+addUserKnob {6 gain_plus l "<font color=#888888><b>_Gain +" +STARTLINE}
+gain_plus true
+addUserKnob {6 gain_minus l "<font color=#888888><b>_Gain -" +STARTLINE}
+gain_minus true
+addUserKnob {6 noise l "<font color=#888888><b>_Noise" +STARTLINE}
+noise true
+addUserKnob {6 saturation_1 l "<font color=#888888><b>_Saturation" +STARTLINE}
+saturation_1 true
+addUserKnob {6 illegal_values l "<font color=#888888><b>_Illegal Values" +STARTLINE}
+illegal_values true
+addUserKnob {6 comp l "<font color=#888888><b>_Comp" +STARTLINE}
+comp true
+addUserKnob {26 ""}
+addUserKnob {22 selectnone l "Select None" T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n" +STARTLINE}
+addUserKnob {22 selectall l "Select All" -STARTLINE T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
+addUserKnob {26 ""}
+addUserKnob {4 res l Res M {Full 0.75 0.5 0.25}}
+addUserKnob {41 width l INVISIBLE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.width}
+addUserKnob {41 height l INVISIBLE -STARTLINE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.height}
+addUserKnob {41 rows l rows/columns T LayerContactSheet_CUSTOM_VIEW.rows}
+addUserKnob {41 columns l "" -STARTLINE T LayerContactSheet_CUSTOM_VIEW.columns}
+addUserKnob {41 roworder l "Row Order" T LayerContactSheet_CUSTOM_VIEW.roworder}
+addUserKnob {41 colorder l "Column Order" T LayerContactSheet_CUSTOM_VIEW.colorder}
+}
+BackdropNode {
+inputs 0
+name BackdropNode12
+tile_color 0x2c2c2cff
+label "<center><font color=#FFFFFF>Custom View"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 4634
+ypos -956
+bdwidth 1073
+bdheight 2247
+z_order -2411031
+}
+BackdropNode {
+inputs 0
+name BackdropNode1
+tile_color 0x212121ff
+label "I\nL\nL\nE\nG\nA\nL\n \nV\nA\nL\nU\nE\nS"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 394
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode10
+tile_color 0x888888ff
+label "QC checks"
+note_font_size 42
+xpos 5938
+ypos -934
+bdwidth 1104
+bdheight 908
+}
+BackdropNode {
+inputs 0
+name BackdropNode11
+tile_color 0x212121ff
+label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 4024
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode2
+tile_color 0x212121ff
+label "C\nO\nM\nP"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos -46
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode3
+tile_color 0x212121ff
+label "S\nA\nT\nU\nR\nA\nT\nI\nO\nN"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 834
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode4
+tile_color 0x212121ff
+label "N\nO\nI\nS\nE"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 1274
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode5
+tile_color 0x212121ff
+label "G\nA\nI\nN\n \n-"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 1714
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode6
+tile_color 0x212121ff
+label "G\nA\nI\nN\n \n+"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 2154
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode7
+tile_color 0x212121ff
+label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nA"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 2594
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode8
+tile_color 0x212121ff
+label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nB"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 3034
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+BackdropNode {
+inputs 0
+name BackdropNode9
+tile_color 0x212121ff
+label "P\nL\nA\nT\nE"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 42
+xpos 3584
+ypos -944
+bdwidth 313
+bdheight 1072
+}
+StickyNote {
+inputs 0
+name StickyNote2
+label "Compare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly, scrub through slowly, back and forth, looking for differences in the animation curve for the focus."
+xpos 5880
+ypos -610
+}
+StickyNote {
+inputs 0
+name StickyNote3
+label "Check edges of keys -  If they're too smooth they won't look natural, if they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair and fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, especially on parts of the frame where comp or CG hasn't been done.  The Noise view is helpful for this."
+xpos 5925
+ypos -516
+}
+StickyNote {
+inputs 0
+name StickyNote1
+label "IMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to full resolution and with your viewer set to 1:1 ratio!!  Any viewer sampling with alter the results and mask details the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere."
+xpos 5944
+ypos -745
+}
+StickyNote {
+inputs 0
+name StickyNote4
+label "Verify that tracked in elements do not wiggle or drift from nearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is"
+xpos 6046
+ypos -333
+}
+StickyNote {
+inputs 0
+name StickyNote5
+label "Make sure the frame range matches the delivery range.  Turn on the 'Frame Ranges' in Overlays to verify against what's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery.  Turn on 'dataWindow' in Overlays and watch the four values to make sure they are correct and do not change throughout the sequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels, no dropped frames, etc.  This can only be done using Full resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp, wipe between the two, do you see any shifting of pixels that shouldn't be there, and grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the edges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up."
+xpos 5890
+ypos -245
+}
+StickyNote {
+inputs 0
+name StickyNote6
+label "Negative blacks - Check for black values that are below zero, even black values close to zero are likely too low for approval.  Check that these values aren't caused by the viewer LUT by testing the plate input to both QC Tool inputs.\n\nCheck despilled elements against their original scans to make sure despilling hasn't effected the element too much (particularly skin tones)\n\nMake sure neutral grades aren't broken by any grading done in the comp compare the final comp colour space to the original scan. Make sure that the comp 'Write node' has the same settings as your 'Read node'. \n\nSwitch colour spaces while watching the shot, Log, sRGB, rec709, this will ensure the added elements will react the same as the original scan."
+xpos 5897
+ypos -863
+}
+NoOp {
+inputs 0
+name QCMenu1
+knobChanged validation()
+xpos 950
+ypos 1431
+addUserKnob {20 QC t "\n"}
+addUserKnob {22 script T "print 'test inside'" +STARTLINE}
+addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
+QCView "All Views"
+}
+Input {
+inputs 0
+name comp
+label Comp
+xpos 2050
+ypos -1719
+}
+Dot {
+name Dot50
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 2084
+ypos -1566
+}
+Dot {
+name Dot29
+xpos 2084
+ypos -1446
+}
+set N965ec610 [stack 0]
+Dot {
+name Dot31
+xpos 1754
+ypos -1446
+}
+set N9c009ea0 [stack 0]
+Crop {
+box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
+reformat true
+crop false
+name top_right
+xpos 1830
+ypos -1329
+}
+push $N9c009ea0
+Crop {
+box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
+reformat true
+crop false
+name top_left
+xpos 1940
+ypos -1329
+}
+push $N9c009ea0
+Crop {
+box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
+reformat true
+crop false
+name bottom_right
+xpos 1610
+ypos -1329
+}
+push $N9c009ea0
+Crop {
+box {0 0 {width/2 x1026 2048} {height/2}}
+reformat true
+crop false
+name bottom_left
+xpos 1500
+ypos -1329
+}
+push $N965ec610
+Switch {
+inputs 5
+which {{Quarter_View.QuarterView}}
+name Switch2
+label "\[value which]"
+xpos 2050
+ypos -1167
+}
+set N96714cf0 [stack 0]
+Dot {
+name Dot2
+xpos 2084
+ypos -846
+}
+set N149238c0 [stack 0]
+Dot {
+name Dot19
+xpos 1974
+ypos -846
+}
+set N94f26440 [stack 0]
+Dot {
+name Dot16
+xpos 1534
+ypos -846
+}
+set N94eef040 [stack 0]
+Dot {
+name Dot18
+xpos 1094
+ypos -846
+}
+set N945f7960 [stack 0]
+Dot {
+name Dot3
+xpos 654
+ypos -846
+}
+set N73bc36a0 [stack 0]
+Dot {
+name Dot7
+xpos 214
+ypos -846
+}
+Text2 {
+font_size_toolbar 50
+font_width_toolbar 100
+font_height_toolbar 100
+message "\[metadata exr/displayWindow] display\n\[metadata exr/dataWindow] dataWin"
+old_message {{48 44 48 44 52 48 52 49 44 50 49 50 57 32 100 105 115 112 108 97 121 10 48 44 48 44 52 48 52 49 44 50 49 50 57 32 100 97 116 97 87 105 110}
+  }
+old_expression_markers {{0 12 22 34}
+  }
+box {{input.format.x} {input.format.y} {"input.width - (input.width / 1.3)"} {"input.height - (input.height / 1.1)"}}
+xjustify right
+transforms {{0 2}
+  }
+font_size_values {{13 50 14 50 15 50 16 50 17 50 18 50 19 50 20 50 21 50 22 50 23 50 24 50 25 50 26 50 27 50 28 50 29 50 30 50 31 50 32 50 33 50 34 50 35 50 36 50 37 50 38 50 39 50 40 50 41 50 42 50 13 50 14 50 15 50 16 50 17 50 18 50 19 50 20 50 21 50 35 50 36 50 37 50 38 50 39 50 40 50 41 50 42 50 0 50 1 50 2 50 3 50 4 50 5 50 6 50 7 50 8 50 9 50 10 50 11 50 12 50 0 40 1 40 2 40 3 40 4 40 5 40 6 40 7 40 8 40 9 40 10 40 11 40 12 40}
+  }
+cursor_position 70
+font {{ DejaVu Sans Mono : Bold : dejavu/DejaVuSansMono-Bold.ttf : 0 }}
+global_font_scale {{"parent.Text10.size *.015"}}
+font_size 50
+scale {1 1}
+cursor_initialised true
+autofit_bbox false
+initial_cursor_position {{641.5 125.5}
+  }
+group_animations {{0} imported: 0 selected: items: "root transform/"}
+animation_layers {{1 11 1440 1080 0 0 1 1 0 0 0 0}
+  }
+enable_shadows true
+shadow_opacity 0.8
+shadow_angle 298
+shadow_distance 10
+shadow_softness 2
+name dataWindow1
+xpos 180
+ypos -393
+disable {{"dataWinToggle == 0 ? 1 : 0"}}
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message COMP
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text10
+xpos 180
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0" x1 1}}
+}
+set N97d22a20 [stack 0]
+push $N97d22a20
+Dilate {
+channels mask
+size 8
+name Dilate2
+xpos 70
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply3
+xpos 70
+ypos -207
+}
+push $N97d22a20
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply4
+xpos 180
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width x1 2048 x9 1920} {input.height/20 x1 nan x9 nan}}
+center {1078 568}
+name Text6
+xpos 180
+ypos -135
+disable {{"frameRanges == 0 ? 1 : 0"}}
+}
+set N9be21970 [stack 0]
+push $N9be21970
+Dilate {
+channels mask
+size 8
+name Dilate7
+xpos 70
+ypos -135
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply13
+xpos 70
+ypos -39
+}
+push $N9be21970
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply14
+xpos 180
+ypos -39
+disable {{"frameRanges == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot44
+xpos 214
+ypos 522
+}
+set N946f74a0 [stack 0]
+push $N73bc36a0
+Expression {
+expr0 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:r"
+expr1 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 1:g"
+expr2 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:b"
+channel3 none
+name nan_inf
+xpos 620
+ypos -753
+}
+Expression {
+expr0 "r < minLimit || g < minLimit || b < minLimit ? 0:r"
+expr1 "r < minLimit || g < minLimit || b < minLimit ? 1:g"
+expr2 "r < minLimit || g < minLimit || b < minLimit ? 1:b"
+channel3 none
+name negative
+xpos 620
+ypos -681
+addUserKnob {20 User}
+addUserKnob {7 minLimit R -1 1}
+minLimit {{minVal}}
+}
+Expression {
+expr0 "r > maxLimit || g > maxLimit || b > maxLimit ? 1:r"
+expr1 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:g"
+expr2 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:b"
+channel3 none
+name high
+xpos 620
+ypos -633
+addUserKnob {20 User}
+addUserKnob {7 maxLimit l "" +STARTLINE R -1 100}
+maxLimit {{maxVal}}
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "ILLEGAL VALUES"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text9
+xpos 620
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N95817110 [stack 0]
+push $N95817110
+Dilate {
+channels mask
+size 8
+name Dilate10
+xpos 510
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply19
+xpos 510
+ypos -207
+}
+push $N95817110
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply20
+xpos 620
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot43
+xpos 654
+ypos 474
+}
+set N94618670 [stack 0]
+push $N945f7960
+Saturation {
+channels all
+saturation {{parent.saturation}}
+name Saturation1
+xpos 1060
+ypos -663
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message SATURATION
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text5
+xpos 1060
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9c70ac50 [stack 0]
+push $N9c70ac50
+Dilate {
+channels mask
+size 8
+name Dilate1
+xpos 950
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply1
+xpos 950
+ypos -207
+}
+push $N9c70ac50
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply2
+xpos 1060
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot42
+xpos 1094
+ypos 426
+}
+set N956d4440 [stack 0]
+push $N94eef040
+Dot {
+name Dot17
+xpos 1534
+ypos -798
+}
+set N956d8be0 [stack 0]
+Dot {
+name Dot1
+xpos 1424
+ypos -798
+}
+Dot {
+name Dot15
+xpos 1424
+ypos -678
+}
+push $N956d8be0
+Blur {
+size 3
+name Blur1
+xpos 1500
+ypos -759
+}
+Merge2 {
+inputs 2
+operation minus
+also_merge all
+name Merge1
+xpos 1500
+ypos -681
+}
+Grade {
+channels all
+multiply 100
+white_clamp true
+name Grade2
+xpos 1500
+ypos -615
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message NOISE
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text1
+xpos 1500
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9c6f5560 [stack 0]
+push $N9c6f5560
+Dilate {
+channels mask
+size 8
+name Dilate3
+xpos 1390
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply5
+xpos 1390
+ypos -207
+}
+push $N9c6f5560
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply6
+xpos 1500
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Text2 {
+font_size_toolbar 100
+font_width_toolbar 100
+font_height_toolbar 100
+message "RESOLUTION SHOULD BE SET TO FULL TO CHECK NOISE"
+old_message {{82 69 83 79 76 85 84 73 79 78 32 83 72 79 85 76 68 32 66 69 32 83 69 84 32 84 79 32 70 85 76 76 32 84 79 32 67 72 69 67 75 32 78 79 73 83 69}
+  }
+box {417.5 1082.5 3678.5 1202.5}
+xjustify center
+transforms {{0 2}
+  }
+cursor_position 47
+font {{ Utopia : Bold : UtopiaBold.pfa : 0 }}
+global_font_scale 1.19
+center {2048 1152}
+cursor_initialised true
+initial_cursor_position {{2048 1202.5}
+  }
+group_animations {{0} imported: 0 selected: items: "root transform/"}
+animation_layers {{1 11 2048 1152 0 0 1 1 0 0 0 0}
+  }
+color {1 0 0 1}
+enable_background true
+background_border_x 9.45
+background_border_y 5.55
+name warning_text
+tile_color 0xff0000ff
+xpos 1500
+ypos -81
+disable true
+}
+Dot {
+name Dot41
+xpos 1534
+ypos 378
+}
+set N9b6006d0 [stack 0]
+push $N94f26440
+Grade {
+channels all
+white {{"1 / Grade5.white"}}
+black_clamp false
+name Grade6
+xpos 1940
+ypos -639
+}
+Grade {
+name Grade1
+xpos 1940
+ypos -561
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "GAIN -"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text2
+xpos 1940
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9c6bec20 [stack 0]
+push $N9c6bec20
+Dilate {
+channels mask
+size 8
+name Dilate4
+xpos 1830
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply7
+xpos 1830
+ypos -207
+}
+push $N9c6bec20
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply8
+xpos 1940
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+NoOp {
+name NoOp2
+xpos 1940
+ypos 15
+addUserKnob {20 User}
+addUserKnob {6 fullResOnly l "" +STARTLINE +STARTLINE}
+fullResOnly {{fullResOnly+1 x1001 1}}
+}
+Dot {
+name Dot40
+xpos 1974
+ypos 330
+}
+set N9562af50 [stack 0]
+push $N149238c0
+Dot {
+name Dot20
+xpos 2414
+ypos -846
+}
+set N9cfb3150 [stack 0]
+Grade {
+channels all
+white {{new_gain}}
+black_clamp false
+name Grade5
+xpos 2380
+ypos -639
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "GAIN +"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text3
+xpos 2380
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9cfc81a0 [stack 0]
+push $N9cfc81a0
+Dilate {
+channels mask
+size 8
+name Dilate5
+xpos 2270
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply9
+xpos 2270
+ypos -207
+}
+push $N9cfc81a0
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply10
+xpos 2380
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot39
+xpos 2414
+ypos 282
+}
+set N958e42d0 [stack 0]
+push $N9cfb3150
+Dot {
+name Dot21
+xpos 2854
+ypos -846
+}
+set N958e88c0 [stack 0]
+Dot {
+name Dot24
+xpos 2854
+ypos -726
+}
+set N958ed170 [stack 0]
+Expression {
+expr0 (x/width)*size*pixel_aspect
+expr1 (y/height)*size
+expr2 0
+name Expression1
+xpos 2820
+ypos -657
+addUserKnob {20 User}
+addUserKnob {3 size}
+size 14
+}
+Expression {
+temp_name0 lr
+temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
+temp_name1 lg
+temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
+temp_name3 checker
+temp_expr3 "lr ^^ lg"
+channel0 alpha
+expr0 checker
+channel1 none
+channel2 none
+channel3 none
+name checker
+xpos 2820
+ypos -609
+addUserKnob {20 User}
+addUserKnob {7 size}
+size 1
+}
+push $N958ed170
+Dot {
+name Dot25
+xpos 2744
+ypos -726
+}
+Dot {
+name Dot23
+xpos 2744
+ypos -534
+}
+Input {
+inputs 0
+name plate
+xpos 3810
+ypos -1689
+number 1
+}
+Dot {
+name Dot54
+xpos 3844
+ypos -1446
+}
+set Nbffcc520 [stack 0]
+Dot {
+name Dot55
+xpos 3514
+ypos -1446
+}
+set N952f5c70 [stack 0]
+Crop {
+box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
+reformat true
+crop false
+name top_right1
+xpos 3590
+ypos -1329
+}
+push $N952f5c70
+Crop {
+box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
+reformat true
+crop false
+name top_left1
+xpos 3700
+ypos -1329
+}
+push $N952f5c70
+Crop {
+box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
+reformat true
+crop false
+name bottom_right1
+xpos 3370
+ypos -1329
+}
+push $N952f5c70
+Crop {
+box {0 0 {width/2 x1026 2048} {height/2}}
+reformat true
+crop false
+name bottom_left1
+xpos 3260
+ypos -1329
+}
+push $Nbffcc520
+Switch {
+inputs 5
+which {{Quarter_View.QuarterView}}
+name Switch5
+label "\[value which]"
+xpos 3810
+ypos -1167
+}
+Dot {
+name Dot27
+xpos 3844
+ypos -534
+}
+set N951d4340 [stack 0]
+Dot {
+name Dot26
+xpos 3624
+ypos -534
+}
+set N951d3d00 [stack 0]
+Dot {
+name Dot6
+xpos 3404
+ypos -534
+}
+set N951dd1f0 [stack 0]
+Keymix {
+inputs 3
+bbox A
+name Keymix2
+xpos 2820
+ypos -543
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "DIFFERENCE A"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text4
+xpos 2820
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N951ea7d0 [stack 0]
+push $N951ea7d0
+Dilate {
+channels mask
+size 8
+name Dilate6
+xpos 2710
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply11
+xpos 2710
+ypos -207
+}
+push $N951ea7d0
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply12
+xpos 2820
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot38
+xpos 2854
+ypos 234
+}
+set N957ce420 [stack 0]
+push $N951d3d00
+push $N958e88c0
+Dot {
+name Dot22
+xpos 3294
+ypos -846
+}
+set N957d2ab0 [stack 0]
+Dot {
+name Dot4
+xpos 3514
+ypos -846
+}
+set N957d7360 [stack 0]
+Difference {
+inputs 2
+gain 50
+name Difference1
+xpos 3480
+ypos -423
+}
+push $N957d2ab0
+Expression {
+expr0 (x/width)*size*pixel_aspect
+expr1 (y/height)*size
+expr2 0
+name Expression2
+xpos 3260
+ypos -657
+addUserKnob {20 User}
+addUserKnob {3 size}
+size 66
+}
+Expression {
+temp_name0 lr
+temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
+temp_name1 lg
+temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
+temp_name3 checker
+temp_expr3 "lr ^^ lg"
+channel0 rgb
+expr0 checker
+channel1 none
+channel2 none
+channel3 none
+name checker1
+xpos 3260
+ypos -609
+addUserKnob {20 User}
+addUserKnob {7 size}
+size 1
+}
+push $N951dd1f0
+Keymix {
+inputs 3
+bbox A
+name Keymix1
+xpos 3260
+ypos -423
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "DIFFERENCE B"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text7
+xpos 3260
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N94fbbcf0 [stack 0]
+push $N94fbbcf0
+Dilate {
+channels mask
+size 8
+name Dilate8
+xpos 3150
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply15
+xpos 3150
+ypos -207
+}
+push $N94fbbcf0
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply16
+xpos 3260
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot37
+xpos 3294
+ypos 186
+}
+set N9bb0b5e0 [stack 0]
+push $N951d4340
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message PLATE
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text8
+xpos 3810
+ypos -303
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9bb0fc70 [stack 0]
+push $N9bb0fc70
+Dilate {
+channels mask
+size 8
+name Dilate9
+xpos 3700
+ypos -303
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply17
+xpos 3700
+ypos -207
+}
+push $N9bb0fc70
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply18
+xpos 3810
+ypos -207
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 10 {input.width} {input.height/20}}
+center {1078 568}
+name Text11
+xpos 3810
+ypos -87
+disable {{"parent.frameRanges == 0 ? 1 : 0"}}
+}
+set N9b804300 [stack 0]
+push $N9b804300
+Dilate {
+channels mask
+size 8
+name Dilate11
+xpos 3700
+ypos -87
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply21
+xpos 3700
+ypos 9
+}
+push $N9b804300
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply22
+xpos 3810
+ypos 9
+disable {{"parent.frameRanges == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot36
+xpos 3844
+ypos 138
+}
+set N9cfee610 [stack 0]
+push $N957d7360
+Dot {
+name Dot34
+xpos 4284
+ypos -846
+}
+set N9cff2ca0 [stack 0]
+push $N951d4340
+Merge2 {
+inputs 2
+operation difference
+name Merge2
+xpos 4250
+ypos -537
+}
+Dot {
+name Dot47
+xpos 4284
+ypos -342
+}
+Text {
+output {rgba.red rgba.green rgba.blue mask.a}
+message DIFFERENCE
+font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+size {{parent.textSize}}
+xjustify center
+yjustify top
+Transform 1
+box {0 0 {input.width} {"input.height  - (input.height/70)"}}
+center {1078 568}
+name Text12
+xpos 4250
+ypos -279
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+set N9d00bf20 [stack 0]
+push $N9d00bf20
+Dilate {
+channels mask
+size 8
+name Dilate12
+xpos 4140
+ypos -279
+}
+Multiply {
+inputs 1+1
+channels mask
+value 0
+maskChannelMask mask.a
+name Multiply23
+xpos 4140
+ypos -183
+}
+push $N9d00bf20
+Multiply {
+inputs 1+1
+value 0
+maskChannelMask mask.a
+name Multiply24
+xpos 4250
+ypos -183
+disable {{"parent.labelToggle == 0 ? 1 : 0"}}
+}
+Dot {
+name Dot45
+xpos 4284
+ypos 90
+}
+set N9d01f0f0 [stack 0]
+push $N9cff2ca0
+Crop {
+box {{input.format.x} {input.format.y} {input.format.r} {input.format.t}}
+name Crop_input1
+xpos 5130
+ypos -849
+}
+Remove {
+name Remove1
+xpos 5130
+ypos -615
+}
+add_layer {DIFFERENCE DIFFERENCE.red DIFFERENCE.green DIFFERENCE.blue DIFFERENCE.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out DIFFERENCE
+name ShuffleCopy_DIFFERENCE
+xpos 5130
+ypos 87
+disable {{"parent.difference == 0"}}
+}
+add_layer {PLATE PLATE.red PLATE.green PLATE.blue PLATE.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out PLATE
+name ShuffleCopy_PLATE
+xpos 5130
+ypos 135
+disable {{"parent.plate == 0"}}
+}
+add_layer {DIFFERENCE_B DIFFERENCE_B.red DIFFERENCE_B.green DIFFERENCE_B.blue DIFFERENCE_B.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out DIFFERENCE_B
+name ShuffleCopy_DIFFERENCE_B
+xpos 5130
+ypos 183
+disable {{"parent.difference_b == 0"}}
+}
+add_layer {DIFFERENCE_A DIFFERENCE_A.red DIFFERENCE_A.green DIFFERENCE_A.blue DIFFERENCE_A.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out DIFFERENCE_A
+name ShuffleCopy_DIFFERENCE_A
+xpos 5130
+ypos 231
+disable {{"parent.difference_a == 0"}}
+}
+add_layer {GAIN_PLUS GAIN_PLUS.red GAIN_PLUS.green GAIN_PLUS.blue GAIN_PLUS.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out GAIN_PLUS
+name ShuffleCopy_GAIN_PLUS
+xpos 5130
+ypos 279
+disable {{"parent.gain_plus == 0"}}
+}
+add_layer {GAIN_MINUS GAIN_MINUS.red GAIN_MINUS.green GAIN_MINUS.blue GAIN_MINUS.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out GAIN_MINUS
+name ShuffleCopy_GAIN_MINUS
+xpos 5130
+ypos 327
+disable {{"parent.gain_minus == 0"}}
+}
+add_layer {NOISE NOISE.red NOISE.green NOISE.blue NOISE.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out NOISE
+name ShuffleCopy_NOISE
+xpos 5130
+ypos 375
+disable {{"parent.noise == 0"}}
+}
+add_layer {SATURATION SATURATION.red SATURATION.green SATURATION.blue SATURATION.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out SATURATION
+name ShuffleCopy_SATURATION
+xpos 5130
+ypos 423
+disable {{"parent.saturation_1 == 0"}}
+}
+add_layer {ILLEGAL_VALUES ILLEGAL_VALUES.red ILLEGAL_VALUES.green ILLEGAL_VALUES.blue ILLEGAL_VALUES.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out ILLEGAL_VALUES
+name ShuffleCopy_ILLEGAL_VALUES
+xpos 5130
+ypos 471
+disable {{"parent.illegal_values == 0"}}
+}
+add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out COMP
+name ShuffleCopy_COMP
+xpos 5130
+ypos 519
+disable {{"parent.comp == 0"}}
+}
+LayerContactSheet {
+width {{"input.width * \[value this.columns]"}}
+height {{"input.height * \[value this.rows]"}}
+autodims false
+name LayerContactSheet_CUSTOM_VIEW
+xpos 5130
+ypos 639
+}
+Dot {
+name Dot30
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 5164
+ypos 762
+}
+set N9b70a910 [stack 0]
+Dot {
+name Dot51
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 5274
+ypos 762
+}
+set N9b70ede0 [stack 0]
+Dot {
+name Dot52
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 5384
+ypos 762
+}
+set N9b713690 [stack 0]
+Dot {
+name Dot53
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 5494
+ypos 762
+}
+Reformat {
+type scale
+scale 0.25
+name Reformat6
+label "\[value scale]"
+xpos 5460
+ypos 873
+}
+push $N9b713690
+Reformat {
+type scale
+scale 0.5
+name Reformat5
+label "\[value scale]"
+xpos 5350
+ypos 873
+}
+push $N9b70ede0
+Reformat {
+type scale
+scale 0.75
+name Reformat1
+label "\[value scale]"
+xpos 5240
+ypos 873
+}
+push $N9b70a910
+Switch {
+inputs 4
+which {{res}}
+name Switch4
+label "\[value which]"
+xpos 5130
+ypos 1017
+}
+Dot {
+name Dot46
+xpos 5164
+ypos 2658
+}
+push $N9d01f0f0
+Dot {
+name Dot49
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 4284
+ypos 786
+}
+set N9bed7dc0 [stack 0]
+push $N9b6006d0
+Dot {
+name Dot10
+xpos 1534
+ypos 786
+}
+set N9bed3290 [stack 0]
+push $N956d4440
+Dot {
+name Dot9
+xpos 1094
+ypos 786
+}
+set N9bee0fa0 [stack 0]
+push $N94618670
+Dot {
+name Dot8
+xpos 654
+ypos 786
+}
+set N9bee5850 [stack 0]
+push $N958e42d0
+Dot {
+name Dot28
+xpos 2414
+ypos 786
+}
+set N9beea100 [stack 0]
+push $N946f74a0
+Dot {
+name Dot5
+xpos 214
+ypos 786
+}
+set N9beee9b0 [stack 0]
+push $N9562af50
+Dot {
+name Dot11
+xpos 1974
+ypos 786
+}
+set N9bef3260 [stack 0]
+push $N9bb0b5e0
+Dot {
+name Dot13
+xpos 3294
+ypos 786
+}
+set N9bef7b10 [stack 0]
+push $N9cfee610
+Dot {
+name Dot12
+xpos 3844
+ypos 786
+}
+set N9bedc640 [stack 0]
+push $N957ce420
+Dot {
+name Dot14
+xpos 2854
+ypos 786
+}
+set N9bf00cb0 [stack 0]
+ContactSheet {
+inputs 10
+width {{"input.width * \[value this.columns]"}}
+height {{"input.height * \[value this.rows]"}}
+columns 3
+roworder TopBottom
+startframe 1
+endframe 1
+name ContactSheet1
+xpos 4250
+ypos 1431
+}
+push $N9bed7dc0
+push $N9bed3290
+push $N9bee0fa0
+push $N9bee5850
+push $N9bef3260
+push $N9beea100
+push $N9bef7b10
+push $N9bf00cb0
+push $N9bedc640
+push $N9beee9b0
+Switch {
+inputs 11
+which {{QCMenu1.QCView}}
+name Switch1
+label "\[value which]"
+xpos 1280
+ypos 1425
+}
+Dot {
+name Dot48
+tile_color 0x949494ff
+note_font_size 22
+note_font_color 0xffffffff
+xpos 1314
+ypos 1554
+}
+set N9bf18c00 [stack 0]
+Dot {
+name Dot35
+xpos 544
+ypos 1554
+}
+set N9bf1d4c0 [stack 0]
+Crop {
+box {{width/2} 0 {width} {height/2}}
+name Crop4
+xpos 730
+ypos 1623
+}
+Mirror2 {
+flip true
+flop true
+name Mirror2_4
+xpos 730
+ypos 1647
+}
+Transform {
+translate {{width/2} {-height/2}}
+center {1024 778}
+name Transform4
+xpos 730
+ypos 1671
+}
+push $N9bf1d4c0
+Crop {
+box {0 0 {width/2} {height/2}}
+name Crop3
+xpos 620
+ypos 1623
+}
+Mirror2 {
+flip true
+flop true
+name Mirror2_3
+xpos 620
+ypos 1647
+}
+Transform {
+translate {{-width/2} {-height/2}}
+center {1600 900}
+name Transform5
+xpos 620
+ypos 1671
+}
+push 0
+push $N9bf1d4c0
+Crop {
+box {0 {height/2} {width/2} {height}}
+name Crop1
+xpos 290
+ypos 1623
+}
+Mirror2 {
+flip true
+flop true
+name Mirror2_1
+xpos 290
+ypos 1647
+}
+Transform {
+translate {{-width/2} {height/2}}
+center {1024 778}
+name Transform2
+xpos 290
+ypos 1671
+}
+push $N9bf1d4c0
+Crop {
+box {{width/2} {height/2} {width} {height}}
+name Crop2
+xpos 400
+ypos 1623
+}
+Mirror2 {
+flip true
+flop true
+name Mirror2_2
+xpos 400
+ypos 1647
+}
+Transform {
+translate {{width/2} {height/2}}
+center {1024 778}
+name Transform1
+xpos 400
+ypos 1671
+}
+Merge2 {
+inputs 4+1
+name Merge8
+xpos 510
+ypos 1815
+}
+push $N9bf18c00
+Switch {
+inputs 2
+which {{parent.Flip}}
+name flipQuad
+label "\[value which]"
+xpos 1280
+ypos 1809
+}
+Dot {
+name Dot32
+xpos 1314
+ypos 2298
+}
+set N9c5c2230 [stack 0]
+Dot {
+name Dot33
+xpos 1094
+ypos 2298
+}
+set N95126810 [stack 0]
+Reformat {
+type scale
+scale 0.25
+name Reformat4
+xpos 1170
+ypos 2463
+}
+push $N95126810
+Reformat {
+type scale
+scale 0.5
+name Reformat3
+xpos 1060
+ypos 2463
+}
+push $N95126810
+Reformat {
+type scale
+scale 0.75
+name Reformat2
+xpos 950
+ypos 2463
+}
+push $N9c5c2230
+Switch {
+inputs 4
+which {{Reso.Resolution}}
+name Switch3
+label "\[value which]"
+xpos 1280
+ypos 2529
+}
+set N9c5f67f0 [stack 0]
+Switch {
+inputs 2
+which {{parent.en_cus_view}}
+name Switch_CUS_VIEW
+label "\[value which]"
+xpos 1280
+ypos 2649
+}
+Output {
+name Output1
+xpos 1280
+ypos 3423
+}
+StickyNote {
+inputs 0
+name StickyNote7
+label "#TODO make Text box dynamic"
+note_font_size 21
+xpos -372
+ypos -157
+}
+push $N9c5f67f0
+NoOp {
+name Reso
+knobChanged validation()
+xpos 1500
+ypos 2535
+addUserKnob {20 User}
+addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
+}
+push $N96714cf0
+NoOp {
+name Quarter_View
+xpos 1830
+ypos -1161
+addUserKnob {20 User}
+addUserKnob {4 QuarterView l "Quarter View" M {"Full Screen" "Bottom Left" "Bottom Right" "Top Left" "Top Right" ""}}
+}
+end_group
