@@ -1,2080 +1,2071 @@
 Group {
-inputs 2
-name QC_Tool1
-selected true
-xpos -9520
-ypos -15922
-addUserKnob {20 QC l "QC Tool" -STARTLINE}
-addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
-addUserKnob {41 Resolution T Reso.Resolution}
-addUserKnob {41 QuarterView l "Quarter View" T Quarter_View.QuarterView}
-addUserKnob {41 rows_1 l rows/columns T ContactSheet1.rows}
-addUserKnob {41 columns_1 l "" -STARTLINE T ContactSheet1.columns}
-addUserKnob {26 tex l "" -STARTLINE T "For 'QC View / All Views'"}
-addUserKnob {26 ""}
-addUserKnob {6 Flip l "Flip Quadrants" +STARTLINE}
-addUserKnob {26 ""}
-addUserKnob {3 new_gain l "Gain Up / Down"}
-new_gain 3
-addUserKnob {26 text l "" -STARTLINE T "For Gain +/- views"}
-addUserKnob {3 saturation1 l Saturation}
-saturation1 4
-addUserKnob {26 text_1 l "" -STARTLINE T "For Saturation view"}
-addUserKnob {26 _1 l "For Illegal Values"}
-addUserKnob {7 maxVal l "Maximum Value" R -10 100}
-maxVal 1
-addUserKnob {7 minVal l "Minimum Value " R -10 100}
-addUserKnob {26 ""}
-addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.3 version</font>"}
-addUserKnob {26 info l "" +STARTLINE T "<font color=#808080 size=\"3\">QC Tool - 2022\n</font>"}
-addUserKnob {26 info2 l "" +STARTLINE T "<font color=#808080 size=\"3\">Credits: Jason Halverson, Neal Patel, Attila Gasparetz</font>"}
-addUserKnob {20 Overlays}
-addUserKnob {6 labelToggle l Labels +STARTLINE}
-labelToggle true
-addUserKnob {6 dataWinToggle l "dataWindow (in Comp view)" +STARTLINE}
-dataWinToggle true
-addUserKnob {6 frameRanges l "Frame Ranges (in Comp view)" +STARTLINE}
-frameRanges true
-addUserKnob {26 ""}
-addUserKnob {7 textSize l "text Size" R 0 10}
-textSize 2.5
-addUserKnob {20 tips l "QC Checking Tips"}
-addUserKnob {20 colourchecks l "Colour Checks" n 1}
-colourchecks 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_colour l "" +STARTLINE T "\nNegative blacks - Check for black values that are below zero,\n even black values close to zero are likely too low for approval.\n\nCheck that these values aren't caused by the viewer LUT by\n testing the plate input to both QC Tool inputs. \n\nCheck despilled elements against their original scans to make sure\ndespilling hasn't effected the element too much (particularly skin tones)\nMake sure neutral grades aren't broken by any grading done in the\ncomp compare the final comp colour space to the original scan. \n\nMake sure that the comp 'Write node' has the same settings as your 'Read node'. \nSwitch colour spaces while watching the shot, Log, sRGB, rec709,\nthis will ensure the added elements will react the same as the original scan.\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup n -1}
-addUserKnob {20 group l "Grain Checks" n 1}
-group 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_grain l "" +STARTLINE T "\nIMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to\nfull resolution and with your viewer set to 1:1 ratio!!\n\nAny viewer sampling with alter the results and mask \ndetails the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere.\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup_1 l endGroup n -1}
-addUserKnob {20 group_1 l "Focus Check" n 1}
-group_1 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_focus l "" +STARTLINE T "\nCompare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly,\nscrub through slowly, back and forth, looking for \ndifferences in the animation curve for the focus.\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup_2 l endGroup n -1}
-addUserKnob {20 group_2 l "Matte Checks" n 1}
-group_2 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_matte l "" +STARTLINE T "\nCheck edges of keys -  If they're too smooth they won't look natural,\nif they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair\nand fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, \nespecially on parts of the frame where comp or CG hasn't been done. \nThe Noise view is helpful for this.\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup_3 l endGroup n -1}
-addUserKnob {20 group_3 l "Tracking Checks" n 1}
-group_3 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_tracking l "" +STARTLINE T "\nVerify that tracked in elements do not wiggle or drift from\nnearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup_4 l endGroup n -1}
-addUserKnob {20 group_4 l "Frame Checks" n 1}
-group_4 0
-addUserKnob {26 ""}
-addUserKnob {26 tip_frame l "" +STARTLINE T "\nMake sure the frame range matches the delivery range.  \nTurn on the 'Frame Ranges' in Overlays to verify against \nwhat's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery. \nTurn on 'dataWindow' in Overlays and watch the four values to make\nsure they are correct and do not change throughout the\nsequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels,\nno dropped frames, etc.  This can only be done using\nFull resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp,\nwipe between the two, do you see any shifting of pixels that shouldn't be there,\nand grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the\nedges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up.\n"}
-addUserKnob {26 ""}
-addUserKnob {20 endGroup_5 l endGroup n -1}
-addUserKnob {20 customview l CustomView}
-addUserKnob {6 en_cus_view l "<font size=5><b>___Enable Custom View___" +STARTLINE}
-addUserKnob {26 ""}
-addUserKnob {6 difference l "<font color=#888888><b>_Difference" +STARTLINE}
-difference true
-addUserKnob {6 plate l "<font color=#888888><b>_Plate" +STARTLINE}
-plate true
-addUserKnob {6 difference_b l "<font color=#888888><b>_Difference B" +STARTLINE}
-difference_b true
-addUserKnob {6 difference_a l "<font color=#888888><b>_Difference A" +STARTLINE}
-difference_a true
-addUserKnob {6 gain_plus l "<font color=#888888><b>_Gain +" +STARTLINE}
-gain_plus true
-addUserKnob {6 gain_minus l "<font color=#888888><b>_Gain -" +STARTLINE}
-gain_minus true
-addUserKnob {6 noise1 l "<font color=#888888><b>_Noise" +STARTLINE}
-noise1 true
-addUserKnob {6 saturation_1 l "<font color=#888888><b>_Saturation" +STARTLINE}
-saturation_1 true
-addUserKnob {6 illegal_values l "<font color=#888888><b>_Illegal Values" +STARTLINE}
-illegal_values true
-addUserKnob {6 comp l "<font color=#888888><b>_Comp" +STARTLINE}
-comp true
-addUserKnob {26 ""}
-addUserKnob {22 selectnone l "Select None" T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n" +STARTLINE}
-addUserKnob {22 selectall l "Select All" -STARTLINE T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
-addUserKnob {26 ""}
-addUserKnob {4 res l Res M {Full 0.75 0.5 0.25}}
-addUserKnob {41 width l INVISIBLE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.width}
-addUserKnob {41 height l INVISIBLE -STARTLINE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.height}
-addUserKnob {41 rows l rows/columns T LayerContactSheet_CUSTOM_VIEW.rows}
-addUserKnob {41 columns l "" -STARTLINE T LayerContactSheet_CUSTOM_VIEW.columns}
-addUserKnob {41 roworder l "Row Order" T LayerContactSheet_CUSTOM_VIEW.roworder}
-addUserKnob {41 colorder l "Column Order" T LayerContactSheet_CUSTOM_VIEW.colorder}
-}
-BackdropNode {
-inputs 0
-name BackdropNode12
-tile_color 0x2c2c2cff
-label "<center><font color=#FFFFFF>Custom View"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 4634
-ypos -956
-bdwidth 1073
-bdheight 2247
-z_order -2411031
-}
-BackdropNode {
-inputs 0
-name BackdropNode1
-tile_color 0x212121ff
-label "I\nL\nL\nE\nG\nA\nL\n \nV\nA\nL\nU\nE\nS"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 394
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode10
-tile_color 0x888888ff
-label "QC checks"
-note_font_size 42
-xpos 5938
-ypos -934
-bdwidth 1104
-bdheight 908
-}
-BackdropNode {
-inputs 0
-name BackdropNode11
-tile_color 0x212121ff
-label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 4024
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode2
-tile_color 0x212121ff
-label "C\nO\nM\nP"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos -46
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode3
-tile_color 0x212121ff
-label "S\nA\nT\nU\nR\nA\nT\nI\nO\nN"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 834
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode4
-tile_color 0x212121ff
-label "N\nO\nI\nS\nE"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 1274
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode5
-tile_color 0x212121ff
-label "G\nA\nI\nN\n \n-"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 1714
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode6
-tile_color 0x212121ff
-label "G\nA\nI\nN\n \n+"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 2154
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode7
-tile_color 0x212121ff
-label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nA"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 2594
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode8
-tile_color 0x212121ff
-label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nB"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 3034
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-BackdropNode {
-inputs 0
-name BackdropNode9
-tile_color 0x212121ff
-label "P\nL\nA\nT\nE"
-note_font "Bitstream Vera Sans Bold"
-note_font_size 42
-xpos 3584
-ypos -944
-bdwidth 313
-bdheight 1072
-}
-StickyNote {
-inputs 0
-name StickyNote2
-label "Compare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly, scrub through slowly, back and forth, looking for differences in the animation curve for the focus."
-xpos 5883
-ypos -610
-}
-StickyNote {
-inputs 0
-name StickyNote3
-label "Check edges of keys -  If they're too smooth they won't look natural, if they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair and fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, especially on parts of the frame where comp or CG hasn't been done.  The Noise view is helpful for this."
-xpos 5932
-ypos -514
-}
-StickyNote {
-inputs 0
-name StickyNote1
-label "IMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to full resolution and with your viewer set to 1:1 ratio!!  Any viewer sampling with alter the results and mask details the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere."
-xpos 5961
-ypos -742
-}
-StickyNote {
-inputs 0
-name StickyNote4
-label "Verify that tracked in elements do not wiggle or drift from nearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is"
-xpos 6050
-ypos -334
-}
-StickyNote {
-inputs 0
-name StickyNote5
-label "Make sure the frame range matches the delivery range.  Turn on the 'Frame Ranges' in Overlays to verify against what's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery.  Turn on 'dataWindow' in Overlays and watch the four values to make sure they are correct and do not change throughout the sequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels, no dropped frames, etc.  This can only be done using Full resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp, wipe between the two, do you see any shifting of pixels that shouldn't be there, and grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the edges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up."
-xpos 5897
-ypos -238
-}
-StickyNote {
-inputs 0
-name StickyNote6
-label "Negative blacks - Check for black values that are below zero, even black values close to zero are likely too low for approval.  Check that these values aren't caused by the viewer LUT by testing the plate input to both QC Tool inputs.\n\nCheck despilled elements against their original scans to make sure despilling hasn't effected the element too much (particularly skin tones)\n\nMake sure neutral grades aren't broken by any grading done in the comp compare the final comp colour space to the original scan. Make sure that the comp 'Write node' has the same settings as your 'Read node'. \n\nSwitch colour spaces while watching the shot, Log, sRGB, rec709, this will ensure the added elements will react the same as the original scan."
-xpos 5906
-ypos -862
-}
-Input {
-inputs 0
-name comp
-label Comp
-xpos 2050
-ypos -1720
-}
-Dot {
-name Dot50
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 2084
-ypos -1566
-}
-Dot {
-name Dot29
-xpos 2084
-ypos -1446
-}
-set Ne7222b00 [stack 0]
-Dot {
-name Dot31
-xpos 1754
-ypos -1446
-}
-set Ne7222400 [stack 0]
-Crop {
-box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
-reformat true
-crop false
-name top_right
-xpos 1830
-ypos -1330
-}
-push $Ne7222400
-Crop {
-box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
-reformat true
-crop false
-name top_left
-xpos 1940
-ypos -1330
-}
-push $Ne7222400
-Crop {
-box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
-reformat true
-crop false
-name bottom_right
-xpos 1610
-ypos -1330
-}
-push $Ne7222400
-Crop {
-box {0 0 {width/2 x1026 2048} {height/2}}
-reformat true
-crop false
-name bottom_left
-xpos 1500
-ypos -1330
-}
-push $Ne7222b00
-Switch {
-inputs 5
-which {{Quarter_View.QuarterView}}
-name Switch2
-label "\[value which]"
-xpos 2050
-ypos -1168
-}
-set Ne7220100 [stack 0]
-Dot {
-name Dot2
-xpos 2084
-ypos -846
-}
-set Ne7203900 [stack 0]
-Dot {
-name Dot19
-xpos 1974
-ypos -846
-}
-set Ne7203200 [stack 0]
-Dot {
-name Dot16
-xpos 1534
-ypos -846
-}
-set Ne7202b00 [stack 0]
-Dot {
-name Dot18
-xpos 1094
-ypos -846
-}
-set Ne7202400 [stack 0]
-Dot {
-name Dot3
-xpos 654
-ypos -846
-}
-set Ne7201d00 [stack 0]
-Dot {
-name Dot7
-xpos 214
-ypos -846
-}
-Dot {
-name Dot56
-note_font_size 22
-xpos 214
-ypos -438
-}
-Text2 {
-font_size_toolbar 50
-font_width_toolbar 100
-font_height_toolbar 100
-message "\[metadata exr/displayWindow] display\n\[metadata exr/dataWindow] dataWin"
-old_message {{48 44 48 44 52 49 50 55 44 50 51 50 49 32 100 105 115 112 108 97 121 10 48 44 48 44 52 49 50 55 44 50 51 50 49 32 100 97 116 97 87 105 110}
-  }
-old_expression_markers {{0 12 22 34}
-  }
-box {{input.format.x} {input.format.y} {"input.width - (input.width / 1.3)"} {"input.height - (input.height / 1.1)"}}
-xjustify right
-transforms {{0 2}
-  }
-font_size_values {{13 50 14 50 15 50 16 50 17 50 18 50 19 50 20 50 21 50 22 50 23 50 24 50 25 50 26 50 27 50 28 50 29 50 30 50 31 50 32 50 33 50 34 50 35 50 36 50 37 50 38 50 39 50 40 50 41 50 42 50 13 50 14 50 15 50 16 50 17 50 18 50 19 50 20 50 21 50 35 50 36 50 37 50 38 50 39 50 40 50 41 50 42 50 0 50 1 50 2 50 3 50 4 50 5 50 6 50 7 50 8 50 9 50 10 50 11 50 12 50 0 40 1 40 2 40 3 40 4 40 5 40 6 40 7 40 8 40 9 40 10 40 11 40 12 40}
-  }
-global_font_scale {{textSize*0.5}}
-font_size 50
-scale {1 1}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{641.5 125.5}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 1440 1080 0 0 1 1 0 0 0 0}
-  }
-enable_shadows true
-shadow_opacity 0.8
-shadow_angle 298
-shadow_distance 10
-shadow_softness 2
-name dataWindow1
-xpos 180
-ypos -394
-disable {{!dataWinToggle}}
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message COMP
-old_message {{67 79 77 80}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-transforms {{0 2}
-  }
-cursor_position 4
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-enable_shadows true
-shadow_opacity 0.8
-shadow_angle 298
-shadow_distance 10
-name Text_COMP
-xpos 180
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne71e2400 [stack 0]
-push $Ne71e2400
-Dilate {
-channels mask
-size 8
-name Dilate2
-xpos 70
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply3
-xpos 70
-ypos -208
-}
-push $Ne71e2400
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply4
-xpos 180
-ypos -208
-disable {{!labelToggle}}
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
-old_message {{49 48 48 49 32 45 32 49 48 54 48}
-  }
-old_expression_markers {{0 3 7 10}
-  }
-box {0 0 {input.width} {input.height/20}}
-xjustify center
-yjustify bottom
-transforms {{0 2}
-  }
-global_font_scale {{textSize}}
-scale {1 1}
-autofit_bbox false
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 1078 568 0 0 1 1 0 0 0 0}
-  }
-name Text10
-xpos 180
-ypos -136
-disable {{!frameRanges}}
-}
-set Ne71c1d00 [stack 0]
-push $Ne71c1d00
-Dilate {
-channels mask
-size 8
-name Dilate7
-xpos 70
-ypos -136
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply25
-xpos 70
-ypos -40
-}
-push $Ne71c1d00
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply26
-xpos 180
-ypos -40
-disable {{!frameRanges}}
-}
-Dot {
-name Dot44
-xpos 214
-ypos 522
-}
-set Ne7195600 [stack 0]
-push $Ne7201d00
-Expression {
-expr0 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:r"
-expr1 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 1:g"
-expr2 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:b"
-channel3 none
-name nan_inf
-xpos 620
-ypos -754
-}
-Expression {
-expr0 "r < minLimit || g < minLimit || b < minLimit ? 0:r"
-expr1 "r < minLimit || g < minLimit || b < minLimit ? 1:g"
-expr2 "r < minLimit || g < minLimit || b < minLimit ? 1:b"
-channel3 none
-name negative
-xpos 620
-ypos -682
-addUserKnob {20 User}
-addUserKnob {7 minLimit R -1 1}
-minLimit {{minVal}}
-}
-Expression {
-expr0 "r > maxLimit || g > maxLimit || b > maxLimit ? 1:r"
-expr1 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:g"
-expr2 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:b"
-channel3 none
-name high
-xpos 620
-ypos -634
-addUserKnob {20 User}
-addUserKnob {7 maxLimit l "" +STARTLINE R -1 100}
-maxLimit {{maxVal}}
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "ILLEGAL VALUES"
-old_message {{73 76 76 69 71 65 76 32 86 65 76 85 69 83}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 14
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_ILLEGAL_VALUES
-xpos 620
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne7167900 [stack 0]
-push $Ne7167900
-Dilate {
-channels mask
-size 8
-name Dilate10
-xpos 510
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply19
-xpos 510
-ypos -208
-}
-push $Ne7167900
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply20
-xpos 620
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot43
-xpos 654
-ypos 474
-}
-set Ne7153200 [stack 0]
-push $Ne7202400
-Saturation {
-channels all
-saturation {{saturation1}}
-name Saturation1
-xpos 1060
-ypos -664
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message SATURATION
-old_message {{83 65 84 85 82 65 84 73 79 78}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 10
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_SATURATION
-xpos 1060
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne7152400 [stack 0]
-push $Ne7152400
-Dilate {
-channels mask
-size 8
-name Dilate1
-xpos 950
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply1
-xpos 950
-ypos -208
-}
-push $Ne7152400
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply2
-xpos 1060
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot42
-xpos 1094
-ypos 426
-}
-set Ne6f15d00 [stack 0]
-push $Ne7202b00
-Dot {
-name Dot17
-xpos 1534
-ypos -798
-}
-set Ne6f15600 [stack 0]
-Dot {
-name Dot1
-xpos 1424
-ypos -798
-}
-Dot {
-name Dot15
-xpos 1424
-ypos -678
-}
-push $Ne6f15600
-Blur {
-size 3
-name Blur1
-xpos 1500
-ypos -760
-}
-Merge2 {
-inputs 2
-operation minus
-also_merge all
-name Merge1
-xpos 1500
-ypos -682
-}
-Grade {
-channels all
-multiply 100
-white_clamp true
-name Grade2
-xpos 1500
-ypos -616
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message NOISE
-old_message {{78 79 73 83 69}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 5
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_NOISE
-xpos 1500
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6ee7900 [stack 0]
-push $Ne6ee7900
-Dilate {
-channels mask
-size 8
-name Dilate3
-xpos 1390
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply5
-xpos 1390
-ypos -208
-}
-push $Ne6ee7900
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply6
-xpos 1500
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-message "RESOLUTION SHOULD BE SET TO FULL TO CHECK NOISE"
-old_message {{82 69 83 79 76 85 84 73 79 78 32 83 72 79 85 76 68 32 66 69 32 83 69 84 32 84 79 32 70 85 76 76 32 84 79 32 67 72 69 67 75 32 78 79 73 83 69}
-  }
-box {417.5 1082.5 3678.5 1202.5}
-xjustify center
-transforms {{0 2}
-  }
-cursor_position 47
-font {{ Utopia : Bold : UtopiaBold.pfa : 0 }}
-global_font_scale 1.19
-center {2048 1152}
-cursor_initialised true
-initial_cursor_position {{2048 1202.5}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2048 1152 0 0 1 1 0 0 0 0}
-  }
-color {1 0 0 1}
-enable_background true
-background_border_x 9.45
-background_border_y 5.55
-name warning_text
-tile_color 0xff0000ff
-xpos 1500
-ypos -82
-disable true
-}
-Dot {
-name Dot41
-xpos 1534
-ypos 378
-}
-set Ne6ebcf00 [stack 0]
-push $Ne7203200
-Grade {
-channels all
-white {{"1 / Grade5.white"}}
-black_clamp false
-name Grade6
-xpos 1940
-ypos -640
-}
-Grade {
-name Grade1
-xpos 1940
-ypos -562
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "GAIN -"
-old_message {{71 65 73 78 32 45}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_GAIN_
-xpos 1940
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6ea9600 [stack 0]
-push $Ne6ea9600
-Dilate {
-channels mask
-size 8
-name Dilate4
-xpos 1830
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply7
-xpos 1830
-ypos -208
-}
-push $Ne6ea9600
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply8
-xpos 1940
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-NoOp {
-name NoOp2
-xpos 1940
-ypos -82
-addUserKnob {20 User}
-addUserKnob {6 fullResOnly l "" +STARTLINE +STARTLINE}
-fullResOnly {{fullResOnly}}
-}
-Dot {
-name Dot40
-xpos 1974
-ypos 330
-}
-set Ne6e90800 [stack 0]
-push $Ne7203900
-Dot {
-name Dot20
-xpos 2414
-ypos -846
-}
-set Ne6e90100 [stack 0]
-Grade {
-channels all
-white {{new_gain}}
-black_clamp false
-name Grade5
-xpos 2380
-ypos -640
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "GAIN +"
-old_message {{71 65 73 78 32 43}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 6
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_GAIN__
-xpos 2380
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6e64100 [stack 0]
-push $Ne6e64100
-Dilate {
-channels mask
-size 8
-name Dilate5
-xpos 2270
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply9
-xpos 2270
-ypos -208
-}
-push $Ne6e64100
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply10
-xpos 2380
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot39
-xpos 2414
-ypos 282
-}
-set Ne7027900 [stack 0]
-push $Ne6e90100
-Dot {
-name Dot21
-xpos 2854
-ypos -846
-}
-set Ne7027200 [stack 0]
-Dot {
-name Dot24
-xpos 2854
-ypos -726
-}
-set Ne7026b00 [stack 0]
-Expression {
-expr0 (x/width)*size*pixel_aspect
-expr1 (y/height)*size
-expr2 0
-name Expression1
-xpos 2820
-ypos -658
-addUserKnob {20 User}
-addUserKnob {3 size}
-size 14
-}
-Expression {
-temp_name0 lr
-temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
-temp_name1 lg
-temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
-temp_name3 checker
-temp_expr3 "lr ^^ lg"
-channel0 alpha
-expr0 checker
-channel1 none
-channel2 none
-channel3 none
-name checker
-xpos 2820
-ypos -610
-addUserKnob {20 User}
-addUserKnob {7 size}
-size 1
-}
-push $Ne7026b00
-Dot {
-name Dot25
-xpos 2744
-ypos -726
-}
-Dot {
-name Dot23
-xpos 2744
-ypos -534
-}
-Input {
-inputs 0
-name plate
-xpos 3810
-ypos -1690
-number 1
-}
-Dot {
-name Dot54
-xpos 3844
-ypos -1446
-}
-set Ne7024100 [stack 0]
-Dot {
-name Dot55
-xpos 3514
-ypos -1446
-}
-set Ne7013900 [stack 0]
-Crop {
-box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
-reformat true
-crop false
-name top_right1
-xpos 3590
-ypos -1330
-}
-push $Ne7013900
-Crop {
-box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
-reformat true
-crop false
-name top_left1
-xpos 3700
-ypos -1330
-}
-push $Ne7013900
-Crop {
-box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
-reformat true
-crop false
-name bottom_right1
-xpos 3370
-ypos -1330
-}
-push $Ne7013900
-Crop {
-box {0 0 {width/2 x1026 2048} {height/2}}
-reformat true
-crop false
-name bottom_left1
-xpos 3260
-ypos -1330
-}
-push $Ne7024100
-Switch {
-inputs 5
-which {{Quarter_View.QuarterView}}
-name Switch5
-label "\[value which]"
-xpos 3810
-ypos -1168
-}
-Dot {
-name Dot27
-xpos 3844
-ypos -534
-}
-set Ne7010f00 [stack 0]
-Dot {
-name Dot26
-xpos 3624
-ypos -534
-}
-set Ne7010800 [stack 0]
-Dot {
-name Dot6
-xpos 3404
-ypos -534
-}
-set Ne7010100 [stack 0]
-Keymix {
-inputs 3
-bbox A
-name Keymix2
-xpos 2820
-ypos -544
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "DIFFERENCE A"
-old_message {{68 73 70 70 69 82 69 78 67 69 32 65}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 12
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_DIFFERENCE_A
-xpos 2820
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6fdf200 [stack 0]
-push $Ne6fdf200
-Dilate {
-channels mask
-size 8
-name Dilate6
-xpos 2710
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply11
-xpos 2710
-ypos -208
-}
-push $Ne6fdf200
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply12
-xpos 2820
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot38
-xpos 2854
-ypos 234
-}
-set Ne6fbeb00 [stack 0]
-push $Ne7010800
-push $Ne7027200
-Dot {
-name Dot22
-xpos 3294
-ypos -846
-}
-set Ne6fbe400 [stack 0]
-Dot {
-name Dot4
-xpos 3514
-ypos -846
-}
-set Ne6fbdd00 [stack 0]
-Difference {
-inputs 2
-gain 50
-name Difference1
-xpos 3480
-ypos -424
-}
-push $Ne6fbe400
-Expression {
-expr0 (x/width)*size*pixel_aspect
-expr1 (y/height)*size
-expr2 0
-name Expression2
-xpos 3260
-ypos -658
-addUserKnob {20 User}
-addUserKnob {3 size}
-size 66
-}
-Expression {
-temp_name0 lr
-temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
-temp_name1 lg
-temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
-temp_name3 checker
-temp_expr3 "lr ^^ lg"
-channel0 rgb
-expr0 checker
-channel1 none
-channel2 none
-channel3 none
-name checker1
-xpos 3260
-ypos -610
-addUserKnob {20 User}
-addUserKnob {7 size}
-size 1
-}
-push $Ne7010100
-Keymix {
-inputs 3
-bbox A
-name Keymix1
-xpos 3260
-ypos -424
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "DIFFERENCE B"
-old_message {{68 73 70 70 69 82 69 78 67 69 32 66}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 12
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_DIFFERENCE_B
-xpos 3260
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6f9b900 [stack 0]
-push $Ne6f9b900
-Dilate {
-channels mask
-size 8
-name Dilate8
-xpos 3150
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply15
-xpos 3150
-ypos -208
-}
-push $Ne6f9b900
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply16
-xpos 3260
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot37
-xpos 3294
-ypos 186
-}
-set Ne6f7b200 [stack 0]
-push $Ne7010f00
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message PLATE
-old_message {{80 76 65 84 69}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 5
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_PLATE
-xpos 3810
-ypos -304
-disable {{!labelToggle}}
-}
-set Ne6f7ab00 [stack 0]
-push $Ne6f7ab00
-Dilate {
-channels mask
-size 8
-name Dilate9
-xpos 3700
-ypos -304
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply17
-xpos 3700
-ypos -208
-}
-push $Ne6f7ab00
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply18
-xpos 3810
-ypos -208
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
-old_message {{49 48 48 49 32 45 32 49 48 54 48}
-  }
-old_expression_markers {{0 3 7 10}
-  }
-box {0 0 {input.width} {input.height/20}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 76
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_PLATE_FR
-xpos 3810
-ypos -88
-disable {{!frameRanges}}
-}
-set Ne6f4e400 [stack 0]
-push $Ne6f4e400
-Dilate {
-channels mask
-size 8
-name Dilate11
-xpos 3700
-ypos -88
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply13
-xpos 3700
-ypos -16
-}
-push $Ne6f4e400
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply14
-xpos 3810
-ypos -16
-disable {{!frameRanges}}
-}
-Dot {
-name Dot36
-xpos 3844
-ypos 138
-}
-set Ne7129d00 [stack 0]
-push $Ne6fbdd00
-Dot {
-name Dot34
-xpos 4284
-ypos -846
-}
-set Ne7129600 [stack 0]
-push $Ne7010f00
-Merge2 {
-inputs 2
-operation difference
-name Merge2
-xpos 4250
-ypos -538
-}
-Dot {
-name Dot47
-xpos 4284
-ypos -342
-}
-Text2 {
-font_size_toolbar 100
-font_width_toolbar 100
-font_height_toolbar 100
-output {rgba.red rgba.green rgba.blue mask.a}
-message DIFFERENCE
-old_message {{68 73 70 70 69 82 69 78 67 69}
-  }
-box {0 0 {input.width} {"input.height  - (input.height/5)"}}
-xjustify center
-yjustify center
-transforms {{0 2}
-  }
-cursor_position 10
-global_font_scale {{textSize}}
-center {2064 1161}
-cursor_initialised true
-autofit_bbox false
-initial_cursor_position {{2064 1161}
-  }
-group_animations {{0} imported: 0 selected: items: "root transform/"}
-animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
-  }
-name Text_DIFFERENCE
-xpos 4250
-ypos -280
-disable {{!labelToggle}}
-}
-set Ne7128100 [stack 0]
-push $Ne7128100
-Dilate {
-channels mask
-size 8
-name Dilate12
-xpos 4140
-ypos -280
-}
-Multiply {
-inputs 1+1
-channels mask
-value 0
-maskChannelMask mask.a
-name Multiply23
-xpos 4140
-ypos -184
-}
-push $Ne7128100
-Multiply {
-inputs 1+1
-value 0
-maskChannelMask mask.a
-name Multiply24
-xpos 4250
-ypos -184
-disable {{"labelToggle == 0 ? 1 : 0"}}
-}
-Dot {
-name Dot45
-xpos 4284
-ypos 90
-}
-set Ne70df900 [stack 0]
-push $Ne7129600
-Crop {
-box {{input.format.x} {input.format.y} {input.format.r} {input.format.t}}
-name Crop_input1
-xpos 5130
-ypos -850
-}
-Remove {
-name Remove1
-xpos 5130
-ypos -616
-}
+ inputs 2
+ name QC_Tool1
+ selected true
+ xpos 7870
+ ypos 18
+ addUserKnob {20 QC l "QC Tool" -STARTLINE}
+ addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
+ addUserKnob {41 Resolution T Reso.Resolution}
+ addUserKnob {41 QuarterView l "Quarter View" T Quarter_View.QuarterView}
+ addUserKnob {41 rows_1 l rows/columns T ContactSheet1.rows}
+ addUserKnob {41 columns_1 l "" -STARTLINE T ContactSheet1.columns}
+ addUserKnob {26 tex l "" -STARTLINE T "For 'QC View / All Views'"}
+ addUserKnob {26 ""}
+ addUserKnob {6 Flip l "Flip Quadrants" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {3 new_gain l "Gain Up / Down"}
+ new_gain 3
+ addUserKnob {26 text l "" -STARTLINE T "For Gain +/- views"}
+ addUserKnob {3 saturation1 l Saturation}
+ saturation1 4
+ addUserKnob {26 text_1 l "" -STARTLINE T "For Saturation view"}
+ addUserKnob {26 _1 l "For Illegal Values"}
+ addUserKnob {7 maxVal l "Maximum Value" R -10 100}
+ maxVal 1
+ addUserKnob {7 minVal l "Minimum Value " R -10 100}
+ addUserKnob {26 ""}
+ addUserKnob {26 TEXT l "" +STARTLINE T "<font color=#808080 size=\"5\" >1.3 version</font>"}
+ addUserKnob {26 info l "" +STARTLINE T "<font color=#808080 size=\"3\">QC Tool - 2022\n</font>"}
+ addUserKnob {26 info2 l "" +STARTLINE T "<font color=#808080 size=\"3\">Credits: Jason Halverson, Neal Patel, Attila Gasparetz</font>"}
+ addUserKnob {20 Overlays}
+ addUserKnob {6 labelToggle l Labels +STARTLINE}
+ labelToggle true
+ addUserKnob {6 dataWinToggle l "dataWindow (in Comp view)" +STARTLINE}
+ dataWinToggle true
+ addUserKnob {6 frameRanges l "Frame Ranges (in Comp view)" +STARTLINE}
+ frameRanges true
+ addUserKnob {26 ""}
+ addUserKnob {7 textSize l "text Size" R 0 10}
+ textSize 2.5
+ addUserKnob {20 tips l "QC Checking Tips"}
+ addUserKnob {20 colourchecks l "Colour Checks" n 1}
+ colourchecks 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_colour l "" +STARTLINE T "\nNegative blacks - Check for black values that are below zero,\n even black values close to zero are likely too low for approval.\n\nCheck that these values aren't caused by the viewer LUT by\n testing the plate input to both QC Tool inputs. \n\nCheck despilled elements against their original scans to make sure\ndespilling hasn't effected the element too much (particularly skin tones)\nMake sure neutral grades aren't broken by any grading done in the\ncomp compare the final comp colour space to the original scan. \n\nMake sure that the comp 'Write node' has the same settings as your 'Read node'. \nSwitch colour spaces while watching the shot, Log, sRGB, rec709,\nthis will ensure the added elements will react the same as the original scan.\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 group l "Grain Checks" n 1}
+ group 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_grain l "" +STARTLINE T "\nIMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to\nfull resolution and with your viewer set to 1:1 ratio!!\n\nAny viewer sampling with alter the results and mask \ndetails the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere.\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 group_1 l "Focus Check" n 1}
+ group_1 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_focus l "" +STARTLINE T "\nCompare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly,\nscrub through slowly, back and forth, looking for \ndifferences in the animation curve for the focus.\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 group_2 l "Matte Checks" n 1}
+ group_2 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_matte l "" +STARTLINE T "\nCheck edges of keys -  If they're too smooth they won't look natural,\nif they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair\nand fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, \nespecially on parts of the frame where comp or CG hasn't been done. \nThe Noise view is helpful for this.\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 group_3 l "Tracking Checks" n 1}
+ group_3 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_tracking l "" +STARTLINE T "\nVerify that tracked in elements do not wiggle or drift from\nnearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_4 l endGroup n -1}
+ addUserKnob {20 group_4 l "Frame Checks" n 1}
+ group_4 0
+ addUserKnob {26 ""}
+ addUserKnob {26 tip_frame l "" +STARTLINE T "\nMake sure the frame range matches the delivery range.  \nTurn on the 'Frame Ranges' in Overlays to verify against \nwhat's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery. \nTurn on 'dataWindow' in Overlays and watch the four values to make\nsure they are correct and do not change throughout the\nsequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels,\nno dropped frames, etc.  This can only be done using\nFull resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp,\nwipe between the two, do you see any shifting of pixels that shouldn't be there,\nand grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the\nedges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up.\n"}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_5 l endGroup n -1}
+ addUserKnob {20 customview l CustomView}
+ addUserKnob {6 en_cus_view l "<font size=5><b>___Enable Custom View___" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {6 difference l "<font color=#888888><b>_Difference" +STARTLINE}
+ difference true
+ addUserKnob {6 plate l "<font color=#888888><b>_Plate" +STARTLINE}
+ plate true
+ addUserKnob {6 difference_b l "<font color=#888888><b>_Difference B" +STARTLINE}
+ difference_b true
+ addUserKnob {6 difference_a l "<font color=#888888><b>_Difference A" +STARTLINE}
+ difference_a true
+ addUserKnob {6 gain_plus l "<font color=#888888><b>_Gain +" +STARTLINE}
+ gain_plus true
+ addUserKnob {6 gain_minus l "<font color=#888888><b>_Gain -" +STARTLINE}
+ gain_minus true
+ addUserKnob {6 noise1 l "<font color=#888888><b>_Noise" +STARTLINE}
+ noise1 true
+ addUserKnob {6 saturation_1 l "<font color=#888888><b>_Saturation" +STARTLINE}
+ saturation_1 true
+ addUserKnob {6 illegal_values l "<font color=#888888><b>_Illegal Values" +STARTLINE}
+ illegal_values true
+ addUserKnob {6 comp l "<font color=#888888><b>_Comp" +STARTLINE}
+ comp true
+ addUserKnob {26 ""}
+ addUserKnob {22 selectnone l "Select None" T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(False)\n" +STARTLINE}
+ addUserKnob {22 selectall l "Select All" -STARTLINE T "import nuke\n\nknobs = \['difference','plate','difference_b','difference_a','gain_plus','gain_minus','noise1','saturation_1','illegal_values','comp']\n\nfor knob in knobs:\n    nuke.thisNode()\[knob].setValue(True)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {4 res l Res M {Full 0.75 0.5 0.25}}
+ addUserKnob {41 width l INVISIBLE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.width}
+ addUserKnob {41 height l INVISIBLE -STARTLINE +INVISIBLE T LayerContactSheet_CUSTOM_VIEW.height}
+ addUserKnob {41 rows l rows/columns T LayerContactSheet_CUSTOM_VIEW.rows}
+ addUserKnob {41 columns l "" -STARTLINE T LayerContactSheet_CUSTOM_VIEW.columns}
+ addUserKnob {41 roworder l "Row Order" T LayerContactSheet_CUSTOM_VIEW.roworder}
+ addUserKnob {41 colorder l "Column Order" T LayerContactSheet_CUSTOM_VIEW.colorder}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode12
+  tile_color 0x2c2c2cff
+  label "<center><font color=#FFFFFF>Custom View"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 4634
+  ypos -956
+  bdwidth 1073
+  bdheight 2247
+  z_order -2411031
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x212121ff
+  label "I\nL\nL\nE\nG\nA\nL\n \nV\nA\nL\nU\nE\nS"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 394
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode10
+  tile_color 0x888888ff
+  label "QC checks"
+  note_font_size 42
+  xpos 5938
+  ypos -934
+  bdwidth 1104
+  bdheight 908
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode11
+  tile_color 0x212121ff
+  label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 4024
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x212121ff
+  label "C\nO\nM\nP"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos -46
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x212121ff
+  label "S\nA\nT\nU\nR\nA\nT\nI\nO\nN"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 834
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x212121ff
+  label "N\nO\nI\nS\nE"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 1274
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode5
+  tile_color 0x212121ff
+  label "G\nA\nI\nN\n \n-"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 1714
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode6
+  tile_color 0x212121ff
+  label "G\nA\nI\nN\n \n+"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 2154
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode7
+  tile_color 0x212121ff
+  label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nA"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 2594
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode8
+  tile_color 0x212121ff
+  label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE\n \nB"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 3034
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode9
+  tile_color 0x212121ff
+  label "P\nL\nA\nT\nE"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 42
+  xpos 3584
+  ypos -944
+  bdwidth 313
+  bdheight 1072
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  label "Compare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly, scrub through slowly, back and forth, looking for differences in the animation curve for the focus."
+  xpos 5883
+  ypos -610
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote3
+  label "Check edges of keys -  If they're too smooth they won't look natural, if they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair and fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, especially on parts of the frame where comp or CG hasn't been done.  The Noise view is helpful for this."
+  xpos 5932
+  ypos -514
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "IMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to full resolution and with your viewer set to 1:1 ratio!!  Any viewer sampling with alter the results and mask details the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere."
+  xpos 5961
+  ypos -742
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote4
+  label "Verify that tracked in elements do not wiggle or drift from nearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is"
+  xpos 6050
+  ypos -334
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote5
+  label "Make sure the frame range matches the delivery range.  Turn on the 'Frame Ranges' in Overlays to verify against what's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery.  Turn on 'dataWindow' in Overlays and watch the four values to make sure they are correct and do not change throughout the sequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels, no dropped frames, etc.  This can only be done using Full resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp, wipe between the two, do you see any shifting of pixels that shouldn't be there, and grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the edges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up."
+  xpos 5897
+  ypos -238
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote6
+  label "Negative blacks - Check for black values that are below zero, even black values close to zero are likely too low for approval.  Check that these values aren't caused by the viewer LUT by testing the plate input to both QC Tool inputs.\n\nCheck despilled elements against their original scans to make sure despilling hasn't effected the element too much (particularly skin tones)\n\nMake sure neutral grades aren't broken by any grading done in the comp compare the final comp colour space to the original scan. Make sure that the comp 'Write node' has the same settings as your 'Read node'. \n\nSwitch colour spaces while watching the shot, Log, sRGB, rec709, this will ensure the added elements will react the same as the original scan."
+  xpos 5906
+  ypos -862
+ }
+ Input {
+  inputs 0
+  name comp
+  label Comp
+  xpos 2050
+  ypos -1720
+ }
+ Dot {
+  name Dot50
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 2084
+  ypos -1566
+ }
+ Dot {
+  name Dot29
+  xpos 2084
+  ypos -1446
+ }
+set N41df8cf0 [stack 0]
+ Dot {
+  name Dot31
+  xpos 1754
+  ypos -1446
+ }
+set N41df2070 [stack 0]
+ Crop {
+  box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
+  reformat true
+  crop false
+  name top_right
+  xpos 1830
+  ypos -1330
+ }
+push $N41df2070
+ Crop {
+  box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
+  reformat true
+  crop false
+  name top_left
+  xpos 1940
+  ypos -1330
+ }
+push $N41df2070
+ Crop {
+  box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
+  reformat true
+  crop false
+  name bottom_right
+  xpos 1610
+  ypos -1330
+ }
+push $N41df2070
+ Crop {
+  box {0 0 {width/2 x1026 2048} {height/2}}
+  reformat true
+  crop false
+  name bottom_left
+  xpos 1500
+  ypos -1330
+ }
+push $N41df8cf0
+ Switch {
+  inputs 5
+  which {{Quarter_View.QuarterView}}
+  name Switch2
+  label "\[value which]"
+  xpos 2050
+  ypos -1168
+ }
+set N4b8638b0 [stack 0]
+ Dot {
+  name Dot2
+  xpos 2084
+  ypos -846
+ }
+set N41df8150 [stack 0]
+ Dot {
+  name Dot19
+  xpos 1974
+  ypos -846
+ }
+set N41df94b0 [stack 0]
+ Dot {
+  name Dot16
+  xpos 1534
+  ypos -846
+ }
+set N41df6a10 [stack 0]
+ Dot {
+  name Dot18
+  xpos 1094
+  ypos -846
+ }
+set N41df6df0 [stack 0]
+ Dot {
+  name Dot3
+  xpos 654
+  ypos -846
+ }
+set N41df9890 [stack 0]
+ Dot {
+  name Dot7
+  xpos 214
+  ypos -846
+ }
+ Dot {
+  name Dot56
+  note_font_size 22
+  xpos 214
+  ypos -438
+ }
+ Text2 {
+  font_size_toolbar 50
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message "\[metadata exr/displayWindow] display\n\[metadata exr/dataWindow] dataWin"
+  old_message {{32 100 105 115 112 108 97 121 10 32 100 97 116 97 87 105 110}
+    }
+  old_expression_markers {{0 -1 9 8}
+    }
+  box {{input.format.x} {input.format.y} {"input.width - (input.width / 1.3)"} {"input.height - (input.height / 1.1)"}}
+  xjustify right
+  transforms {{0 2}
+    }
+  font_size_values {{9 50 10 50 11 50 12 50 13 50 14 50 15 50 16 50 9 50 10 50 11 50 12 50 13 50 14 50 15 50 16 50 0 50 1 50 2 50 3 50 4 50 5 50 6 50 7 50 8 50 0 40 1 40 2 40 3 40 4 40 5 40 6 40 7 40 8 40}
+    }
+  global_font_scale {{textSize*0.5}}
+  font_size 50
+  scale {1 1}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{641.5 125.5}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1440 1080 0 0 1 1 0 0 0 0}
+    }
+  enable_shadows true
+  shadow_opacity 0.8
+  shadow_angle 298
+  shadow_distance 10
+  shadow_softness 2
+  name dataWindow1
+  xpos 180
+  ypos -394
+  disable {{!dataWinToggle}}
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message COMP
+  old_message {{67 79 77 80}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 4
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  enable_shadows true
+  shadow_opacity 0.8
+  shadow_angle 298
+  shadow_distance 10
+  name Text_COMP
+  xpos 180
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N41df3f70 [stack 0]
+push $N41df3f70
+ Dilate {
+  channels mask
+  size 8
+  name Dilate2
+  xpos 70
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply3
+  xpos 70
+  ypos -208
+ }
+push $N41df3f70
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply4
+  xpos 180
+  ypos -208
+  disable {{!labelToggle}}
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
+  old_message {{49 48 48 50 56 50 57 55 53 32 45 32 49 48 48 50 56 51 49 55 53}
+    }
+  old_expression_markers {{0 8 12 20}
+    }
+  box {0 0 {input.width} {input.height/20}}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  global_font_scale {{textSize}}
+  scale {1 1}
+  autofit_bbox false
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1078 568 0 0 1 1 0 0 0 0}
+    }
+  name Text10
+  xpos 180
+  ypos -136
+  disable {{!frameRanges}}
+ }
+set N41df8530 [stack 0]
+push $N41df8530
+ Dilate {
+  channels mask
+  size 8
+  name Dilate7
+  xpos 70
+  ypos -136
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply25
+  xpos 70
+  ypos -40
+ }
+push $N41df8530
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply26
+  xpos 180
+  ypos -40
+  disable {{!frameRanges}}
+ }
+ Dot {
+  name Dot44
+  xpos 214
+  ypos 522
+ }
+set N41dfa050 [stack 0]
+push $N41df9890
+ Expression {
+  expr0 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:r"
+  expr1 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 1:g"
+  expr2 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:b"
+  channel3 none
+  name nan_inf
+  xpos 620
+  ypos -754
+ }
+ Expression {
+  expr0 "r < minLimit || g < minLimit || b < minLimit ? 0:r"
+  expr1 "r < minLimit || g < minLimit || b < minLimit ? 1:g"
+  expr2 "r < minLimit || g < minLimit || b < minLimit ? 1:b"
+  channel3 none
+  name negative
+  xpos 620
+  ypos -682
+  addUserKnob {20 User}
+  addUserKnob {7 minLimit R -1 1}
+  minLimit {{minVal}}
+ }
+ Expression {
+  expr0 "r > maxLimit || g > maxLimit || b > maxLimit ? 1:r"
+  expr1 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:g"
+  expr2 "r > maxLimit || g > maxLimit || b > maxLimit ? 0:b"
+  channel3 none
+  name high
+  xpos 620
+  ypos -634
+  addUserKnob {20 User}
+  addUserKnob {7 maxLimit l "" +STARTLINE R -1 100}
+  maxLimit {{maxVal}}
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "ILLEGAL VALUES"
+  old_message {{73 76 76 69 71 65 76 32 86 65 76 85 69 83}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 14
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_ILLEGAL_VALUES
+  xpos 620
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N41dfa430 [stack 0]
+push $N41dfa430
+ Dilate {
+  channels mask
+  size 8
+  name Dilate10
+  xpos 510
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply19
+  xpos 510
+  ypos -208
+ }
+push $N41dfa430
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply20
+  xpos 620
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot43
+  xpos 654
+  ypos 474
+ }
+set N41dfafd0 [stack 0]
+push $N41df6df0
+ Saturation {
+  channels all
+  saturation {{saturation1}}
+  name Saturation1
+  xpos 1060
+  ypos -664
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message SATURATION
+  old_message {{83 65 84 85 82 65 84 73 79 78}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 10
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_SATURATION
+  xpos 1060
+  ypos -306
+  disable {{!labelToggle}}
+ }
+set N41dfbf50 [stack 0]
+push $N41dfbf50
+ Dilate {
+  channels mask
+  size 8
+  name Dilate1
+  xpos 950
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply1
+  xpos 950
+  ypos -208
+ }
+push $N41dfbf50
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply2
+  xpos 1060
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot42
+  xpos 1094
+  ypos 426
+ }
+set N41df4730 [stack 0]
+push $N41df6a10
+ Dot {
+  name Dot17
+  xpos 1534
+  ypos -798
+ }
+set N41dfc330 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1424
+  ypos -798
+ }
+ Dot {
+  name Dot15
+  xpos 1424
+  ypos -678
+ }
+push $N41dfc330
+ Blur {
+  size 3
+  name Blur1
+  xpos 1500
+  ypos -760
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  also_merge all
+  name Merge1
+  xpos 1500
+  ypos -682
+ }
+ Grade {
+  channels all
+  multiply 100
+  white_clamp true
+  name Grade2
+  xpos 1500
+  ypos -616
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message NOISE
+  old_message {{78 79 73 83 69}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 5
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_NOISE
+  xpos 1500
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N41dfced0 [stack 0]
+push $N41dfced0
+ Dilate {
+  channels mask
+  size 8
+  name Dilate3
+  xpos 1390
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply5
+  xpos 1390
+  ypos -208
+ }
+push $N41dfced0
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply6
+  xpos 1500
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message "RESOLUTION SHOULD BE SET TO FULL TO CHECK NOISE"
+  old_message {{82 69 83 79 76 85 84 73 79 78 32 83 72 79 85 76 68 32 66 69 32 83 69 84 32 84 79 32 70 85 76 76 32 84 79 32 67 72 69 67 75 32 78 79 73 83 69}
+    }
+  box {417.5 1082.5 3678.5 1202.5}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 47
+  font {{ Utopia : Bold : UtopiaBold.pfa : 0 }}
+  global_font_scale 1.19
+  center {2048 1152}
+  cursor_initialised true
+  initial_cursor_position {{2048 1202.5}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2048 1152 0 0 1 1 0 0 0 0}
+    }
+  color {1 0 0 1}
+  enable_background true
+  background_border_x 9.45
+  background_border_y 5.55
+  name warning_text
+  tile_color 0xff0000ff
+  xpos 1500
+  ypos -82
+  disable true
+ }
+ Dot {
+  name Dot41
+  xpos 1534
+  ypos 378
+ }
+set N41dfde50 [stack 0]
+push $N41df94b0
+ Grade {
+  channels all
+  white {{"1 / Grade5.white"}}
+  black_clamp false
+  name Grade6
+  xpos 1940
+  ypos -640
+ }
+ Grade {
+  name Grade1
+  xpos 1940
+  ypos -562
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "GAIN -"
+  old_message {{71 65 73 78 32 45}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_GAIN_
+  xpos 1940
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N41dff590 [stack 0]
+push $N41dff590
+ Dilate {
+  channels mask
+  size 8
+  name Dilate4
+  xpos 1830
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply7
+  xpos 1830
+  ypos -208
+ }
+push $N41dff590
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply8
+  xpos 1940
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ NoOp {
+  name NoOp2
+  xpos 1940
+  ypos -82
+  addUserKnob {20 User}
+  addUserKnob {6 fullResOnly l "" +STARTLINE +STARTLINE}
+  fullResOnly {{fullResOnly}}
+ }
+ Dot {
+  name Dot40
+  xpos 1974
+  ypos 330
+ }
+set N41e008f0 [stack 0]
+push $N41df8150
+ Dot {
+  name Dot20
+  xpos 2414
+  ypos -846
+ }
+set N41e00cd0 [stack 0]
+ Grade {
+  channels all
+  white {{new_gain}}
+  black_clamp false
+  name Grade5
+  xpos 2380
+  ypos -640
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "GAIN +"
+  old_message {{71 65 73 78 32 43}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 6
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_GAIN__
+  xpos 2380
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N41e01490 [stack 0]
+push $N41e01490
+ Dilate {
+  channels mask
+  size 8
+  name Dilate5
+  xpos 2270
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply9
+  xpos 2270
+  ypos -208
+ }
+push $N41e01490
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply10
+  xpos 2380
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot39
+  xpos 2414
+  ypos 282
+ }
+set N576295d0 [stack 0]
+push $N41e00cd0
+ Dot {
+  name Dot21
+  xpos 2854
+  ypos -846
+ }
+set N57628650 [stack 0]
+ Dot {
+  name Dot24
+  xpos 2854
+  ypos -726
+ }
+set N57625bb0 [stack 0]
+ Expression {
+  expr0 (x/width)*size*pixel_aspect
+  expr1 (y/height)*size
+  expr2 0
+  name Expression1
+  xpos 2820
+  ypos -658
+  addUserKnob {20 User}
+  addUserKnob {3 size}
+  size 14
+ }
+ Expression {
+  temp_name0 lr
+  temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
+  temp_name1 lg
+  temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
+  temp_name3 checker
+  temp_expr3 "lr ^^ lg"
+  channel0 alpha
+  expr0 checker
+  channel1 none
+  channel2 none
+  channel3 none
+  name checker
+  xpos 2820
+  ypos -610
+  addUserKnob {20 User}
+  addUserKnob {7 size}
+  size 1
+ }
+push $N57625bb0
+ Dot {
+  name Dot25
+  xpos 2744
+  ypos -726
+ }
+ Dot {
+  name Dot23
+  xpos 2744
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name plate
+  xpos 3810
+  ypos -1690
+  number 1
+ }
+ Dot {
+  name Dot54
+  xpos 3844
+  ypos -1446
+ }
+set N57626370 [stack 0]
+ Dot {
+  name Dot55
+  xpos 3514
+  ypos -1446
+ }
+set N5762a930 [stack 0]
+ Crop {
+  box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
+  reformat true
+  crop false
+  name top_right1
+  xpos 3590
+  ypos -1330
+ }
+push $N5762a930
+ Crop {
+  box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
+  reformat true
+  crop false
+  name top_left1
+  xpos 3700
+  ypos -1330
+ }
+push $N5762a930
+ Crop {
+  box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
+  reformat true
+  crop false
+  name bottom_right1
+  xpos 3370
+  ypos -1330
+ }
+push $N5762a930
+ Crop {
+  box {0 0 {width/2 x1026 2048} {height/2}}
+  reformat true
+  crop false
+  name bottom_left1
+  xpos 3260
+  ypos -1330
+ }
+push $N57626370
+ Switch {
+  inputs 5
+  which {{Quarter_View.QuarterView}}
+  name Switch5
+  label "\[value which]"
+  xpos 3810
+  ypos -1168
+ }
+ Dot {
+  name Dot27
+  xpos 3844
+  ypos -534
+ }
+set N57626f10 [stack 0]
+ Dot {
+  name Dot26
+  xpos 3624
+  ypos -534
+ }
+set N5762ad10 [stack 0]
+ Dot {
+  name Dot6
+  xpos 3404
+  ypos -534
+ }
+set N576272f0 [stack 0]
+ Keymix {
+  inputs 3
+  bbox A
+  name Keymix2
+  xpos 2820
+  ypos -544
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "DIFFERENCE A"
+  old_message {{68 73 70 70 69 82 69 78 67 69 32 65}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 12
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_DIFFERENCE_A
+  xpos 2820
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N576276d0 [stack 0]
+push $N576276d0
+ Dilate {
+  channels mask
+  size 8
+  name Dilate6
+  xpos 2710
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply11
+  xpos 2710
+  ypos -208
+ }
+push $N576276d0
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply12
+  xpos 2820
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot38
+  xpos 2854
+  ypos 234
+ }
+set N5762b8b0 [stack 0]
+push $N5762ad10
+push $N57628650
+ Dot {
+  name Dot22
+  xpos 3294
+  ypos -846
+ }
+set N57624850 [stack 0]
+ Dot {
+  name Dot4
+  xpos 3514
+  ypos -846
+ }
+set N57624090 [stack 0]
+ Difference {
+  inputs 2
+  gain 50
+  name Difference1
+  xpos 3480
+  ypos -424
+ }
+push $N57624850
+ Expression {
+  expr0 (x/width)*size*pixel_aspect
+  expr1 (y/height)*size
+  expr2 0
+  name Expression2
+  xpos 3260
+  ypos -658
+  addUserKnob {20 User}
+  addUserKnob {3 size}
+  size 66
+ }
+ Expression {
+  temp_name0 lr
+  temp_expr0 "abs(fmod(r, size)) > 0.5 ? 1 : 0"
+  temp_name1 lg
+  temp_expr1 "abs(fmod(g, size)) > 0.5 ? 1 : 0"
+  temp_name3 checker
+  temp_expr3 "lr ^^ lg"
+  channel0 rgb
+  expr0 checker
+  channel1 none
+  channel2 none
+  channel3 none
+  name checker1
+  xpos 3260
+  ypos -610
+  addUserKnob {20 User}
+  addUserKnob {7 size}
+  size 1
+ }
+push $N576272f0
+ Keymix {
+  inputs 3
+  bbox A
+  name Keymix1
+  xpos 3260
+  ypos -424
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "DIFFERENCE B"
+  old_message {{68 73 70 70 69 82 69 78 67 69 32 66}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 12
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_DIFFERENCE_B
+  xpos 3260
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N57624c30 [stack 0]
+push $N57624c30
+ Dilate {
+  channels mask
+  size 8
+  name Dilate8
+  xpos 3150
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply15
+  xpos 3150
+  ypos -208
+ }
+push $N57624c30
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply16
+  xpos 3260
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot37
+  xpos 3294
+  ypos 186
+ }
+set N5762df70 [stack 0]
+push $N57626f10
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message PLATE
+  old_message {{80 76 65 84 69}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 5
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_PLATE
+  xpos 3810
+  ypos -304
+  disable {{!labelToggle}}
+ }
+set N5762e350 [stack 0]
+push $N5762e350
+ Dilate {
+  channels mask
+  size 8
+  name Dilate9
+  xpos 3700
+  ypos -304
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply17
+  xpos 3700
+  ypos -208
+ }
+push $N5762e350
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply18
+  xpos 3810
+  ypos -208
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
+  old_message {{49 48 48 50 56 50 57 55 53 32 45 32 49 48 48 50 56 51 49 55 53}
+    }
+  old_expression_markers {{0 8 12 20}
+    }
+  box {0 0 {input.width} {input.height/20}}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  cursor_position 76
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_PLATE_FR
+  xpos 3810
+  ypos -88
+  disable {{!frameRanges}}
+ }
+set N576315b0 [stack 0]
+push $N576315b0
+ Dilate {
+  channels mask
+  size 8
+  name Dilate11
+  xpos 3700
+  ypos -88
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply13
+  xpos 3700
+  ypos -16
+ }
+push $N576315b0
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply14
+  xpos 3810
+  ypos -16
+  disable {{!frameRanges}}
+ }
+ Dot {
+  name Dot36
+  xpos 3844
+  ypos 138
+ }
+set N5762cc10 [stack 0]
+push $N57624090
+ Dot {
+  name Dot34
+  xpos 4284
+  ypos -846
+ }
+set N57630df0 [stack 0]
+push $N57626f10
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge2
+  xpos 4250
+  ypos -538
+ }
+ Dot {
+  name Dot47
+  xpos 4284
+  ypos -342
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  output {rgba.red rgba.green rgba.blue mask.a}
+  message DIFFERENCE
+  old_message {{68 73 70 70 69 82 69 78 67 69}
+    }
+  box {0 0 {input.width} {"input.height  - (input.height/5)"}}
+  xjustify center
+  transforms {{0 2}
+    }
+  cursor_position 10
+  global_font_scale {{textSize}}
+  center {2064 1161}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{2064 1161}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 2064 1161 0 0 1 1 0 0 0 0}
+    }
+  name Text_DIFFERENCE
+  xpos 4250
+  ypos -280
+  disable {{!labelToggle}}
+ }
+set N57632cf0 [stack 0]
+push $N57632cf0
+ Dilate {
+  channels mask
+  size 8
+  name Dilate12
+  xpos 4140
+  ypos -280
+ }
+ Multiply {
+  inputs 1+1
+  channels mask
+  value 0
+  maskChannelMask mask.a
+  name Multiply23
+  xpos 4140
+  ypos -184
+ }
+push $N57632cf0
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask mask.a
+  name Multiply24
+  xpos 4250
+  ypos -184
+  disable {{"labelToggle == 0 ? 1 : 0"}}
+ }
+ Dot {
+  name Dot45
+  xpos 4284
+  ypos 90
+ }
+set N576334b0 [stack 0]
+push $N57630df0
+ Crop {
+  box {{input.format.x} {input.format.y} {input.format.r} {input.format.t}}
+  name Crop_input1
+  xpos 5130
+  ypos -850
+ }
+ Remove {
+  name Remove1
+  xpos 5130
+  ypos -616
+ }
 add_layer {DIFFERENCE DIFFERENCE.red DIFFERENCE.green DIFFERENCE.blue DIFFERENCE.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out DIFFERENCE
-name ShuffleCopy_DIFFERENCE
-xpos 5130
-ypos 86
-disable {{"difference == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out DIFFERENCE
+  name ShuffleCopy_DIFFERENCE
+  xpos 5130
+  ypos 86
+  disable {{"difference == 0"}}
+ }
 add_layer {PLATE PLATE.red PLATE.green PLATE.blue PLATE.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out PLATE
-name ShuffleCopy_PLATE
-xpos 5130
-ypos 134
-disable {{"plate == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out PLATE
+  name ShuffleCopy_PLATE
+  xpos 5130
+  ypos 134
+  disable {{"plate == 0"}}
+ }
 add_layer {DIFFERENCE_B DIFFERENCE_B.red DIFFERENCE_B.green DIFFERENCE_B.blue DIFFERENCE_B.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out DIFFERENCE_B
-name ShuffleCopy_DIFFERENCE_B
-xpos 5130
-ypos 182
-disable {{"difference_b == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out DIFFERENCE_B
+  name ShuffleCopy_DIFFERENCE_B
+  xpos 5130
+  ypos 182
+  disable {{"difference_b == 0"}}
+ }
 add_layer {DIFFERENCE_A DIFFERENCE_A.red DIFFERENCE_A.green DIFFERENCE_A.blue DIFFERENCE_A.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out DIFFERENCE_A
-name ShuffleCopy_DIFFERENCE_A
-xpos 5130
-ypos 230
-disable {{"difference_a == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out DIFFERENCE_A
+  name ShuffleCopy_DIFFERENCE_A
+  xpos 5130
+  ypos 230
+  disable {{"difference_a == 0"}}
+ }
 add_layer {GAIN_PLUS GAIN_PLUS.red GAIN_PLUS.green GAIN_PLUS.blue GAIN_PLUS.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out GAIN_PLUS
-name ShuffleCopy_GAIN_PLUS
-xpos 5130
-ypos 278
-disable {{"gain_plus == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out GAIN_PLUS
+  name ShuffleCopy_GAIN_PLUS
+  xpos 5130
+  ypos 278
+  disable {{"gain_plus == 0"}}
+ }
 add_layer {GAIN_MINUS GAIN_MINUS.red GAIN_MINUS.green GAIN_MINUS.blue GAIN_MINUS.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out GAIN_MINUS
-name ShuffleCopy_GAIN_MINUS
-xpos 5130
-ypos 326
-disable {{"gain_minus == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out GAIN_MINUS
+  name ShuffleCopy_GAIN_MINUS
+  xpos 5130
+  ypos 326
+  disable {{"gain_minus == 0"}}
+ }
 add_layer {NOISE NOISE.red NOISE.green NOISE.blue NOISE.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out NOISE
-name ShuffleCopy_NOISE
-xpos 5130
-ypos 374
-disable {{"noise1 == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out NOISE
+  name ShuffleCopy_NOISE
+  xpos 5130
+  ypos 374
+  disable {{"noise1 == 0"}}
+ }
 add_layer {SATURATION SATURATION.red SATURATION.green SATURATION.blue SATURATION.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out SATURATION
-name ShuffleCopy_SATURATION
-xpos 5130
-ypos 422
-disable {{"saturation_1 == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out SATURATION
+  name ShuffleCopy_SATURATION
+  xpos 5130
+  ypos 422
+  disable {{"saturation_1 == 0"}}
+ }
 add_layer {ILLEGAL_VALUES ILLEGAL_VALUES.red ILLEGAL_VALUES.green ILLEGAL_VALUES.blue ILLEGAL_VALUES.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out ILLEGAL_VALUES
-name ShuffleCopy_ILLEGAL_VALUES
-xpos 5130
-ypos 470
-disable {{"illegal_values == 0"}}
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out ILLEGAL_VALUES
+  name ShuffleCopy_ILLEGAL_VALUES
+  xpos 5130
+  ypos 470
+  disable {{"illegal_values == 0"}}
+ }
 add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
-ShuffleCopy {
-inputs 2
-red red
-green green
-blue blue
-out COMP
-name ShuffleCopy_COMP
-xpos 5130
-ypos 518
-disable {{"comp == 0"}}
-}
-LayerContactSheet {
-width {{"input.width * \[value this.columns]"}}
-height {{"input.height * \[value this.rows]"}}
-autodims false
-name LayerContactSheet_CUSTOM_VIEW
-xpos 5130
-ypos 638
-}
-Dot {
-name Dot30
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 5164
-ypos 762
-}
-set Ne70b1600 [stack 0]
-Dot {
-name Dot51
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 5274
-ypos 762
-}
-set Ne70b0f00 [stack 0]
-Dot {
-name Dot52
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 5384
-ypos 762
-}
-set Ne70b0800 [stack 0]
-Dot {
-name Dot53
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 5494
-ypos 762
-}
-Reformat {
-type scale
-scale 0.25
-name Reformat6
-label "\[value scale]"
-xpos 5460
-ypos 872
-}
-push $Ne70b0800
-Reformat {
-type scale
-scale 0.5
-name Reformat5
-label "\[value scale]"
-xpos 5350
-ypos 872
-}
-push $Ne70b0f00
-Reformat {
-type scale
-scale 0.75
-name Reformat1
-label "\[value scale]"
-xpos 5240
-ypos 872
-}
-push $Ne70b1600
-Switch {
-inputs 4
-which {{res}}
-name Switch4
-label "\[value which]"
-xpos 5130
-ypos 1016
-}
-Dot {
-name Dot46
-xpos 5164
-ypos 2658
-}
-push $Ne70df900
-Dot {
-name Dot49
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 4284
-ypos 786
-}
-set Ne7089600 [stack 0]
-push $Ne6ebcf00
-Dot {
-name Dot10
-xpos 1534
-ypos 786
-}
-set Ne7088f00 [stack 0]
-push $Ne6f15d00
-Dot {
-name Dot9
-xpos 1094
-ypos 786
-}
-set Ne7088800 [stack 0]
-push $Ne7153200
-Dot {
-name Dot8
-xpos 654
-ypos 786
-}
-set Ne7088100 [stack 0]
-push $Ne7027900
-Dot {
-name Dot28
-xpos 2414
-ypos 786
-}
-set Ne7057900 [stack 0]
-push $Ne7195600
-Dot {
-name Dot5
-xpos 214
-ypos 786
-}
-set Ne7057200 [stack 0]
-push $Ne6e90800
-Dot {
-name Dot11
-xpos 1974
-ypos 786
-}
-set Ne7056b00 [stack 0]
-push $Ne6f7b200
-Dot {
-name Dot13
-xpos 3294
-ypos 786
-}
-set Ne7056400 [stack 0]
-push $Ne7129d00
-Dot {
-name Dot12
-xpos 3844
-ypos 786
-}
-set Ne7055d00 [stack 0]
-push $Ne6fbeb00
-Dot {
-name Dot14
-xpos 2854
-ypos 786
-}
-set Ne7055600 [stack 0]
-ContactSheet {
-inputs 10
-width {{"input.width * \[value this.columns]"}}
-height {{"input.height * \[value this.rows]"}}
-columns 3
-roworder TopBottom
-startframe 1
-endframe 1
-name ContactSheet1
-xpos 4250
-ypos 1430
-}
-push $Ne7089600
-push $Ne7088f00
-push $Ne7088800
-push $Ne7088100
-push $Ne7056b00
-push $Ne7057900
-push $Ne7056400
-push $Ne7055600
-push $Ne7055d00
-push $Ne7057200
-Switch {
-inputs 11
-which {{QCMenu1.QCView}}
-name Switch1
-label "\[value which]"
-xpos 1280
-ypos 1424
-}
-Dot {
-name Dot48
-tile_color 0x949494ff
-note_font_size 22
-note_font_color 0xffffffff
-xpos 1314
-ypos 1554
-}
-set Ne7054100 [stack 0]
-Dot {
-name Dot35
-xpos 544
-ypos 1554
-}
-set Ne6e2f900 [stack 0]
-Crop {
-box {{width/2} 0 {width} {height/2}}
-name Crop4
-xpos 730
-ypos 1622
-}
-Mirror2 {
-flip true
-flop true
-name Mirror2_4
-xpos 730
-ypos 1646
-}
-Transform {
-translate {{width/2} {-height/2}}
-center {1024 778}
-name Transform4
-xpos 730
-ypos 1670
-}
-push $Ne6e2f900
-Crop {
-box {0 0 {width/2} {height/2}}
-name Crop3
-xpos 620
-ypos 1622
-}
-Mirror2 {
-flip true
-flop true
-name Mirror2_3
-xpos 620
-ypos 1646
-}
-Transform {
-translate {{-width/2} {-height/2}}
-center {1600 900}
-name Transform5
-xpos 620
-ypos 1670
-}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out COMP
+  name ShuffleCopy_COMP
+  xpos 5130
+  ypos 518
+  disable {{"comp == 0"}}
+ }
+ LayerContactSheet {
+  width {{"input.width * \[value this.columns]"}}
+  height {{"input.height * \[value this.rows]"}}
+  autodims false
+  name LayerContactSheet_CUSTOM_VIEW
+  xpos 5130
+  ypos 638
+ }
+ Dot {
+  name Dot30
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 5164
+  ypos 762
+ }
+set N57637a70 [stack 0]
+ Dot {
+  name Dot51
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 5274
+  ypos 762
+ }
+set N57633c70 [stack 0]
+ Dot {
+  name Dot52
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 5384
+  ypos 762
+ }
+set N57638dd0 [stack 0]
+ Dot {
+  name Dot53
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 5494
+  ypos 762
+ }
+ Reformat {
+  type scale
+  scale 0.25
+  name Reformat6
+  label "\[value scale]"
+  xpos 5460
+  ypos 872
+ }
+push $N57638dd0
+ Reformat {
+  type scale
+  scale 0.5
+  name Reformat5
+  label "\[value scale]"
+  xpos 5350
+  ypos 872
+ }
+push $N57633c70
+ Reformat {
+  type scale
+  scale 0.75
+  name Reformat1
+  label "\[value scale]"
+  xpos 5240
+  ypos 872
+ }
+push $N57637a70
+ Switch {
+  inputs 4
+  which {{res}}
+  name Switch4
+  label "\[value which]"
+  xpos 5130
+  ypos 1016
+ }
+ Dot {
+  name Dot46
+  xpos 5164
+  ypos 2658
+ }
+push $N576334b0
+ Dot {
+  name Dot49
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 4284
+  ypos 786
+ }
+set N57634fd0 [stack 0]
+push $N41dfde50
+ Dot {
+  name Dot10
+  xpos 1534
+  ypos 786
+ }
+set N57634810 [stack 0]
+push $N41df4730
+ Dot {
+  name Dot9
+  xpos 1094
+  ypos 786
+ }
+set N576353b0 [stack 0]
+push $N41dfafd0
+ Dot {
+  name Dot8
+  xpos 654
+  ypos 786
+ }
+set N57635790 [stack 0]
+push $N576295d0
+ Dot {
+  name Dot28
+  xpos 2414
+  ypos 786
+ }
+set N57639590 [stack 0]
+push $N41dfa050
+ Dot {
+  name Dot5
+  xpos 214
+  ypos 786
+ }
+set N57636330 [stack 0]
+push $N41e008f0
+ Dot {
+  name Dot11
+  xpos 1974
+  ypos 786
+ }
+set N57639d50 [stack 0]
+push $N5762df70
+ Dot {
+  name Dot13
+  xpos 3294
+  ypos 786
+ }
+set N5763a130 [stack 0]
+push $N5762cc10
+ Dot {
+  name Dot12
+  xpos 3844
+  ypos 786
+ }
+set N57636710 [stack 0]
+push $N5762b8b0
+ Dot {
+  name Dot14
+  xpos 2854
+  ypos 786
+ }
+set N57636af0 [stack 0]
+ ContactSheet {
+  inputs 10
+  width {{"input.width * \[value this.columns]"}}
+  height {{"input.height * \[value this.rows]"}}
+  columns 3
+  roworder TopBottom
+  startframe 1
+  endframe 1
+  name ContactSheet1
+  xpos 4250
+  ypos 1430
+ }
+push $N57634fd0
+push $N57634810
+push $N576353b0
+push $N57635790
+push $N57639d50
+push $N57639590
+push $N5763a130
+push $N57636af0
+push $N57636710
+push $N57636330
+ Switch {
+  inputs 11
+  which {{QCMenu1.QCView}}
+  name Switch1
+  label "\[value which]"
+  xpos 1280
+  ypos 1424
+ }
+ Dot {
+  name Dot48
+  tile_color 0x949494ff
+  note_font_size 22
+  note_font_color 0xffffffff
+  xpos 1314
+  ypos 1554
+ }
+set N576389f0 [stack 0]
+ Dot {
+  name Dot35
+  xpos 544
+  ypos 1554
+ }
+set N5763b870 [stack 0]
+ Crop {
+  box {{width/2} 0 {width} {height/2}}
+  name Crop4
+  xpos 730
+  ypos 1622
+ }
+ Mirror2 {
+  flip true
+  flop true
+  name Mirror2_4
+  xpos 730
+  ypos 1646
+ }
+ Transform {
+  translate {{width/2} {-height/2}}
+  center {1024 778}
+  name Transform4
+  xpos 730
+  ypos 1670
+ }
+push $N5763b870
+ Crop {
+  box {0 0 {width/2} {height/2}}
+  name Crop3
+  xpos 620
+  ypos 1622
+ }
+ Mirror2 {
+  flip true
+  flop true
+  name Mirror2_3
+  xpos 620
+  ypos 1646
+ }
+ Transform {
+  translate {{-width/2} {-height/2}}
+  center {1600 900}
+  name Transform5
+  xpos 620
+  ypos 1670
+ }
 push 0
-push $Ne6e2f900
-Crop {
-box {0 {height/2} {width/2} {height}}
-name Crop1
-xpos 290
-ypos 1622
-}
-Mirror2 {
-flip true
-flop true
-name Mirror2_1
-xpos 290
-ypos 1646
-}
-Transform {
-translate {{-width/2} {height/2}}
-center {1024 778}
-name Transform2
-xpos 290
-ypos 1670
-}
-push $Ne6e2f900
-Crop {
-box {{width/2} {height/2} {width} {height}}
-name Crop2
-xpos 400
-ypos 1622
-}
-Mirror2 {
-flip true
-flop true
-name Mirror2_2
-xpos 400
-ypos 1646
-}
-Transform {
-translate {{width/2} {height/2}}
-center {1024 778}
-name Transform1
-xpos 400
-ypos 1670
-}
-Merge2 {
-inputs 4+1
-name Merge8
-xpos 510
-ypos 1814
-}
-push $Ne7054100
-Switch {
-inputs 2
-which {{Flip}}
-name flipQuad
-label "\[value which]"
-xpos 1280
-ypos 1808
-}
-Dot {
-name Dot32
-xpos 1314
-ypos 2298
-}
-set Ne6dfcf00 [stack 0]
-Dot {
-name Dot33
-xpos 1094
-ypos 2298
-}
-set Ne6dfc800 [stack 0]
-Reformat {
-type scale
-scale 0.25
-name Reformat4
-xpos 1170
-ypos 2462
-}
-push $Ne6dfc800
-Reformat {
-type scale
-scale 0.5
-name Reformat3
-xpos 1060
-ypos 2462
-}
-push $Ne6dfc800
-Reformat {
-type scale
-scale 0.75
-name Reformat2
-xpos 950
-ypos 2462
-}
-push $Ne6dfcf00
-Switch {
-inputs 4
-which {{Reso.Resolution}}
-name Switch3
-label "\[value which]"
-xpos 1280
-ypos 2528
-}
-set Ne6dceb00 [stack 0]
-Switch {
-inputs 2
-which {{en_cus_view}}
-name Switch_CUS_VIEW
-label "\[value which]"
-xpos 1280
-ypos 2648
-}
-Output {
-name Output1
-xpos 1280
-ypos 3422
-}
-StickyNote {
-inputs 0
-name StickyNote7
-label "#TODO make Text box dynamic"
-note_font_size 21
-xpos -376
-ypos -159
-}
-push $Ne6dceb00
-NoOp {
-name Reso
-knobChanged validation()
-xpos 1500
-ypos 2534
-addUserKnob {20 User}
-addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
-}
-push $Ne7220100
-NoOp {
-name Quarter_View
-xpos 1830
-ypos -1162
-addUserKnob {20 User}
-addUserKnob {4 QuarterView l "Quarter View" M {"Full Screen" "Bottom Left" "Bottom Right" "Top Left" "Top Right" ""}}
-}
-NoOp {
-inputs 0
-name QCMenu1
-knobChanged validation()
-xpos 950
-ypos 1430
-addUserKnob {20 QC t "\n"}
-addUserKnob {22 script T "print 'test inside'" +STARTLINE}
-addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
-QCView "All Views"
-}
+push $N5763b870
+ Crop {
+  box {0 {height/2} {width/2} {height}}
+  name Crop1
+  xpos 290
+  ypos 1622
+ }
+ Mirror2 {
+  flip true
+  flop true
+  name Mirror2_1
+  xpos 290
+  ypos 1646
+ }
+ Transform {
+  translate {{-width/2} {height/2}}
+  center {1024 778}
+  name Transform2
+  xpos 290
+  ypos 1670
+ }
+push $N5763b870
+ Crop {
+  box {{width/2} {height/2} {width} {height}}
+  name Crop2
+  xpos 400
+  ypos 1622
+ }
+ Mirror2 {
+  flip true
+  flop true
+  name Mirror2_2
+  xpos 400
+  ypos 1646
+ }
+ Transform {
+  translate {{width/2} {height/2}}
+  center {1024 778}
+  name Transform1
+  xpos 400
+  ypos 1670
+ }
+ Merge2 {
+  inputs 4+1
+  name Merge8
+  xpos 510
+  ypos 1814
+ }
+push $N576389f0
+ Switch {
+  inputs 2
+  which {{Flip}}
+  name flipQuad
+  label "\[value which]"
+  xpos 1280
+  ypos 1808
+ }
+ Dot {
+  name Dot32
+  xpos 1314
+  ypos 2298
+ }
+set N57641570 [stack 0]
+ Dot {
+  name Dot33
+  xpos 1094
+  ypos 2298
+ }
+set N5763e6f0 [stack 0]
+ Reformat {
+  type scale
+  scale 0.25
+  name Reformat4
+  xpos 1170
+  ypos 2462
+ }
+push $N5763e6f0
+ Reformat {
+  type scale
+  scale 0.5
+  name Reformat3
+  xpos 1060
+  ypos 2462
+ }
+push $N5763e6f0
+ Reformat {
+  type scale
+  scale 0.75
+  name Reformat2
+  xpos 950
+  ypos 2462
+ }
+push $N57641570
+ Switch {
+  inputs 4
+  which {{Reso.Resolution}}
+  name Switch3
+  label "\[value which]"
+  xpos 1280
+  ypos 2528
+ }
+set N4b86cf00 [stack 0]
+ Switch {
+  inputs 2
+  which {{en_cus_view}}
+  name Switch_CUS_VIEW
+  label "\[value which]"
+  xpos 1280
+  ypos 2648
+ }
+ Output {
+  name Output1
+  xpos 1280
+  ypos 3422
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote7
+  label "#TODO make Text box dynamic"
+  note_font_size 21
+  xpos -376
+  ypos -159
+ }
+push $N4b86cf00
+ NoOp {
+  name Reso
+  knobChanged validation()
+  xpos 1500
+  ypos 2534
+  addUserKnob {20 User}
+  addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
+ }
+push $N4b8638b0
+ NoOp {
+  name Quarter_View
+  xpos 1830
+  ypos -1162
+  addUserKnob {20 User}
+  addUserKnob {4 QuarterView l "Quarter View" M {"Full Screen" "Bottom Left" "Bottom Right" "Top Left" "Top Right" ""}}
+ }
+ NoOp {
+  inputs 0
+  name QCMenu1
+  knobChanged validation()
+  xpos 950
+  ypos 1430
+  addUserKnob {20 QC t "\n"}
+  addUserKnob {22 script T "print 'test inside'" +STARTLINE}
+  addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
+  QCView "All Views"
+ }
 end_group
