@@ -1,9 +1,6 @@
 Group {
- inputs 2
  name QC_Tool1
  selected true
- xpos 7870
- ypos 18
  addUserKnob {20 QC l "QC Tool" -STARTLINE}
  addUserKnob {41 QCView l "QC View" T QCMenu1.QCView}
  addUserKnob {41 Resolution T Reso.Resolution}
@@ -137,17 +134,6 @@ Group {
  }
  BackdropNode {
   inputs 0
-  name BackdropNode10
-  tile_color 0x888888ff
-  label "QC checks"
-  note_font_size 42
-  xpos 5938
-  ypos -934
-  bdwidth 1104
-  bdheight 908
- }
- BackdropNode {
-  inputs 0
   name BackdropNode11
   tile_color 0x212121ff
   label "D\nI\nF\nF\nE\nR\nE\nN\nC\nE"
@@ -254,54 +240,12 @@ Group {
   bdwidth 313
   bdheight 1072
  }
- StickyNote {
-  inputs 0
-  name StickyNote2
-  label "Compare CG elements added to the plate to the things they replaced to. \n\nMake sure the focus on the cg elements makes sense.\n\nDoes the rack focus on the CG match the plate exactly, scrub through slowly, back and forth, looking for differences in the animation curve for the focus."
-  xpos 5883
-  ypos -610
- }
- StickyNote {
-  inputs 0
-  name StickyNote3
-  label "Check edges of keys -  If they're too smooth they won't look natural, if they're too noisy, they will draw attention to themselves.\n\nCompare edges to the original scan to make sure it retains as much hair and fine detail as it possibly can.\n\nCheck all roto, make sure it's not too sharp, not too defocused, \n\nCheck no background colour is coming through.\n\nLook for matte lines that are apparent where they aren't supposed to be, especially on parts of the frame where comp or CG hasn't been done.  The Noise view is helpful for this."
-  xpos 5932
-  ypos -514
- }
- StickyNote {
-  inputs 0
-  name StickyNote1
-  label "IMPORTANT TO NOTE!!!!\n\nGrain should only EVER be checked with the QC Tool set to full resolution and with your viewer set to 1:1 ratio!!  Any viewer sampling with alter the results and mask details the noise view is meant to highlight.\n\nSpill suppression many times will increase the apparent grain of a keyed element.\n\nCheck all your edges and keyed elements for this artefact\n\nLook for doubled up grain where the patterns move differently than one another.\n\nLook for static grain on DMP, backgrounds, clean-up patches, and elsewhere."
-  xpos 5961
-  ypos -742
- }
- StickyNote {
-  inputs 0
-  name StickyNote4
-  label "Verify that tracked in elements do not wiggle or drift from nearby features in the scan.\n\nDon't assume the matchmove camera is working, Verify that it is"
-  xpos 6050
-  ypos -334
- }
- StickyNote {
-  inputs 0
-  name StickyNote5
-  label "Make sure the frame range matches the delivery range.  Turn on the 'Frame Ranges' in Overlays to verify against what's in the shot database (ftrack / Shotgun)\n\nMake sure the frame size matches the show spec for client delivery.  Turn on 'dataWindow' in Overlays and watch the four values to make sure they are correct and do not change throughout the sequence of frames as you play it back.\n\nLook for stretching pixels or gaps between the last pixel and the edge of the frame.\n\nLook for all the pixels to be there, no missing scanlines, no dropped pixels, no dropped frames, etc.  This can only be done using Full resolution and a 1:1 viewer aspect ratio!  Do not resample!!\n\nCan you see lightwrap that is leaking in from the edges of the frame?\n\nIn Nuke (or RV/Cezanne), set up a wipe between the scan and the comp, wipe between the two, do you see any shifting of pixels that shouldn't be there, and grade changes that shouldn't be there.\n\nIf there is added camera shake to a plate, make sure you can't see the edges of the plate coming inside show crop.\n\nRetime artefacts - Please check these frame by frame. \n\nLook for unnaturally sharp edges.\n\nWatch in loop n speed up."
-  xpos 5897
-  ypos -238
- }
- StickyNote {
-  inputs 0
-  name StickyNote6
-  label "Negative blacks - Check for black values that are below zero, even black values close to zero are likely too low for approval.  Check that these values aren't caused by the viewer LUT by testing the plate input to both QC Tool inputs.\n\nCheck despilled elements against their original scans to make sure despilling hasn't effected the element too much (particularly skin tones)\n\nMake sure neutral grades aren't broken by any grading done in the comp compare the final comp colour space to the original scan. Make sure that the comp 'Write node' has the same settings as your 'Read node'. \n\nSwitch colour spaces while watching the shot, Log, sRGB, rec709, this will ensure the added elements will react the same as the original scan."
-  xpos 5906
-  ypos -862
- }
  Input {
   inputs 0
   name comp
   label Comp
   xpos 2050
-  ypos -1720
+  ypos -1719
  }
  Dot {
   name Dot50
@@ -316,88 +260,88 @@ Group {
   xpos 2084
   ypos -1446
  }
-set N41df8cf0 [stack 0]
+set N1082a800 [stack 0]
  Dot {
   name Dot31
   xpos 1754
   ypos -1446
  }
-set N41df2070 [stack 0]
+set N1082ac00 [stack 0]
  Crop {
   box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
   reformat true
   crop false
   name top_right
   xpos 1830
-  ypos -1330
+  ypos -1329
  }
-push $N41df2070
+push $N1082ac00
  Crop {
   box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
   reformat true
   crop false
   name top_left
   xpos 1940
-  ypos -1330
+  ypos -1329
  }
-push $N41df2070
+push $N1082ac00
  Crop {
   box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
   reformat true
   crop false
   name bottom_right
   xpos 1610
-  ypos -1330
+  ypos -1329
  }
-push $N41df2070
+push $N1082ac00
  Crop {
   box {0 0 {width/2 x1026 2048} {height/2}}
   reformat true
   crop false
   name bottom_left
   xpos 1500
-  ypos -1330
+  ypos -1329
  }
-push $N41df8cf0
+push $N1082a800
  Switch {
   inputs 5
   which {{Quarter_View.QuarterView}}
   name Switch2
   label "\[value which]"
   xpos 2050
-  ypos -1168
+  ypos -1167
  }
-set N4b8638b0 [stack 0]
+set N10850000 [stack 0]
  Dot {
   name Dot2
   xpos 2084
   ypos -846
  }
-set N41df8150 [stack 0]
+set N10850400 [stack 0]
  Dot {
   name Dot19
   xpos 1974
   ypos -846
  }
-set N41df94b0 [stack 0]
+set N10850800 [stack 0]
  Dot {
   name Dot16
   xpos 1534
   ypos -846
  }
-set N41df6a10 [stack 0]
+set N10850c00 [stack 0]
  Dot {
   name Dot18
   xpos 1094
   ypos -846
  }
-set N41df6df0 [stack 0]
+set N10851000 [stack 0]
  Dot {
   name Dot3
   xpos 654
   ypos -846
  }
-set N41df9890 [stack 0]
+set N10851400 [stack 0]
  Dot {
   name Dot7
   xpos 214
@@ -414,15 +358,13 @@ set N41df9890 [stack 0]
   font_width_toolbar 100
   font_height_toolbar 100
   message "\[metadata exr/displayWindow] display\n\[metadata exr/dataWindow] dataWin"
-  old_message {{32 100 105 115 112 108 97 121 10 32 100 97 116 97 87 105 110}
-    }
-  old_expression_markers {{0 -1 9 8}
+  old_message {{91 109 101 116 97 100 97 116 97 32 101 120 114 47 100 105 115 112 108 97 121 87 105 110 100 111 119 93 32 100 105 115 112 108 97 121 10 91 109 101 116 97 100 97 116 97 32 101 120 114 47 100 97 116 97 87 105 110 100 111 119 93 32 100 97 116 97 87 105 110}
     }
   box {{input.format.x} {input.format.y} {"input.width - (input.width / 1.3)"} {"input.height - (input.height / 1.1)"}}
   xjustify right
   transforms {{0 2}
     }
-  font_size_values {{9 50 10 50 11 50 12 50 13 50 14 50 15 50 16 50 9 50 10 50 11 50 12 50 13 50 14 50 15 50 16 50 0 50 1 50 2 50 3 50 4 50 5 50 6 50 7 50 8 50 0 40 1 40 2 40 3 40 4 40 5 40 6 40 7 40 8 40}
+  font_size_values {{62 50 63 50 64 50 65 50 66 50 67 50 68 50 69 50 62 50 63 50 64 50 65 50 66 50 67 50 68 50 69 50 0 50 1 50 2 50 3 50 4 50 5 50 6 50 7 50 8 50 0 40 1 40 2 40 3 40 4 40 5 40 6 40 7 40 8 40}
     }
   global_font_scale {{textSize*0.5}}
   font_size 50
@@ -441,7 +383,7 @@ set N41df9890 [stack 0]
   shadow_softness 2
   name dataWindow1
   xpos 180
-  ypos -394
+  ypos -393
   disable {{!dataWinToggle}}
  }
  Text2 {
@@ -472,17 +414,17 @@ set N41df9890 [stack 0]
   shadow_distance 10
   name Text_COMP
   xpos 180
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41df3f70 [stack 0]
-push $N41df3f70
+set N1086a400 [stack 0]
+push $N1086a400
  Dilate {
   channels mask
   size 8
   name Dilate2
   xpos 70
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -491,16 +433,16 @@ push $N41df3f70
   maskChannelMask mask.a
   name Multiply3
   xpos 70
-  ypos -208
+  ypos -207
  }
-push $N41df3f70
+push $N1086a400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply4
   xpos 180
-  ypos -208
+  ypos -207
   disable {{!labelToggle}}
  }
  Text2 {
@@ -509,9 +451,7 @@ push $N41df3f70
   font_height_toolbar 100
   output {rgba.red rgba.green rgba.blue mask.a}
   message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
-  old_message {{49 48 48 50 56 50 57 55 53 32 45 32 49 48 48 50 56 51 49 55 53}
-    }
-  old_expression_markers {{0 8 12 20}
+  old_message {{91 118 97 108 117 101 32 91 116 111 112 110 111 100 101 32 112 97 114 101 110 116 46 105 110 112 117 116 48 93 46 102 105 114 115 116 93 32 45 32 91 118 97 108 117 101 32 91 116 111 112 110 111 100 101 32 112 97 114 101 110 116 46 105 110 112 117 116 48 93 46 108 97 115 116 93}
     }
   box {0 0 {input.width} {input.height/20}}
   xjustify center
@@ -526,17 +466,17 @@ push $N41df3f70
     }
   name Text10
   xpos 180
-  ypos -136
+  ypos -135
   disable {{!frameRanges}}
  }
-set N41df8530 [stack 0]
-push $N41df8530
+set N1086b400 [stack 0]
+push $N1086b400
  Dilate {
   channels mask
   size 8
   name Dilate7
   xpos 70
-  ypos -136
+  ypos -135
  }
  Multiply {
   inputs 1+1
@@ -545,16 +485,16 @@ push $N41df8530
   maskChannelMask mask.a
   name Multiply25
   xpos 70
-  ypos -40
+  ypos -39
  }
-push $N41df8530
+push $N1086b400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply26
   xpos 180
-  ypos -40
+  ypos -39
   disable {{!frameRanges}}
  }
  Dot {
@@ -562,8 +502,8 @@ push $N41df8530
   xpos 214
   ypos 522
  }
-set N41dfa050 [stack 0]
-push $N41df9890
+set N108cc400 [stack 0]
+push $N10851400
  Expression {
   expr0 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 0:r"
   expr1 "isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) ? 1:g"
@@ -571,7 +511,7 @@ push $N41df9890
   channel3 none
   name nan_inf
   xpos 620
-  ypos -754
+  ypos -753
  }
  Expression {
   expr0 "r < minLimit || g < minLimit || b < minLimit ? 0:r"
@@ -580,7 +520,7 @@ push $N41df9890
   channel3 none
   name negative
   xpos 620
-  ypos -682
+  ypos -681
   addUserKnob {20 User}
   addUserKnob {7 minLimit R -1 1}
   minLimit {{minVal}}
@@ -592,7 +532,7 @@ push $N41df9890
   channel3 none
   name high
   xpos 620
-  ypos -634
+  ypos -633
   addUserKnob {20 User}
   addUserKnob {7 maxLimit l "" +STARTLINE R -1 100}
   maxLimit {{maxVal}}
@@ -621,17 +561,17 @@ push $N41df9890
     }
   name Text_ILLEGAL_VALUES
   xpos 620
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41dfa430 [stack 0]
-push $N41dfa430
+set N108cd400 [stack 0]
+push $N108cd400
  Dilate {
   channels mask
   size 8
   name Dilate10
   xpos 510
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -640,16 +580,16 @@ push $N41dfa430
   maskChannelMask mask.a
   name Multiply19
   xpos 510
-  ypos -208
+  ypos -207
  }
-push $N41dfa430
+push $N108cd400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply20
   xpos 620
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -657,14 +597,14 @@ push $N41dfa430
   xpos 654
   ypos 474
  }
-set N41dfafd0 [stack 0]
-push $N41df6df0
+set N1091a400 [stack 0]
+push $N10851000
  Saturation {
   channels all
   saturation {{saturation1}}
   name Saturation1
   xpos 1060
-  ypos -664
+  ypos -663
  }
  Text2 {
   font_size_toolbar 100
@@ -690,17 +630,17 @@ push $N41df6df0
     }
   name Text_SATURATION
   xpos 1060
-  ypos -306
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41dfbf50 [stack 0]
-push $N41dfbf50
+set N1091ac00 [stack 0]
+push $N1091ac00
  Dilate {
   channels mask
   size 8
   name Dilate1
   xpos 950
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -709,16 +649,16 @@ push $N41dfbf50
   maskChannelMask mask.a
   name Multiply1
   xpos 950
-  ypos -208
+  ypos -207
  }
-push $N41dfbf50
+push $N1091ac00
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply2
   xpos 1060
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -726,14 +666,14 @@ push $N41dfbf50
   xpos 1094
   ypos 426
  }
-set N41df4730 [stack 0]
-push $N41df6a10
+set N1091bc00 [stack 0]
+push $N10850c00
  Dot {
   name Dot17
   xpos 1534
   ypos -798
  }
-set N41dfc330 [stack 0]
+set N10962000 [stack 0]
  Dot {
   name Dot1
   xpos 1424
@@ -744,12 +684,12 @@ set N41dfc330 [stack 0]
   xpos 1424
   ypos -678
  }
-push $N41dfc330
+push $N10962000
  Blur {
   size 3
   name Blur1
   xpos 1500
-  ypos -760
+  ypos -759
  }
  Merge2 {
   inputs 2
@@ -757,7 +697,7 @@ push $N41dfc330
   also_merge all
   name Merge1
   xpos 1500
-  ypos -682
+  ypos -681
  }
  Grade {
   channels all
@@ -765,7 +705,7 @@ push $N41dfc330
   white_clamp true
   name Grade2
   xpos 1500
-  ypos -616
+  ypos -615
  }
  Text2 {
   font_size_toolbar 100
@@ -791,17 +731,17 @@ push $N41dfc330
     }
   name Text_NOISE
   xpos 1500
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41dfced0 [stack 0]
-push $N41dfced0
+set N10963800 [stack 0]
+push $N10963800
  Dilate {
   channels mask
   size 8
   name Dilate3
   xpos 1390
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -810,68 +750,37 @@ push $N41dfced0
   maskChannelMask mask.a
   name Multiply5
   xpos 1390
-  ypos -208
+  ypos -207
  }
-push $N41dfced0
+push $N10963800
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply6
   xpos 1500
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
- }
- Text2 {
-  font_size_toolbar 100
-  font_width_toolbar 100
-  font_height_toolbar 100
-  message "RESOLUTION SHOULD BE SET TO FULL TO CHECK NOISE"
-  old_message {{82 69 83 79 76 85 84 73 79 78 32 83 72 79 85 76 68 32 66 69 32 83 69 84 32 84 79 32 70 85 76 76 32 84 79 32 67 72 69 67 75 32 78 79 73 83 69}
-    }
-  box {417.5 1082.5 3678.5 1202.5}
-  xjustify center
-  transforms {{0 2}
-    }
-  cursor_position 47
-  font {{ Utopia : Bold : UtopiaBold.pfa : 0 }}
-  global_font_scale 1.19
-  center {2048 1152}
-  cursor_initialised true
-  initial_cursor_position {{2048 1202.5}
-    }
-  group_animations {{0} imported: 0 selected: items: "root transform/"}
-  animation_layers {{1 11 2048 1152 0 0 1 1 0 0 0 0}
-    }
-  color {1 0 0 1}
-  enable_background true
-  background_border_x 9.45
-  background_border_y 5.55
-  name warning_text
-  tile_color 0xff0000ff
-  xpos 1500
-  ypos -82
-  disable true
  }
  Dot {
   name Dot41
   xpos 1534
   ypos 378
  }
-set N41dfde50 [stack 0]
-push $N41df94b0
+set N109a0c00 [stack 0]
+push $N10850800
  Grade {
   channels all
   white {{"1 / Grade5.white"}}
   black_clamp false
   name Grade6
   xpos 1940
-  ypos -640
+  ypos -639
  }
  Grade {
   name Grade1
   xpos 1940
-  ypos -562
+  ypos -561
  }
  Text2 {
   font_size_toolbar 100
@@ -896,17 +805,17 @@ push $N41df94b0
     }
   name Text_GAIN_
   xpos 1940
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41dff590 [stack 0]
-push $N41dff590
+set N109a1800 [stack 0]
+push $N109a1800
  Dilate {
   channels mask
   size 8
   name Dilate4
   xpos 1830
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -915,46 +824,38 @@ push $N41dff590
   maskChannelMask mask.a
   name Multiply7
   xpos 1830
-  ypos -208
+  ypos -207
  }
-push $N41dff590
+push $N109a1800
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply8
   xpos 1940
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
- }
- NoOp {
-  name NoOp2
-  xpos 1940
-  ypos -82
-  addUserKnob {20 User}
-  addUserKnob {6 fullResOnly l "" +STARTLINE +STARTLINE}
-  fullResOnly {{fullResOnly}}
  }
  Dot {
   name Dot40
   xpos 1974
   ypos 330
  }
-set N41e008f0 [stack 0]
-push $N41df8150
+set N109f4c00 [stack 0]
+push $N10850400
  Dot {
   name Dot20
   xpos 2414
   ypos -846
  }
-set N41e00cd0 [stack 0]
+set N109f5000 [stack 0]
  Grade {
   channels all
   white {{new_gain}}
   black_clamp false
   name Grade5
   xpos 2380
-  ypos -640
+  ypos -639
  }
  Text2 {
   font_size_toolbar 100
@@ -980,17 +881,17 @@ set N41e00cd0 [stack 0]
     }
   name Text_GAIN__
   xpos 2380
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N41e01490 [stack 0]
-push $N41e01490
+set N109f5800 [stack 0]
+push $N109f5800
  Dilate {
   channels mask
   size 8
   name Dilate5
   xpos 2270
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -999,16 +900,16 @@ push $N41e01490
   maskChannelMask mask.a
   name Multiply9
   xpos 2270
-  ypos -208
+  ypos -207
  }
-push $N41e01490
+push $N109f5800
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply10
   xpos 2380
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -1016,27 +917,27 @@ push $N41e01490
   xpos 2414
   ypos 282
  }
-set N576295d0 [stack 0]
-push $N41e00cd0
+set N10a3a800 [stack 0]
+push $N109f5000
  Dot {
   name Dot21
   xpos 2854
   ypos -846
  }
-set N57628650 [stack 0]
+set N10a3ac00 [stack 0]
  Dot {
   name Dot24
   xpos 2854
   ypos -726
  }
-set N57625bb0 [stack 0]
+set N10a3b000 [stack 0]
  Expression {
   expr0 (x/width)*size*pixel_aspect
   expr1 (y/height)*size
   expr2 0
   name Expression1
   xpos 2820
-  ypos -658
+  ypos -657
   addUserKnob {20 User}
   addUserKnob {3 size}
   size 14
@@ -1055,12 +956,12 @@ set N57625bb0 [stack 0]
   channel3 none
   name checker
   xpos 2820
-  ypos -610
+  ypos -609
   addUserKnob {20 User}
   addUserKnob {7 size}
   size 1
  }
-push $N57625bb0
+push $N10a3b000
  Dot {
   name Dot25
   xpos 2744
@@ -1075,7 +976,7 @@ push $N57625bb0
   inputs 0
   name plate
   xpos 3810
-  ypos -1690
+  ypos -1689
   number 1
  }
  Dot {
@@ -1083,81 +984,81 @@ push $N57625bb0
   xpos 3844
   ypos -1446
  }
-set N57626370 [stack 0]
+set N10a6e800 [stack 0]
  Dot {
   name Dot55
   xpos 3514
   ypos -1446
  }
-set N5762a930 [stack 0]
+set N10a6ec00 [stack 0]
  Crop {
   box {{width/2 x1048 1024} {height/2 x1048 576} {width x1048 2048} {height x1048 1046}}
   reformat true
   crop false
   name top_right1
   xpos 3590
-  ypos -1330
+  ypos -1329
  }
-push $N5762a930
+push $N10a6ec00
  Crop {
   box {{0 x1048 44.69870472} {height/2 x1048 13.37067938} {width/2 x1048 1027.301295} {height x1048 576}}
   reformat true
   crop false
   name top_left1
   xpos 3700
-  ypos -1330
+  ypos -1329
  }
-push $N5762a930
+push $N10a6ec00
  Crop {
   box {{width} 0 {width/2 x1048 1021.500593} {height/2 x1048 574.2026013}}
   reformat true
   crop false
   name bottom_right1
   xpos 3370
-  ypos -1330
+  ypos -1329
  }
-push $N5762a930
+push $N10a6ec00
  Crop {
   box {0 0 {width/2 x1026 2048} {height/2}}
   reformat true
   crop false
   name bottom_left1
   xpos 3260
-  ypos -1330
+  ypos -1329
  }
-push $N57626370
+push $N10a6e800
  Switch {
   inputs 5
   which {{Quarter_View.QuarterView}}
   name Switch5
   label "\[value which]"
   xpos 3810
-  ypos -1168
+  ypos -1167
  }
  Dot {
   name Dot27
   xpos 3844
   ypos -534
  }
-set N57626f10 [stack 0]
+set N10a92400 [stack 0]
  Dot {
   name Dot26
   xpos 3624
   ypos -534
  }
-set N5762ad10 [stack 0]
+set N10a92800 [stack 0]
  Dot {
   name Dot6
   xpos 3404
   ypos -534
  }
-set N576272f0 [stack 0]
+set N10a92c00 [stack 0]
  Keymix {
   inputs 3
   bbox A
   name Keymix2
   xpos 2820
-  ypos -544
+  ypos -543
  }
  Text2 {
   font_size_toolbar 100
@@ -1183,17 +1084,17 @@ set N576272f0 [stack 0]
     }
   name Text_DIFFERENCE_A
   xpos 2820
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N576276d0 [stack 0]
-push $N576276d0
+set N10a93400 [stack 0]
+push $N10a93400
  Dilate {
   channels mask
   size 8
   name Dilate6
   xpos 2710
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -1202,16 +1103,16 @@ push $N576276d0
   maskChannelMask mask.a
   name Multiply11
   xpos 2710
-  ypos -208
+  ypos -207
  }
-push $N576276d0
+push $N10a93400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply12
   xpos 2820
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -1219,36 +1120,36 @@ push $N576276d0
   xpos 2854
   ypos 234
  }
-set N5762b8b0 [stack 0]
-push $N5762ad10
-push $N57628650
+set N10ac4400 [stack 0]
+push $N10a92800
+push $N10a3ac00
  Dot {
   name Dot22
   xpos 3294
   ypos -846
  }
-set N57624850 [stack 0]
+set N10ac4800 [stack 0]
  Dot {
   name Dot4
   xpos 3514
   ypos -846
  }
-set N57624090 [stack 0]
+set N10ac4c00 [stack 0]
  Difference {
   inputs 2
   gain 50
   name Difference1
   xpos 3480
-  ypos -424
+  ypos -423
  }
-push $N57624850
+push $N10ac4800
  Expression {
   expr0 (x/width)*size*pixel_aspect
   expr1 (y/height)*size
   expr2 0
   name Expression2
   xpos 3260
-  ypos -658
+  ypos -657
   addUserKnob {20 User}
   addUserKnob {3 size}
   size 66
@@ -1267,18 +1168,18 @@ push $N57624850
   channel3 none
   name checker1
   xpos 3260
-  ypos -610
+  ypos -609
   addUserKnob {20 User}
   addUserKnob {7 size}
   size 1
  }
-push $N576272f0
+push $N10a92c00
  Keymix {
   inputs 3
   bbox A
   name Keymix1
   xpos 3260
-  ypos -424
+  ypos -423
  }
  Text2 {
   font_size_toolbar 100
@@ -1304,17 +1205,17 @@ push $N576272f0
     }
   name Text_DIFFERENCE_B
   xpos 3260
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N57624c30 [stack 0]
-push $N57624c30
+set N10af4000 [stack 0]
+push $N10af4000
  Dilate {
   channels mask
   size 8
   name Dilate8
   xpos 3150
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -1323,16 +1224,16 @@ push $N57624c30
   maskChannelMask mask.a
   name Multiply15
   xpos 3150
-  ypos -208
+  ypos -207
  }
-push $N57624c30
+push $N10af4000
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply16
   xpos 3260
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -1340,8 +1241,8 @@ push $N57624c30
   xpos 3294
   ypos 186
  }
-set N5762df70 [stack 0]
-push $N57626f10
+set N10af5000 [stack 0]
+push $N10a92400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -1366,17 +1267,17 @@ push $N57626f10
     }
   name Text_PLATE
   xpos 3810
-  ypos -304
+  ypos -303
   disable {{!labelToggle}}
  }
-set N5762e350 [stack 0]
-push $N5762e350
+set N10af5400 [stack 0]
+push $N10af5400
  Dilate {
   channels mask
   size 8
   name Dilate9
   xpos 3700
-  ypos -304
+  ypos -303
  }
  Multiply {
   inputs 1+1
@@ -1385,16 +1286,16 @@ push $N5762e350
   maskChannelMask mask.a
   name Multiply17
   xpos 3700
-  ypos -208
+  ypos -207
  }
-push $N5762e350
+push $N10af5400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply18
   xpos 3810
-  ypos -208
+  ypos -207
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Text2 {
@@ -1403,9 +1304,7 @@ push $N5762e350
   font_height_toolbar 100
   output {rgba.red rgba.green rgba.blue mask.a}
   message "\[value \[topnode parent.input0].first] - \[value \[topnode parent.input0].last]"
-  old_message {{49 48 48 50 56 50 57 55 53 32 45 32 49 48 48 50 56 51 49 55 53}
-    }
-  old_expression_markers {{0 8 12 20}
+  old_message {{91 118 97 108 117 101 32 91 116 111 112 110 111 100 101 32 112 97 114 101 110 116 46 105 110 112 117 116 48 93 46 102 105 114 115 116 93 32 45 32 91 118 97 108 117 101 32 91 116 111 112 110 111 100 101 32 112 97 114 101 110 116 46 105 110 112 117 116 48 93 46 108 97 115 116 93}
     }
   box {0 0 {input.width} {input.height/20}}
   xjustify center
@@ -1424,17 +1323,17 @@ push $N5762e350
     }
   name Text_PLATE_FR
   xpos 3810
-  ypos -88
+  ypos -87
   disable {{!frameRanges}}
  }
-set N576315b0 [stack 0]
-push $N576315b0
+set N10b44400 [stack 0]
+push $N10b44400
  Dilate {
   channels mask
   size 8
   name Dilate11
   xpos 3700
-  ypos -88
+  ypos -87
  }
  Multiply {
   inputs 1+1
@@ -1443,16 +1342,16 @@ push $N576315b0
   maskChannelMask mask.a
   name Multiply13
   xpos 3700
-  ypos -16
+  ypos -15
  }
-push $N576315b0
+push $N10b44400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply14
   xpos 3810
-  ypos -16
+  ypos -15
   disable {{!frameRanges}}
  }
  Dot {
@@ -1460,21 +1359,21 @@ push $N576315b0
   xpos 3844
   ypos 138
  }
-set N5762cc10 [stack 0]
-push $N57624090
+set N10b45400 [stack 0]
+push $N10ac4c00
  Dot {
   name Dot34
   xpos 4284
   ypos -846
  }
-set N57630df0 [stack 0]
-push $N57626f10
+set N10b45800 [stack 0]
+push $N10a92400
  Merge2 {
   inputs 2
   operation difference
   name Merge2
   xpos 4250
-  ypos -538
+  ypos -537
  }
  Dot {
   name Dot47
@@ -1505,17 +1404,17 @@ push $N57626f10
     }
   name Text_DIFFERENCE
   xpos 4250
-  ypos -280
+  ypos -279
   disable {{!labelToggle}}
  }
-set N57632cf0 [stack 0]
-push $N57632cf0
+set N10b92400 [stack 0]
+push $N10b92400
  Dilate {
   channels mask
   size 8
   name Dilate12
   xpos 4140
-  ypos -280
+  ypos -279
  }
  Multiply {
   inputs 1+1
@@ -1524,16 +1423,16 @@ push $N57632cf0
   maskChannelMask mask.a
   name Multiply23
   xpos 4140
-  ypos -184
+  ypos -183
  }
-push $N57632cf0
+push $N10b92400
  Multiply {
   inputs 1+1
   value 0
   maskChannelMask mask.a
   name Multiply24
   xpos 4250
-  ypos -184
+  ypos -183
   disable {{"labelToggle == 0 ? 1 : 0"}}
  }
  Dot {
@@ -1541,18 +1440,18 @@ push $N57632cf0
   xpos 4284
   ypos 90
  }
-set N576334b0 [stack 0]
-push $N57630df0
+set N10b93400 [stack 0]
+push $N10b45800
  Crop {
   box {{input.format.x} {input.format.y} {input.format.r} {input.format.t}}
   name Crop_input1
   xpos 5130
-  ypos -850
+  ypos -849
  }
  Remove {
   name Remove1
   xpos 5130
-  ypos -616
+  ypos -615
  }
 add_layer {DIFFERENCE DIFFERENCE.red DIFFERENCE.green DIFFERENCE.blue DIFFERENCE.alpha}
  ShuffleCopy {
@@ -1563,7 +1462,7 @@ add_layer {DIFFERENCE DIFFERENCE.red DIFFERENCE.green DIFFERENCE.blue DIFFERENCE
   out DIFFERENCE
   name ShuffleCopy_DIFFERENCE
   xpos 5130
-  ypos 86
+  ypos 87
   disable {{"difference == 0"}}
  }
 add_layer {PLATE PLATE.red PLATE.green PLATE.blue PLATE.alpha}
@@ -1575,7 +1474,7 @@ add_layer {PLATE PLATE.red PLATE.green PLATE.blue PLATE.alpha}
   out PLATE
   name ShuffleCopy_PLATE
   xpos 5130
-  ypos 134
+  ypos 135
   disable {{"plate == 0"}}
  }
 add_layer {DIFFERENCE_B DIFFERENCE_B.red DIFFERENCE_B.green DIFFERENCE_B.blue DIFFERENCE_B.alpha}
@@ -1587,7 +1486,7 @@ add_layer {DIFFERENCE_B DIFFERENCE_B.red DIFFERENCE_B.green DIFFERENCE_B.blue DI
   out DIFFERENCE_B
   name ShuffleCopy_DIFFERENCE_B
   xpos 5130
-  ypos 182
+  ypos 183
   disable {{"difference_b == 0"}}
  }
 add_layer {DIFFERENCE_A DIFFERENCE_A.red DIFFERENCE_A.green DIFFERENCE_A.blue DIFFERENCE_A.alpha}
@@ -1599,7 +1498,7 @@ add_layer {DIFFERENCE_A DIFFERENCE_A.red DIFFERENCE_A.green DIFFERENCE_A.blue DI
   out DIFFERENCE_A
   name ShuffleCopy_DIFFERENCE_A
   xpos 5130
-  ypos 230
+  ypos 231
   disable {{"difference_a == 0"}}
  }
 add_layer {GAIN_PLUS GAIN_PLUS.red GAIN_PLUS.green GAIN_PLUS.blue GAIN_PLUS.alpha}
@@ -1611,7 +1510,7 @@ add_layer {GAIN_PLUS GAIN_PLUS.red GAIN_PLUS.green GAIN_PLUS.blue GAIN_PLUS.alph
   out GAIN_PLUS
   name ShuffleCopy_GAIN_PLUS
   xpos 5130
-  ypos 278
+  ypos 279
   disable {{"gain_plus == 0"}}
  }
 add_layer {GAIN_MINUS GAIN_MINUS.red GAIN_MINUS.green GAIN_MINUS.blue GAIN_MINUS.alpha}
@@ -1623,7 +1522,7 @@ add_layer {GAIN_MINUS GAIN_MINUS.red GAIN_MINUS.green GAIN_MINUS.blue GAIN_MINUS
   out GAIN_MINUS
   name ShuffleCopy_GAIN_MINUS
   xpos 5130
-  ypos 326
+  ypos 327
   disable {{"gain_minus == 0"}}
  }
 add_layer {NOISE NOISE.red NOISE.green NOISE.blue NOISE.alpha}
@@ -1635,7 +1534,7 @@ add_layer {NOISE NOISE.red NOISE.green NOISE.blue NOISE.alpha}
   out NOISE
   name ShuffleCopy_NOISE
   xpos 5130
-  ypos 374
+  ypos 375
   disable {{"noise1 == 0"}}
  }
 add_layer {SATURATION SATURATION.red SATURATION.green SATURATION.blue SATURATION.alpha}
@@ -1647,7 +1546,7 @@ add_layer {SATURATION SATURATION.red SATURATION.green SATURATION.blue SATURATION
   out SATURATION
   name ShuffleCopy_SATURATION
   xpos 5130
-  ypos 422
+  ypos 423
   disable {{"saturation_1 == 0"}}
  }
 add_layer {ILLEGAL_VALUES ILLEGAL_VALUES.red ILLEGAL_VALUES.green ILLEGAL_VALUES.blue ILLEGAL_VALUES.alpha}
@@ -1659,7 +1558,7 @@ add_layer {ILLEGAL_VALUES ILLEGAL_VALUES.red ILLEGAL_VALUES.green ILLEGAL_VALUES
   out ILLEGAL_VALUES
   name ShuffleCopy_ILLEGAL_VALUES
   xpos 5130
-  ypos 470
+  ypos 471
   disable {{"illegal_values == 0"}}
  }
 add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
@@ -1671,7 +1570,7 @@ add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
   out COMP
   name ShuffleCopy_COMP
   xpos 5130
-  ypos 518
+  ypos 519
   disable {{"comp == 0"}}
  }
  LayerContactSheet {
@@ -1680,7 +1579,7 @@ add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
   autodims false
   name LayerContactSheet_CUSTOM_VIEW
   xpos 5130
-  ypos 638
+  ypos 639
  }
  Dot {
   name Dot30
@@ -1690,7 +1589,7 @@ add_layer {COMP COMP.red COMP.green COMP.blue COMP.alpha}
   xpos 5164
   ypos 762
  }
-set N57637a70 [stack 0]
+set N10bfec00 [stack 0]
  Dot {
   name Dot51
   tile_color 0x949494ff
@@ -1699,7 +1598,7 @@ set N57637a70 [stack 0]
   xpos 5274
   ypos 762
  }
-set N57633c70 [stack 0]
+set N10bff000 [stack 0]
  Dot {
   name Dot52
   tile_color 0x949494ff
@@ -1708,7 +1607,7 @@ set N57633c70 [stack 0]
   xpos 5384
   ypos 762
  }
-set N57638dd0 [stack 0]
+set N10bff400 [stack 0]
  Dot {
   name Dot53
   tile_color 0x949494ff
@@ -1723,41 +1622,41 @@ set N57638dd0 [stack 0]
   name Reformat6
   label "\[value scale]"
   xpos 5460
-  ypos 872
+  ypos 873
  }
-push $N57638dd0
+push $N10bff400
  Reformat {
   type scale
   scale 0.5
   name Reformat5
   label "\[value scale]"
   xpos 5350
-  ypos 872
+  ypos 873
  }
-push $N57633c70
+push $N10bff000
  Reformat {
   type scale
   scale 0.75
   name Reformat1
   label "\[value scale]"
   xpos 5240
-  ypos 872
+  ypos 873
  }
-push $N57637a70
+push $N10bfec00
  Switch {
   inputs 4
   which {{res}}
   name Switch4
   label "\[value which]"
   xpos 5130
-  ypos 1016
+  ypos 1017
  }
  Dot {
   name Dot46
   xpos 5164
   ypos 2658
  }
-push $N576334b0
+push $N10b93400
  Dot {
   name Dot49
   tile_color 0x949494ff
@@ -1766,70 +1665,70 @@ push $N576334b0
   xpos 4284
   ypos 786
  }
-set N57634fd0 [stack 0]
-push $N41dfde50
+set N10c1fc00 [stack 0]
+push $N109a0c00
  Dot {
   name Dot10
   xpos 1534
   ypos 786
  }
-set N57634810 [stack 0]
-push $N41df4730
+set N10c44000 [stack 0]
+push $N1091bc00
  Dot {
   name Dot9
   xpos 1094
   ypos 786
  }
-set N576353b0 [stack 0]
-push $N41dfafd0
+set N10c44400 [stack 0]
+push $N1091a400
  Dot {
   name Dot8
   xpos 654
   ypos 786
  }
-set N57635790 [stack 0]
-push $N576295d0
+set N10c44800 [stack 0]
+push $N10a3a800
  Dot {
   name Dot28
   xpos 2414
   ypos 786
  }
-set N57639590 [stack 0]
-push $N41dfa050
+set N10c44c00 [stack 0]
+push $N108cc400
  Dot {
   name Dot5
   xpos 214
   ypos 786
  }
-set N57636330 [stack 0]
-push $N41e008f0
+set N10c45000 [stack 0]
+push $N109f4c00
  Dot {
   name Dot11
   xpos 1974
   ypos 786
  }
-set N57639d50 [stack 0]
-push $N5762df70
+set N10c45400 [stack 0]
+push $N10af5000
  Dot {
   name Dot13
   xpos 3294
   ypos 786
  }
-set N5763a130 [stack 0]
-push $N5762cc10
+set N10c45800 [stack 0]
+push $N10b45400
  Dot {
   name Dot12
   xpos 3844
   ypos 786
  }
-set N57636710 [stack 0]
-push $N5762b8b0
+set N10c45c00 [stack 0]
+push $N10ac4400
  Dot {
   name Dot14
   xpos 2854
   ypos 786
  }
-set N57636af0 [stack 0]
+set N10c5a000 [stack 0]
  ContactSheet {
   inputs 10
   width {{"input.width * \[value this.columns]"}}
@@ -1840,25 +1739,25 @@ set N57636af0 [stack 0]
   endframe 1
   name ContactSheet1
   xpos 4250
-  ypos 1430
+  ypos 1431
  }
-push $N57634fd0
-push $N57634810
-push $N576353b0
-push $N57635790
-push $N57639d50
-push $N57639590
-push $N5763a130
-push $N57636af0
-push $N57636710
-push $N57636330
+push $N10c1fc00
+push $N10c44000
+push $N10c44400
+push $N10c44800
+push $N10c45400
+push $N10c44c00
+push $N10c45800
+push $N10c5a000
+push $N10c45c00
+push $N10c45000
  Switch {
   inputs 11
   which {{QCMenu1.QCView}}
   name Switch1
   label "\[value which]"
   xpos 1280
-  ypos 1424
+  ypos 1425
  }
  Dot {
   name Dot48
@@ -1868,192 +1767,183 @@ push $N57636330
   xpos 1314
   ypos 1554
  }
-set N576389f0 [stack 0]
+set N10c5ac00 [stack 0]
  Dot {
   name Dot35
   xpos 544
   ypos 1554
  }
-set N5763b870 [stack 0]
+set N10c5b000 [stack 0]
  Crop {
   box {{width/2} 0 {width} {height/2}}
   name Crop4
   xpos 730
-  ypos 1622
+  ypos 1623
  }
  Mirror2 {
   flip true
   flop true
   name Mirror2_4
   xpos 730
-  ypos 1646
+  ypos 1647
  }
  Transform {
   translate {{width/2} {-height/2}}
   center {1024 778}
   name Transform4
   xpos 730
-  ypos 1670
+  ypos 1671
  }
-push $N5763b870
+push $N10c5b000
  Crop {
   box {0 0 {width/2} {height/2}}
   name Crop3
   xpos 620
-  ypos 1622
+  ypos 1623
  }
  Mirror2 {
   flip true
   flop true
   name Mirror2_3
   xpos 620
-  ypos 1646
+  ypos 1647
  }
  Transform {
   translate {{-width/2} {-height/2}}
   center {1600 900}
   name Transform5
   xpos 620
-  ypos 1670
+  ypos 1671
  }
 push 0
-push $N5763b870
+push $N10c5b000
  Crop {
   box {0 {height/2} {width/2} {height}}
   name Crop1
   xpos 290
-  ypos 1622
+  ypos 1623
  }
  Mirror2 {
   flip true
   flop true
   name Mirror2_1
   xpos 290
-  ypos 1646
+  ypos 1647
  }
  Transform {
   translate {{-width/2} {height/2}}
   center {1024 778}
   name Transform2
   xpos 290
-  ypos 1670
+  ypos 1671
  }
-push $N5763b870
+push $N10c5b000
  Crop {
   box {{width/2} {height/2} {width} {height}}
   name Crop2
   xpos 400
-  ypos 1622
+  ypos 1623
  }
  Mirror2 {
   flip true
   flop true
   name Mirror2_2
   xpos 400
-  ypos 1646
+  ypos 1647
  }
  Transform {
   translate {{width/2} {height/2}}
   center {1024 778}
   name Transform1
   xpos 400
-  ypos 1670
+  ypos 1671
  }
  Merge2 {
   inputs 4+1
   name Merge8
   xpos 510
-  ypos 1814
+  ypos 1815
  }
-push $N576389f0
+push $N10c5ac00
  Switch {
   inputs 2
   which {{Flip}}
   name flipQuad
   label "\[value which]"
   xpos 1280
-  ypos 1808
+  ypos 1809
  }
  Dot {
   name Dot32
   xpos 1314
   ypos 2298
  }
-set N57641570 [stack 0]
+set N10cbac00 [stack 0]
  Dot {
   name Dot33
   xpos 1094
   ypos 2298
  }
-set N5763e6f0 [stack 0]
+set N10cbb000 [stack 0]
  Reformat {
   type scale
   scale 0.25
   name Reformat4
-  xpos 1170
-  ypos 2462
+  xpos 950
+  ypos 2463
  }
-push $N5763e6f0
+push $N10cbb000
  Reformat {
   type scale
   scale 0.5
   name Reformat3
   xpos 1060
-  ypos 2462
+  ypos 2463
  }
-push $N5763e6f0
+push $N10cbb000
  Reformat {
   type scale
   scale 0.75
   name Reformat2
-  xpos 950
-  ypos 2462
+  xpos 1170
+  ypos 2463
  }
-push $N57641570
+push $N10cbac00
  Switch {
   inputs 4
   which {{Reso.Resolution}}
   name Switch3
   label "\[value which]"
   xpos 1280
-  ypos 2528
+  ypos 2529
  }
-set N4b86cf00 [stack 0]
+set N10cdec00 [stack 0]
  Switch {
   inputs 2
   which {{en_cus_view}}
   name Switch_CUS_VIEW
   label "\[value which]"
   xpos 1280
-  ypos 2648
+  ypos 2649
  }
  Output {
   name Output1
   xpos 1280
-  ypos 3422
+  ypos 3423
  }
  StickyNote {
   inputs 0
   name StickyNote7
   label "#TODO make Text box dynamic"
   note_font_size 21
-  xpos -376
-  ypos -159
+  xpos -385
+  ypos -160
  }
-push $N4b86cf00
- NoOp {
-  name Reso
-  knobChanged validation()
-  xpos 1500
-  ypos 2534
-  addUserKnob {20 User}
-  addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
- }
-push $N4b8638b0
+push $N10850000
  NoOp {
   name Quarter_View
   xpos 1830
-  ypos -1162
+  ypos -1161
   addUserKnob {20 User}
   addUserKnob {4 QuarterView l "Quarter View" M {"Full Screen" "Bottom Left" "Bottom Right" "Top Left" "Top Right" ""}}
  }
@@ -2062,10 +1952,19 @@ push $N4b8638b0
   name QCMenu1
   knobChanged validation()
   xpos 950
-  ypos 1430
+  ypos 1431
   addUserKnob {20 QC t "\n"}
   addUserKnob {22 script T "print 'test inside'" +STARTLINE}
   addUserKnob {4 QCView l "QC View" M {Comp Plate "Difference A" "Difference B" "Gain +" "Gain -" "Illegal Values" Saturation Noise Difference "All Views" "" "" "" ""}}
   QCView "All Views"
+ }
+push $N10cdec00
+ NoOp {
+  name Reso
+  knobChanged validation()
+  xpos 1500
+  ypos 2535
+  addUserKnob {20 User}
+  addUserKnob {4 Resolution M {Full 0.75 0.5 0.25 "" "" "" "" "" "" ""}}
  }
 end_group
